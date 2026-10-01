@@ -52,3 +52,7 @@ The build uses Node.js and has no npm dependencies. The vendored fflate 0.8.2 li
 - 13 Node.js browser-data tests and 13 Python app/metadata tests passed; GitHub Actions passed. Vercel deployed from the private GitHub repository.
 
 Browser storage is typically limited to a few MB, varying by browser. Files larger than 12 MB are rejected; a quota error preserves the last saved state and asks the student to export. The first Python load requires internet. This preview targets modern desktop browsers; classroom mobile/offline use has not been validated.
+
+## Git identity for automatic deployments
+
+This local repository uses the GitHub noreply identity of alextthecreator, so GitHub and Vercel can attribute pushes to the connected owner. GitHub Actions verifies the source before release, and Vercel builds the main branch automatically. Historical local-baseline commits retain their original metadata. When cloning on another computer, set the commit email to an address verified by your GitHub account (the GitHub noreply address is supported).
