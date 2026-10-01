@@ -13,6 +13,8 @@ let html=read(path.join(app,'assets/index.html'));
 html=html.replace(/    <button class="side-link" data-page="update".*\n/,'');
 const start=html.indexOf('      <section id="update"'),end=html.indexOf('      <section id="files"',start);html=html.slice(0,start)+html.slice(end);
 html=html.replace('local project folder','browser project').replace('This folder is your project. Export before leaving every class.','Your work stays in this browser. Download your project before leaving.');
+html=html.replace('<div class="grid2"><article><h3>Editable model source</h3>', '<div class="toolbar"><label>Saved model<select id="savedModelSelect"></select></label><button class="secondary" onclick="loadSavedModel()">Open saved model</button></div><div class="grid2"><article><h3>Editable model source</h3>');
+html=html.replace('<div class="grid2"><article><h3>Inputs (JSON)</h3>', '<div class="toolbar"><label>Saved experiment<select id="savedRunSelect"></select></label><button class="secondary" onclick="loadSavedRun()">Open saved experiment</button></div><div class="grid2"><article><h3>Inputs (JSON)</h3>');
 html=html.replace('<script src="/assets/app.js"></script>','<script src="/assets/fflate.js"></script>\n<script src="/assets/project-store.js"></script>\n<script src="/assets/project-archive.js"></script>\n<script src="/assets/app.js"></script>');
 fs.writeFileSync(path.join(out,'index.html'),html);
 let js=read(path.join(app,'assets/app.js'));

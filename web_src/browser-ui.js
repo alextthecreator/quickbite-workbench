@@ -55,8 +55,29 @@ function installAutosave(){
 }
 saveReport=async function(){const result=await api('/api/report',{method:'POST',body:JSON.stringify({module:loadedModuleCode||$('moduleSelect').value,text:$('reportEditor').value})});$('saveStatus').textContent='Saved '+result.file;STATE=await api('/api/state');};
 saveCode=async function(){const result=await api('/api/code',{method:'POST',body:JSON.stringify({key:loadedCodeKey||$('codeKey').value,text:$('codeEditor').value})});$('saveStatus').textContent='Saved '+result.file;};
+function refreshSavedEvidence(){
+ const state=browserStore.state(COURSE);
+ for(const [id,values] of [['savedModelSelect',state.models],['savedRunSelect',state.runs]]){
+  const select=$(id);if(!select)continue;const selected=select.value;
+  select.innerHTML='<option value="">Choose saved evidence…</option>'+values.map(name=>`<option value="${esc(name)}">${esc(name)}</option>`).join('');
+  if(values.includes(selected))select.value=selected;
+ }
+}
+async function loadSavedModel(){
+ try{const name=$('savedModelSelect').value;if(!name)throw Error('Choose a saved model first.');
+  const text=browserStore.get('workspace/models/'+name+'.json'),model=JSON.parse(text);$('modelEditor').value=text;$('modelName').value=name;$('modelKind').value=model.kind;await previewModel();
+ }catch(e){showError(e);}
+}
+function loadSavedRun(){
+ try{const name=$('savedRunSelect').value;if(!name)throw Error('Choose a saved experiment first.');
+  const text=browserStore.get('workspace/runs/'+name),run=JSON.parse(text);$('engineSelect').value=run.engine;$('simModule').value=name.slice(0,3);$('simInput').value=JSON.stringify(run.inputs,null,2);$('simOutput').textContent=text;
+ }catch(e){showError(e);}
+}
+const oldSaveModel=saveModel,oldRunSim=runSim;
+saveModel=async function(){await oldSaveModel();refreshSavedEvidence();};
+runSim=async function(save){await oldRunSim(save);refreshSavedEvidence();};
 const oldShow=show,oldLoadModule=loadModule,oldLoadCode=loadCode;
-show=function(id){flushEditors().catch(showError);oldShow(id);};
+show=function(id){flushEditors().catch(showError);oldShow(id);if(browserStore)refreshSavedEvidence();};
 loadModule=async function(code){await flushEditors();const result=await oldLoadModule(code);loadedModuleCode=code;return result;};
 loadCode=async function(){await flushEditors();const key=$('codeKey').value;const result=await oldLoadCode();loadedCodeKey=key;return result;};
 overviewHtml=onlineOverview;exportHtml=onlineFiles;exportProgress=onlineExport;
@@ -65,4 +86,4 @@ runTests=async function(suite){
  try{await flushEditors();const result=await api('/api/tests',{method:'POST',body:JSON.stringify({suite})});$('testOutput').textContent=`exit_code=${result.exit_code}\n${result.log}\nSaved log: ${result.file}`;STATE=await api('/api/state');}
  catch(e){$('testOutput').textContent=e.message;showError(e);}
 };
-boot().then(()=>{installAutosave();$('saveStatus').textContent='Saved in this browser · export before leaving';}).catch(showError);
+boot().then(()=>{installAutosave();refreshSavedEvidence();$('saveStatus').textContent='Saved in this browser · export before leaving';}).catch(showError);

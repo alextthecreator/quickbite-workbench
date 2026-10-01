@@ -2,6 +2,8 @@
 
 ## Online browser preview
 
+Live course: https://quickbite-workbench.vercel.app/ . Git pushes to main automatically update this production URL.
+
 The browser version uses Vercel as static hosting, without accounts or a database. Students keep work in their browser and export/import project ZIPs. See [the online workflow](docs/ONLINE.md) for student and teacher instructions. Run `npm run build` to produce the static `web/` directory. The original 4.4.0 local release remains available via its Git tag.
 
 ## Local Python workbench — 4.4.0

@@ -1,5 +1,7 @@
 # Browser workbench preview — 4.5.0-web.1
 
+Live course: https://quickbite-workbench.vercel.app/ . Git pushes to main automatically update this production URL.
+
 This is a static course app for Vercel. Students open one URL, work in their own browser and exchange a project file. No accounts, database, backend, synchronization or local Python installation are required.
 
 ## Student workflow
@@ -46,6 +48,7 @@ The build uses Node.js and has no npm dependencies. The vendored fflate 0.8.2 li
 - Online ZIP round trip, legacy ZIP import, binary attachments and rejection of unrelated/traversal/oversized archives.
 - Actual browser Python simulation and evidence save; neutral SVG model rendering.
 - Actual student unittest execution, the three expected starter defects, and passing regression tests after edits in the test workspace. Teaching templates remain deliberately defective.
-- Report autosave, reload, project download and import through the visible UI.
+- Report autosave, reload, reopening a saved model, actual project download (verified 12 student files) and import through the visible UI.
+- 13 Node.js browser-data tests and 13 Python app/metadata tests passed; GitHub Actions passed. Vercel deployed from the private GitHub repository.
 
 Browser storage is typically limited to a few MB, varying by browser. Files larger than 12 MB are rejected; a quota error preserves the last saved state and asks the student to export. The first Python load requires internet. This preview targets modern desktop browsers; classroom mobile/offline use has not been validated.
