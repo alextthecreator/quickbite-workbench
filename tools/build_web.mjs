@@ -8,7 +8,7 @@ const toolData=JSON.parse(read(path.join(source,'tool-data.json')));
 const templates={'workspace/student_code/policies.py':read(path.join(app,'workspace_template/student_code/policies.py')),'workspace/tests/test_student.py':read(path.join(app,'workspace_template/tests/test_student.py')),'workspace/student_code/__init__.py':'','workspace/tests/__init__.py':''};
 const course=JSON.parse(read(path.join(app,'curriculum.json')));
 for(const m of course.modules)for(const s of m.session_plan){s.before_leave=s.before_leave.map(x=>x.replace(/Export the complete project ZIP.*$/,'Download your project ZIP; import it on this site next class.'));}
-fs.writeFileSync(path.join(out,'course.json'),JSON.stringify({course,...toolData,templates,supplied_tests:read(path.join(app,'tests/test_m10.py')),version:{app_id:'quickbite-web',version:'4.7.0',label:'Complete project guide and submission baseline'}},null,2));
+fs.writeFileSync(path.join(out,'course.json'),JSON.stringify({course,...toolData,templates,supplied_tests:read(path.join(app,'tests/test_m10.py')),version:{app_id:'quickbite-web',version:'4.7.1',label:'Complete project guide and submission baseline'}},null,2));
 let html=read(path.join(app,'assets/index.html'));
 html=html.replace(/    <button class="side-link" data-page="update".*\n/,'');
 const start=html.indexOf('      <section id="update"'),end=html.indexOf('      <section id="files"',start);html=html.slice(0,start)+html.slice(end);

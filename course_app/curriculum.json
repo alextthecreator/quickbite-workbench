@@ -2089,7 +2089,7 @@
         {
           "task": 2,
           "instruction": "Create one sequence diagram for your selected use case.",
-          "save_to": "Write on this task card and click Save answer. It is copied into the module report and included in your project ZIP. Models / CASE → Save name → M08_sequence01 and M08_sequence02; M08 Report → Sequence Scenarios. Use the website controls.",
+          "save_to": "Write on this task card and click Save answer. It is copied into the module report and included in your project ZIP. Models / CASE → Save name → M08_sequence01 (one diagram); M08 Report → Sequence Scenarios. Use the website controls.",
           "minimum_requirements": [
             "Show participants and credible message order for the normal flow.",
             "Describe one alternative or error case in text."
@@ -2368,7 +2368,7 @@
           "instruction": "Analyse one change request.",
           "save_to": "Write on this task card and click Save answer. It is copied into the module report and included in your project ZIP.",
           "minimum_requirements": [
-            "Describe the change and identify affected requirements, models and tests.",
+            "Describe the change and identify affected requirements and models. Suggest 2 test ideas for the change; no existing test plan, Python code or test logs are required.",
             "Accept, defer or reject it with a justification; revise one affected artifact."
           ],
           "complete_when": "Your saved work meets the checklist above. Check it yourself; the website does not grade correctness.",
