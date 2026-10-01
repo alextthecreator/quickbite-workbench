@@ -12,13 +12,14 @@ def validate_course(root):
     for module in modules:
         sessions.extend(module['sessions'])
         tasks=module.get('task_specs',[])
-        if len(tasks)!=len(module['steps']) or [t['task'] for t in tasks]!=list(range(1,len(tasks)+1)):
+        required=[t for t in tasks if not t.get('optional',False)]
+        if len(required)!=len(module['steps']) or [t['task'] for t in tasks]!=list(range(1,len(tasks)+1)):
             raise ValueError(f"Incomplete task guidance for {module['code']}")
         for task in tasks:
             for key in ['instruction','save_to','minimum_requirements','complete_when']:
                 if not task.get(key): raise ValueError(f"Missing {key} in {module['code']} task {task['task']}")
         assigned=[n for sp in module['session_plan'] for n in sp['task_numbers']]
-        if sorted(assigned)!=list(range(1,len(tasks)+1)): raise ValueError('Session/task mapping incomplete')
+        if sorted(assigned)!=sorted(t['task'] for t in required): raise ValueError('Session/task mapping incomplete')
     if sorted(sessions)!=list(range(1,21)): raise ValueError('Expected sessions 1–20 exactly once')
     node=shutil.which('node')
     if not node: raise RuntimeError('Node.js is required for release/update validation. Install Node.js, then retry; no course files were accepted.')
