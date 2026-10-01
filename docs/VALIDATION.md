@@ -6,7 +6,7 @@ Root cause reproduced with Node.js syntax checking: assets/app.js lines 72–73 
 
 Verified on macOS with Python 3.14.7 and Node.js 24.21.0:
 
-- JavaScript syntax and all M01–M10 task/session guidance.
+- 12 app regression tests pass. JavaScript syntax and all 70 M01–M10 tasks/session guidance pass.
 - All simulator defaults and neutral model rendering through self-check.
 - Rejection of broken JavaScript, failing candidate Python, bad checksums, protected paths, traversal, symlink destinations and legacy update formats.
 - Valid update with byte-for-byte preservation of student files; rollback after forced installed-check failure.

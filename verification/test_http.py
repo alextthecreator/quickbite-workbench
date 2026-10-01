@@ -25,7 +25,7 @@ class HTTPTests(unittest.TestCase):
                     data=json.loads(get('/api/course'));self.assertEqual(len(data['course']['modules']),10)
                     self.assertIn(b'id="moduleNav"',get('/'));self.assertIn(b'function templateReport',get('/assets/app.js'))
                     with self.assertRaises(urllib.error.HTTPError) as e:post('/api/report',{'module':'M05','text':'unauthorized'},token='wrong')
-                    self.assertEqual(e.exception.code,403)
+                    self.assertEqual(e.exception.code,403);e.exception.close()
                     post('/api/project',{'team_id':'TESTTEAM','current_session':9})
                     post('/api/report',{'module':'M05','text':'# M05\nStudent analysis preserved'})
                     model=next(iter(app.models.STARTERS.values()));post('/api/model-save',{'name':'m05_test','model':model})
