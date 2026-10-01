@@ -2,8 +2,9 @@
 (function(root){
  'use strict';
  const KEY='quickbite.workspace.v1', MAX_BYTES=12_000_000, APP_ID='quickbite-browser-project';
+ const learning=typeof module!=='undefined'&&module.exports?require('./learning-state.js'):root.QuickBiteLearning;
  const clone=x=>JSON.parse(JSON.stringify(x));
- const validPath=p=>typeof p==='string'&&!p.includes('\\')&&!p.split('/').some(x=>x==='..'||x==='.'||!x)&&/^workspace\/(reports|models|runs|logs|attachments|student_code|tests)\/[A-Za-z0-9_. -]+$/.test(p)||p==='workspace/project.json'||p==='workspace/EXPORT_MANIFEST.json';
+ const validPath=p=>typeof p==='string'&&!p.includes('\\')&&!p.split('/').some(x=>x==='..'||x==='.'||!x)&&/^workspace\/(reports|models|runs|logs|attachments|student_code|tests)\/[A-Za-z0-9_. -]+$/.test(p)||p==='workspace/project.json'||p==='workspace/EXPORT_MANIFEST.json'||p==='workspace/project-context.json'||p==='workspace/task-progress.json';
  function meta(input={}){
   const m={team_id:'TEAM',current_session:1,last_export_session:0,last_export_utc:null,...input};
   if(typeof m.team_id!=='string'||!/^[A-Za-z0-9_-]{2,24}$/.test(m.team_id))throw Error('Team ID: 2–24 letters, numbers, _ or -.');
@@ -22,6 +23,8 @@
    total+=typeof value==='string'?new TextEncoder().encode(value).length:value.data.length;
   }
   if(total>MAX_BYTES)throw Error('Project is too large (12 MB maximum).');
+  learning.context(data.files);
+  if(data.files[learning.PROGRESS]){const records=JSON.parse(data.files[learning.PROGRESS]);if(!records||Array.isArray(records)||typeof records!=='object'||Object.entries(records).some(([id,r])=>!/^M(?:0[1-9]|10)\.\d{2}$/.test(id)||!r||typeof r.signature!=='string'||typeof r.reviewed_at!=='string'))throw Error('Invalid task review records.');}
   const project=meta(data.files['workspace/project.json']?JSON.parse(data.files['workspace/project.json']):{});
   data.files['workspace/project.json']=JSON.stringify(project,null,2);
   return {app_id:APP_ID,schema_version:1,course_version:typeof data.course_version==='string'?data.course_version:'unknown',exported_at:data.exported_at||null,files:data.files};
@@ -56,7 +59,7 @@
    }
    const module_progress={};
    for(const m of course.modules){const text=reports[m.code]||'';module_progress[m.code]={report:{saved:!!text,unfinished:(text.match(/\[Write your answer here\.\]/g)||[]).length,word_count:text.trim()?text.trim().split(/\s+/).length:0},models:models.filter(x=>x.toLowerCase().startsWith(m.code.toLowerCase())),runs:runs.filter(x=>x.startsWith(m.code+'_')),logs:m.code==='M10'?logs:[]};}
-   return {project:this.project(),reports,models:models.sort(),runs:runs.sort(),logs:logs.sort(),module_progress};
+   return {context:learning.context(files),learning:learning.state(course,files),project:this.project(),reports,models:models.sort(),runs:runs.sort(),logs:logs.sort(),module_progress};
   }
  }
  root.QuickBiteStore={ProjectStore,validate,meta,KEY,APP_ID,MAX_BYTES};

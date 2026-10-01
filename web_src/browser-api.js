@@ -22,6 +22,7 @@ class PythonWorker{
 }
 // Engine/model workers contain only trusted course code; student tests always get a fresh worker.
 let engineWorker=null;
+function requireTasks(ids){const states=browserStore.state(browserCourse.course).learning;if(!ids.some(id=>states[id]&&states[id].status!=='blocked'))throw Error('This work is waiting for prerequisites. Open task '+ids.join(' / ')+' to see what to complete or import first.');}
 async function compute(operation,payload){
  if(!engineWorker)engineWorker=new PythonWorker();
  try{return await engineWorker.call(operation,payload);}catch(e){engineWorker.stop();engineWorker=null;throw e;}
@@ -43,6 +44,7 @@ async function browserApi(url,opt={}){
  }
  if(url==='/api/report'){
   if(!browserCourse.course.modules.some(m=>m.code===d.module)||typeof d.text!=='string')throw Error('Invalid report.');
+  requireTasks(browserCourse.course.modules.find(m=>m.code===d.module).task_specs.map(t=>d.module+'.'+String(t.task).padStart(2,'0')));
   const file='workspace/reports/'+d.module+'.md';browserStore.save(file,d.text);return {saved:true,file};
  }
  if(url==='/api/check'){
@@ -51,6 +53,7 @@ async function browserApi(url,opt={}){
   return {required_sections:sections,missing_headings:sections.filter(x=>!text.split('\n').includes('## '+x)),unfinished_placeholders:(text.match(/\[Write your answer here\.\]/g)||[]).length,word_count:text.trim()?text.trim().split(/\s+/).length:0,note:'Structure only; academic correctness requires review.'};
  }
  if(url==='/api/simulate'||url==='/api/save-run'){
+  const tasks={feasibility:['M01.07'],availability:['M05.03'],capacity:['M06.05'],sprint:['M09.02'],order_state:['M08.04']};requireTasks(tasks[d.engine]||[]);
   const result=await compute('simulate',d),payload={engine:d.engine,inputs:d.inputs,result};
   if(url==='/api/save-run'){
    if(!browserCourse.course.modules.some(m=>m.code===d.module))throw Error('Unknown module.');
@@ -59,6 +62,7 @@ async function browserApi(url,opt={}){
   }return payload;
  }
  if(url==='/api/model-preview'||url==='/api/model-save'){
+  if(url==='/api/model-save'){const module=String(d.name).slice(0,3).toUpperCase(),m=browserCourse.course.modules.find(m=>m.code===module);if(!m)throw Error('Use the task’s Mxx_ model save name.');d.name=module+d.name.slice(3);const matching=m.task_specs.filter(t=>t.evidence.some(e=>('workspace/models/'+d.name).toLowerCase().startsWith(e.prefix.toLowerCase())));if(!matching.length)throw Error('Use the exact model save name stated on the task card.');requireTasks(matching.map(t=>module+'.'+String(t.task).padStart(2,'0')));}
   const result=await compute('render',d);
   if(url==='/api/model-save'){
    if(typeof d.name!=='string'||!/^[A-Za-z0-9_-]{1,60}$/.test(d.name))throw Error('Model name: letters, numbers, _ or -.');
@@ -67,11 +71,13 @@ async function browserApi(url,opt={}){
   }return result;
  }
  if(url==='/api/code'){
+  requireTasks(['M10.03','M10.04','M10.06']);
   const path={policies:'workspace/student_code/policies.py',student_tests:'workspace/tests/test_student.py'}[d.key];
   if(!path||typeof d.text!=='string'||d.text.length>200000)throw Error('Invalid code save.');browserStore.save(path,d.text);return {saved:true,file:path};
  }
  if(url==='/api/tests'){
   if(!['student','m10','all'].includes(d.suite))throw Error('Unknown test suite.');
+  requireTasks(d.suite==='student'?['M10.04','M10.06']:d.suite==='m10'?['M10.05','M10.06']:['M10.07']);
   const worker=new PythonWorker();let result;
   try{result=await worker.call('tests',{suite:d.suite,files:Object.fromEntries(Object.entries(browserStore.snapshot().files).filter(([path,text])=>typeof text==='string'&&/^(workspace\/student_code\/|workspace\/tests\/).*\.py$/.test(path)&&!path.endsWith('/test_m10.py'))),supplied_tests:browserCourse.supplied_tests});}
   finally{worker.stop();}

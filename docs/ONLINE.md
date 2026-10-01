@@ -1,4 +1,4 @@
-# Browser workbench — 4.5.1
+# Browser workbench — 4.6.0
 
 Live course: https://quickbite-workbench.vercel.app/ . Git pushes to main automatically update this production URL.
 
@@ -62,3 +62,9 @@ This local repository uses the GitHub noreply identity of alextthecreator, so Gi
 Project Brief contains the fictional company context, roles, scope/exclusions, open design decisions, data rules, team workflow and lecture-to-session mapping. Every task has an explicit deliverable; Module deliverables is generated from those same labels. Methods needed by the tasks are explained in titled guidance cards. M01/M02 lecture files cover Meetings 1/2 inside website module M01.
 
 Exports preserve the guide used at export time, separately from student answers. Import ignores this read-only guide and preserves student workspace data. Each test run uses a timestamp/UUID log filename; legacy logs are retained and can also be reopened from Python testing.
+
+## Student-owned inputs and prerequisites
+
+The course contains company/problem context and classroom constraints, not a supplied stakeholder or scope solution. Your project fields start empty: M01.03 supplies stakeholders and M01.04 supplies scope. Save them in workspace/project-context.json. Task answers use independent workspace/reports/Mxx_taskNN.md files and are mirrored into the module report. The main report can retain legacy notes; task-card answers are the authoritative per-task source.
+
+Every task declares prerequisite IDs in curriculum.json. Student review records are stored in workspace/task-progress.json and fingerprint the saved evidence and upstream evidence. Missing/changed upstream work blocks dependent editing/reviews and relevant evidence saves. Concepts/instructions remain readable. This is a self-check workflow, not automatic academic grading. Export/import carries context, individual answers and reviews; old files retain their reports but do not fabricate structured data or review records.

@@ -1,5 +1,5 @@
 /* Browser-only start/resume, safe project exchange, and clear runtime feedback. */
-titles.brief='Project Brief';
+titles.brief='Project Brief';titles.context='Your project';
 function onlineOverview(){
  const m=moduleForSession(PROJECT.current_session);
  return `<div class="hero"><div class="eyebrow" style="color:#aecaFF">QuickBite online · one project</div><h2>Your course. Your browser. Your project file.</h2><p>Work here without accounts or installing Python. Your saved work stays in this browser. Download your project after every class; import that file to continue on any computer.</p></div>
@@ -17,6 +17,7 @@ function onlineFiles(){
 function downloadBlob(blob,name){const link=document.createElement('a'),url=URL.createObjectURL(blob);link.href=url;link.download=name;document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);}
 async function onlineExport(){
  try{
+  if(taskDrafts.size||contextDirty)throw Error('Save your task answers and project data before exporting.');
   await flushEditors();
   if($('exportTeam'))await browserApi('/api/project',{method:'POST',body:JSON.stringify({team_id:$('exportTeam').value.trim(),current_session:Number($('exportSession').value)})});
   const project=browserStore.project();browserStore.saveProject({last_export_session:project.current_session,last_export_utc:new Date().toISOString()});
@@ -33,6 +34,7 @@ async function prepareImport(input){
 }
 async function applyImport(){
  if(!pendingImport)return;
+ if(taskDrafts.size||contextDirty){showError(Error('Save your task answers and project data before importing.'));return;}
  try{
   await flushEditors();const previous=browserStore.snapshot();
   downloadBlob(new Blob([JSON.stringify(previous,null,2)],{type:'application/json'}),`QuickBite_${browserStore.project().team_id}_before_import.json`);
@@ -82,8 +84,8 @@ const oldSaveModel=saveModel,oldRunSim=runSim;
 saveModel=async function(){await oldSaveModel();refreshSavedEvidence();};
 runSim=async function(save){await oldRunSim(save);refreshSavedEvidence();};
 const oldShow=show,oldLoadModule=loadModule,oldLoadCode=loadCode;
-show=function(id){flushEditors().catch(showError);if(id==='brief')$('brief').innerHTML=projectBriefHtml();oldShow(id);if(browserStore)refreshSavedEvidence();};
-loadModule=async function(code){await flushEditors();const result=await oldLoadModule(code);loadedModuleCode=code;return result;};
+show=function(id){if(contextDirty&&id!=='context'){showError(Error('Save your stakeholder/scope changes before leaving Your project.'));return;}flushEditors().catch(showError);if(id==='brief')$('brief').innerHTML=projectBriefHtml();if(id==='context')$('context').innerHTML=contextFormHtml();oldShow(id);if(browserStore){refreshSavedEvidence();updateLearningAccess();}};
+loadModule=async function(code){await flushEditors();const result=await oldLoadModule(code);loadedModuleCode=code;updateLearningAccess();return result;};
 loadCode=async function(){await flushEditors();const key=$('codeKey').value;const result=await oldLoadCode();loadedCodeKey=key;return result;};
 overviewHtml=onlineOverview;exportHtml=onlineFiles;exportProgress=onlineExport;
 runTests=async function(suite){
@@ -92,4 +94,4 @@ runTests=async function(suite){
  try{await flushEditors();const result=await api('/api/tests',{method:'POST',body:JSON.stringify({suite})});$('testOutput').textContent=`exit_code=${result.exit_code}\n${result.log}\nSaved log: ${result.file}`;STATE=await api('/api/state');refreshSavedEvidence();}
  catch(e){$('testOutput').textContent=e.message;showError(e);}
 };
-boot().then(()=>{installAutosave();refreshSavedEvidence();$('saveStatus').textContent='Saved in this browser · export before leaving';}).catch(showError);
+boot().then(()=>{updateLearningAccess();installAutosave();refreshSavedEvidence();$('saveStatus').textContent='Saved in this browser · export before leaving';}).catch(showError);

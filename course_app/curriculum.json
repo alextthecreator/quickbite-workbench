@@ -11,33 +11,6 @@
   },
   "scenario": {
     "problem": "QuickBite is a proposed food-ordering and delivery service. The company wants one digital flow for placing, fulfilling and tracking orders, but the brief intentionally leaves important engineering decisions open.",
-    "in_scope": [
-      "browse restaurants and menus",
-      "cart and order placement",
-      "synthetic payment status",
-      "restaurant acceptance/rejection",
-      "courier assignment and delivery states",
-      "notifications",
-      "cancellation policy",
-      "basic admin operations"
-    ],
-    "out_of_scope": [
-      "real payment processing",
-      "live GPS tracking",
-      "route optimization",
-      "recommendation AI",
-      "loyalty programme",
-      "production deployment",
-      "real personal data"
-    ],
-    "roles": [
-      "Customer",
-      "Restaurant Staff",
-      "Courier",
-      "Administrator",
-      "Payment Provider",
-      "Notification Service"
-    ],
     "brief_points": [
       "Local restaurants currently use different ways to receive and confirm orders, which makes the customer experience inconsistent.",
       "Customers need clearer information about whether an order was accepted, prepared, handed to delivery and completed.",
@@ -51,32 +24,6 @@
       "The company wants a coherent information flow between customers, participating restaurants and couriers. Existing restaurant practices differ; confirmation and fulfilment status are unclear to customers.",
       "The intended improvement is fewer coordination problems and clearer order status. The company has not supplied measured baselines, demand forecasts, budgets or financial results. Targets and numbers selected for the laboratory are teaching assumptions.",
       "The course project is an engineering evidence portfolio: decisions, requirements, models, experiments and a small Python policy laboratory. The workbench website is the tool for this portfolio; it is not the production QuickBite application."
-    ],
-    "role_context": [
-      {
-        "role": "Customer",
-        "context": "Browses menus, places an order and needs understandable payment, fulfilment and delivery status."
-      },
-      {
-        "role": "Restaurant Staff",
-        "context": "Reviews incoming orders, accepts or rejects them and reports preparation/readiness."
-      },
-      {
-        "role": "Courier",
-        "context": "Receives a delivery assignment and communicates progress after pickup."
-      },
-      {
-        "role": "Administrator",
-        "context": "Supports basic service administration; your team must justify permissions and responsibility boundaries."
-      },
-      {
-        "role": "Payment Provider",
-        "context": "An external service. Model synthetic payment outcomes; do not implement real payment processing."
-      },
-      {
-        "role": "Notification Service",
-        "context": "An external service that communicates status changes. Decide what messages are appropriate and what failure means."
-      }
     ],
     "process_context": [
       "A customer browses a participating restaurant menu and prepares an order. The proposal includes order placement and a synthetic payment status.",
@@ -95,17 +42,17 @@
     "data_rules": [
       "Use synthetic data only: invented restaurants, menu items, prices, order IDs and payment statuses. Do not collect real customer identities or card data.",
       "No real company budget, demand, availability measurement or service-level agreement has been supplied. Do not report default simulator numbers as measured company facts.",
-      "In-scope items are boundaries of the teaching proposal, not ready-made requirement sentences. Derive and justify your own precise requirements.",
       "The M10 policy lab is an explicit exception: published function contracts are fixed exercise rules. Compare them with your earlier design, document differences and test the published contracts without rewriting them to match your own assumptions."
     ],
     "workflow_rules": [
       "Work in teams of 3. Keep one agreed current project ZIP; nominate the member who exports the agreed team baseline.",
       "First meeting: open this website, set Team ID and Session 1, then start M01. No starter ZIP or Python installation is needed.",
       "Later meetings: return to this address. If your work is not already here, use Save & Export → Import project with your latest ZIP; set Current session to the new meeting.",
-      "Reports and Python editor drafts save in this browser. Models require Save JSON + SVG; simulator evidence requires Run & save evidence. A preview or unsaved calculation is not a deliverable.",
+      "Task-card answers require Save task answer; Your project data require Save stakeholders / Save scope. Report and Python editor drafts save in this browser. Models require Save JSON + SVG; simulator evidence requires Run & save evidence. A preview or unsaved calculation is not a deliverable.",
       "Before leaving every meeting, download the project ZIP and keep it outside the university computer. Share this agreed ZIP with your team. Imports replace a project; they do not merge simultaneous edits.",
       "Module deliverables and the task cards define what the ZIP must contain. Formal checkpoint dates and the submission activity are announced by the instructor in Moodle; do not assume that every backup is a submission.",
-      "The ZIP contains your evidence and a read-only copy of the current brief and assignment guide. Import it on this website to continue; do not try to start a local server from it."
+      "The ZIP contains your evidence and a read-only copy of the current brief and assignment guide. Import it on this website to continue; do not try to start a local server from it.",
+      "When a dependency is missing, the page tells you exactly which earlier task to complete or import. Concepts and task instructions remain readable; later work is unavailable until its prerequisites are reviewed. Editing prerequisite evidence makes dependent reviews need review again."
     ],
     "lecture_mapping": [
       "SE-M01: general theory for Meeting 1 → website M01, Tasks 1–5.",
@@ -114,9 +61,18 @@
       "Other-company examples in slides demonstrate methods. All QuickBite-specific facts, open decisions, task requirements and evidence locations are provided here."
     ],
     "reporting_rules": [
+      "Write each task’s answer/interpretation on its own card and click Save task answer; it is copied into the named report section. Stakeholders and scope use the structured Your project fields instead. Save before Review complete and before export. Imported answers are your own project data, not course defaults.",
       "Use the named section in the module Report editor for your explanation. Tables and lists in Markdown are sufficient; external word-processing or drawing tools are not required.",
       "Evidence Record: list the task and saved filenames you are relying on; distinguish executed results from planned checks. Review & Contributions: briefly record who did/reviewed what and the resulting change or confirmation. Sources: name the website guide/contracts, any used lecture concepts and any outside source; label your own assumptions.",
-      "References to workspace/... identify evidence in the exported ZIP. The guide copied into the ZIP is read-only; do not put your answers there. The task-specific minimums are the assessment checklist; headings organize the report rather than adding hidden numerical requirements."
+      "References to workspace/... identify evidence in the exported ZIP. The guide copied into the ZIP is read-only; do not put your answers there. The task-specific minimums are the assessment checklist; headings organize the report rather than adding hidden numerical requirements.",
+      "Your project starts empty. Define stakeholder data in M01 Task 3 and scope in M01 Task 4 using Your project; these are your answers, not supplied company facts.",
+      "For every task, save its answer/evidence, check its minimum requirements and record Review complete. This is a student self-check, not an automatic academic grade. Later tasks name their prerequisites and use only your saved project data.",
+      "Import restores your saved answers and review records. Old exports without structured project data keep their reports: copy your own earlier stakeholder/scope answers into Your project and review the relevant tasks. No answers are inferred from course defaults."
+    ],
+    "classroom_constraints": [
+      "Use synthetic information only; no real personal/card data or payments.",
+      "Analyse and design a proposal; no production deployment, live GPS, route optimization or real integrations are required.",
+      "Prepare an evidence portfolio and the small supplied Python policy lab; you are not building a full operating business."
     ]
   },
   "report_headings": [
@@ -139,7 +95,7 @@
       ],
       "theory": [
         "A fact is explicitly supplied by the brief; an assumption is your unverified working proposition; a constraint limits choices; an open question needs clarification. Keep these four lists separate. A stakeholder is anyone affected by the proposed change, including external organizations, not only a user role. For each, record need, concern and a question. A conflict is a tension between needs that cannot both be maximized.",
-        "Problem: [who] experiences [difficulty], causing [impact]. Vision: describe the desired improvement, not the technology. Scope defines capabilities and exclusions. A business objective has an outcome, metric, target/direction and way to measure it; a feature is not an outcome. Example for an unrelated service: reduce repeated booking corrections, measured per month. Invented baselines/targets must be marked as assumptions. Respect the fixed out-of-scope boundaries.",
+        "Problem: [who] experiences [difficulty], causing [impact]. Vision: describe the desired improvement, not the technology. Scope defines capabilities and exclusions. A business objective has an outcome, metric, target/direction and way to measure it; a feature is not an outcome. Example for an unrelated service: reduce repeated booking corrections, measured per month. Invented baselines/targets must be marked as assumptions. Respect classroom constraints; decide your own project scope.",
         "Sequential development plans major stages in order and suits relatively stable agreed needs. Iterative work revisits decisions with feedback; incremental work delivers useful slices progressively. Risk-driven work tackles the most consequential uncertainties first. Compare at least two approaches against requirement uncertainty, feedback access and risk/coordination; a hybrid needs a reason. These are ways to organize the hypothetical project, not instructions to deploy a live business.",
         "Technical: can the proposed capabilities be achieved with plausible skills/technology? Operational: can people use and support the process? Economic: do assumed benefits justify assumed costs? Schedule: is the proposed effort/time plausible? Feasibility simulator uses synthetic PLN: build_cost is one-time development cost, monthly_benefit the estimated monetary benefit, monthly_cost recurring cost, months the analysis horizon. Monthly net = benefit − cost; net_value = months × monthly net − build_cost; payback = build_cost / monthly net if positive, otherwise no payback. This is undiscounted arithmetic, excluding tax, inflation and financing, not a real investment appraisal.",
         "A base case is your starting set of assumptions. A sensitivity run asks “what if an assumption changes?” Keep the base inputs for comparison. For example, test build_cost × 1.2 to ask about a cost overrun, then monthly_benefit × 0.8 to ask about weaker benefits; 20% is an illustrative choice, not a company fact. Choose your own questions and changes. Save each of the three runs with Assign evidence to M01, then reference its saved filename and interpret net_value/payback in the report. You may use the default base values as explicitly labelled teaching assumptions; real prices are not required.",
@@ -148,8 +104,8 @@
       "steps": [
         "Read the QuickBite scenario and separate information you can treat as given from assumptions and unresolved questions.",
         "Write a concise problem statement and project vision. Avoid implementation technologies unless they are genuine constraints.",
-        "Identify stakeholders yourself. For each, record a need, a concern and one question that would reduce uncertainty.",
-        "Define project scope and explicit exclusions. Justify at least one boundary decision that could reasonably have been made differently.",
+        "Derive stakeholders and relevant external people/organizations/services from the company narrative. Record needs, concerns, questions and a conflict in Your project.",
+        "Define your team’s in-scope capabilities and explicit out-of-scope choices in Your project. Respect classroom constraints and justify one debatable boundary.",
         "Create three measurable business objectives. State how each could be measured and which values are assumptions rather than observed data.",
         "Compare at least two lifecycle approaches and justify how you would organize this project. A hybrid is allowed if you can defend it.",
         "Use the feasibility simulator for a base case and two sensitivity scenarios of your own choosing. Explain why you changed those inputs.",
@@ -247,101 +203,164 @@
         {
           "task": 1,
           "instruction": "Read the QuickBite scenario and separate information you can treat as given from assumptions and unresolved questions.",
-          "save_to": "M01 Report → Facts, Assumptions, Constraints & Open Questions. Use the website controls. In your downloaded ZIP: workspace/reports/M01.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M01 Report → Facts, Assumptions, Constraints & Open Questions). M01 Report → Facts, Assumptions, Constraints & Open Questions. Use the website controls. In your downloaded ZIP: workspace/reports/M01.md. Task answer in the ZIP: workspace/reports/M01_task01.md.",
           "minimum_requirements": [
             "Record at least 3 facts taken directly from the scenario.",
             "Record at least 3 assumptions and label them as assumptions, not facts.",
             "Record at least 2 constraints and 3 open questions that would require clarification."
           ],
-          "complete_when": "The four categories are visibly separated and every item can be traced either to the scenario or to your team’s uncertainty.",
-          "deliverable": "Four-category facts/assumptions/constraints/questions record"
+          "complete_when": "The four categories are visibly separated and every item can be traced either to the scenario or to your team’s uncertainty. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Four-category facts/assumptions/constraints/questions record",
+          "prerequisites": [],
+          "report_section": "Facts, Assumptions, Constraints & Open Questions",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: none — this is the starting task. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 2,
           "instruction": "Write a concise problem statement and project vision. Avoid implementation technologies unless they are genuine constraints.",
-          "save_to": "M01 Report → Problem Statement & Project Vision. Use the website controls. In your downloaded ZIP: workspace/reports/M01.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M01 Report → Problem Statement & Project Vision). M01 Report → Problem Statement & Project Vision. Use the website controls. In your downloaded ZIP: workspace/reports/M01.md. Task answer in the ZIP: workspace/reports/M01_task02.md.",
           "minimum_requirements": [
             "Problem statement identifies who experiences the problem, the problem itself and its impact.",
             "Problem statement does not prescribe a technical solution.",
             "Vision describes the desired future state and expected improvement.",
             "Keep each statement concise enough to be reviewed by another team."
           ],
-          "complete_when": "A reviewer can explain the problem and intended change without seeing a feature list or technology stack.",
-          "deliverable": "Problem statement and project vision"
+          "complete_when": "A reviewer can explain the problem and intended change without seeing a feature list or technology stack. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Problem statement and project vision",
+          "prerequisites": [
+            "M01.01"
+          ],
+          "report_section": "Problem Statement & Project Vision",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M01.01. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 3,
-          "instruction": "Identify stakeholders yourself. For each, record a need, a concern and one question that would reduce uncertainty.",
-          "save_to": "M01 Report → Stakeholders & Conflicts. Use the website controls. In your downloaded ZIP: workspace/reports/M01.md.",
+          "instruction": "Derive stakeholders and relevant external people/organizations/services from the company narrative. Record needs, concerns, questions and a conflict in Your project.",
+          "save_to": "Your project → People and external services → Save stakeholders. In the ZIP: workspace/project-context.json. Use M01 Report → Stakeholders & Conflicts for extra rationale.",
           "minimum_requirements": [
-            "Identify at least 5 relevant stakeholders or external organizations.",
+            "Define at least 5 relevant stakeholders or external organizations/services yourself; no list is supplied.",
             "For each stakeholder record a need, a concern and one question that would reduce uncertainty.",
             "Identify at least one conflict between stakeholder needs."
           ],
-          "complete_when": "Stakeholders are relevant to the stated problem and the conflict is explicitly described rather than silently resolved.",
-          "deliverable": "Stakeholder table: needs, concerns, questions and conflict"
+          "complete_when": "Stakeholders are relevant to the stated problem and the conflict is explicitly described rather than silently resolved. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Stakeholder table: needs, concerns, questions and conflict",
+          "prerequisites": [
+            "M01.01",
+            "M01.02"
+          ],
+          "report_section": "Stakeholders & Conflicts",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M01.01, M01.02. Do not use a ready-made stakeholder list or scope from the course.",
+          "context_output": "people"
         },
         {
           "task": 4,
-          "instruction": "Define project scope and explicit exclusions. Justify at least one boundary decision that could reasonably have been made differently.",
-          "save_to": "M01 Report → Scope & Business Objectives. Use the website controls. In your downloaded ZIP: workspace/reports/M01.md.",
+          "instruction": "Define your team’s in-scope capabilities and explicit out-of-scope choices in Your project. Respect classroom constraints and justify one debatable boundary.",
+          "save_to": "Your project → Scope decisions → Save scope. In the ZIP: workspace/project-context.json. Use M01 Report → Scope & Business Objectives for business objectives and extra rationale.",
           "minimum_requirements": [
-            "List at least 4 in-scope capabilities and at least 3 explicit exclusions.",
+            "Define at least 4 in-scope capabilities and 3 team exclusions; distinguish your design choices from fixed classroom constraints.",
             "Scope items describe project boundaries, not implementation details.",
             "Choose one debatable boundary and give a short justification for including or excluding it."
           ],
-          "complete_when": "Another team can tell what this project will and will not attempt to deliver.",
-          "deliverable": "Scope, exclusions and justified boundary"
+          "complete_when": "Another team can tell what this project will and will not attempt to deliver. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Scope, exclusions and justified boundary",
+          "prerequisites": [
+            "M01.02",
+            "M01.03"
+          ],
+          "report_section": "Scope & Business Objectives",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M01.02, M01.03. Do not use a ready-made stakeholder list or scope from the course.",
+          "context_output": "scope"
         },
         {
           "task": 5,
           "instruction": "Create three measurable business objectives. State how each could be measured and which values are assumptions rather than observed data.",
-          "save_to": "M01 Report → Scope & Business Objectives. Use the website controls. In your downloaded ZIP: workspace/reports/M01.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M01 Report → Scope & Business Objectives). M01 Report → Scope & Business Objectives. Use the website controls. In your downloaded ZIP: workspace/reports/M01.md. Task answer in the ZIP: workspace/reports/M01_task05.md.",
           "minimum_requirements": [
             "Write exactly 3 business objectives.",
             "Each objective includes an outcome, a metric and a target or direction of improvement.",
             "If a baseline/target is invented for the exercise, mark it clearly as an assumption."
           ],
-          "complete_when": "All 3 objectives describe outcomes rather than features and could later be evaluated with evidence.",
-          "deliverable": "Three measurable business objectives"
+          "complete_when": "All 3 objectives describe outcomes rather than features and could later be evaluated with evidence. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Three measurable business objectives",
+          "prerequisites": [
+            "M01.02",
+            "M01.04"
+          ],
+          "report_section": "Scope & Business Objectives",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M01.02, M01.04. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 6,
           "instruction": "Compare at least two lifecycle approaches and justify how you would organize this project. A hybrid is allowed if you can defend it.",
-          "save_to": "M01 Report → Lifecycle Decision. Use the website controls. In your downloaded ZIP: workspace/reports/M01.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M01 Report → Lifecycle Decision). M01 Report → Lifecycle Decision. Use the website controls. In your downloaded ZIP: workspace/reports/M01.md. Task answer in the ZIP: workspace/reports/M01_task06.md.",
           "minimum_requirements": [
             "Compare at least 2 lifecycle approaches against at least 3 project conditions.",
             "State your selected approach or hybrid.",
             "Give at least 2 reasons linked to QuickBite risks, uncertainty, feedback needs or constraints."
           ],
-          "complete_when": "The selected lifecycle follows from the comparison; it is not just a preference statement.",
-          "deliverable": "Lifecycle comparison and decision"
+          "complete_when": "The selected lifecycle follows from the comparison; it is not just a preference statement. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Lifecycle comparison and decision",
+          "prerequisites": [
+            "M01.02",
+            "M01.04",
+            "M01.05"
+          ],
+          "report_section": "Lifecycle Decision",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M01.02, M01.04, M01.05. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 7,
           "instruction": "Use the feasibility simulator for a base case and two sensitivity scenarios of your own choosing. Explain why you changed those inputs.",
-          "save_to": "Simulators → Simulator: feasibility → Assign evidence to M01 → Run & save evidence for each of 3 runs. Summarize in M01 Report → Feasibility & Risk. Use the website controls. In your downloaded ZIP: workspace/reports/M01.md; workspace/runs/ (saved inputs + results).",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M01 Report → Feasibility & Risk). Simulators → Simulator: feasibility → Assign evidence to M01 → Run & save evidence for each of 3 runs. Summarize in M01 Report → Feasibility & Risk. Use the website controls. In your downloaded ZIP: workspace/reports/M01.md; workspace/runs/ (saved inputs + results). Task answer in the ZIP: workspace/reports/M01_task07.md.",
           "minimum_requirements": [
             "Save 1 base run and 2 sensitivity runs.",
             "Change inputs deliberately to answer a stated question.",
             "For each sensitivity run explain what changed and what the result suggests.",
             "Do not present simulator output as proof of real-world feasibility."
           ],
-          "complete_when": "Three saved run files exist and the report explains what question each run was used to explore.",
-          "deliverable": "Three saved feasibility runs with report interpretation"
+          "complete_when": "Three saved run files exist and the report explains what question each run was used to explore. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Three saved feasibility runs with report interpretation",
+          "prerequisites": [
+            "M01.05",
+            "M01.06"
+          ],
+          "report_section": "Feasibility & Risk",
+          "evidence": [
+            {
+              "prefix": "workspace/runs/M01_feasibility_",
+              "count": 3,
+              "label": "three feasibility runs"
+            }
+          ],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M01.05, M01.06. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 8,
           "instruction": "Prepare technical, operational, economic and schedule feasibility plus an initial risk register. Finish with GO, CONDITIONAL GO or NO-GO and justify it.",
-          "save_to": "M01 Report → Feasibility & Risk. Use the website controls. In your downloaded ZIP: workspace/reports/M01.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M01 Report → Feasibility & Risk). M01 Report → Feasibility & Risk. Use the website controls. In your downloaded ZIP: workspace/reports/M01.md. Task answer in the ZIP: workspace/reports/M01_task08.md.",
           "minimum_requirements": [
             "Address all 4 feasibility dimensions separately.",
             "Create at least 5 initial risks with cause/event, consequence and response/mitigation idea.",
             "State GO, CONDITIONAL GO or NO-GO.",
             "Link the decision to evidence and uncertainty identified in the analysis."
           ],
-          "complete_when": "All dimensions and risks are present, and the final decision is supported by the team’s own evidence rather than the simulator alone.",
-          "deliverable": "Four-dimension feasibility assessment, five-risk register and GO decision"
+          "complete_when": "All dimensions and risks are present, and the final decision is supported by the team’s own evidence rather than the simulator alone. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Four-dimension feasibility assessment, five-risk register and GO decision",
+          "prerequisites": [
+            "M01.03",
+            "M01.04",
+            "M01.06",
+            "M01.07"
+          ],
+          "report_section": "Feasibility & Risk",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M01.03, M01.04, M01.06, M01.07. Do not use a ready-made stakeholder list or scope from the course."
         }
       ],
       "theory_cards": [
@@ -351,7 +370,7 @@
         },
         {
           "title": "Problem, vision, scope and measures",
-          "body": "Problem: [who] experiences [difficulty], causing [impact]. Vision: describe the desired improvement, not the technology. Scope defines capabilities and exclusions. A business objective has an outcome, metric, target/direction and way to measure it; a feature is not an outcome. Example for an unrelated service: reduce repeated booking corrections, measured per month. Invented baselines/targets must be marked as assumptions. Respect the fixed out-of-scope boundaries."
+          "body": "Problem: [who] experiences [difficulty], causing [impact]. Vision: describe the desired improvement, not the technology. Scope defines capabilities and exclusions. A business objective has an outcome, metric, target/direction and way to measure it; a feature is not an outcome. Example for an unrelated service: reduce repeated booking corrections, measured per month. Invented baselines/targets must be marked as assumptions. Respect classroom constraints; decide your own project scope."
         },
         {
           "title": "Choosing a lifecycle",
@@ -379,7 +398,7 @@
         4
       ],
       "theory": [
-        "Elicit needs, analyse ambiguity/conflict, specify obligations, validate them and manage changes. Business requirements express outcomes; functional requirements specify services/behaviour; non-functional requirements constrain quality or operation. Use one main obligation per requirement and split compound statements. Choose your own coverage of the QuickBite scope rather than copy a ready-made solution.",
+        "Elicit needs, analyse ambiguity/conflict, specify obligations, validate them and manage changes. Business requirements express outcomes; functional requirements specify services/behaviour; non-functional requirements constrain quality or operation. Use one main obligation per requirement and split compound statements. Choose your own coverage of your saved QuickBite scope rather than copy a ready-made solution.",
         "Use a table with ID, type, requirement, source, priority, rationale and acceptance criterion. IDs remain stable when wording changes. Sources may be brief facts, M01 decisions or explicitly labelled assumptions. State a simple priority scale, such as must/should/could, and use it consistently. Acceptance criteria describe observable evidence; avoid “fast”, “easy” or “secure” without measurable conditions.",
         "For an NFR specify metric, measurement condition/window and target; justify its stakeholder/risk relevance and label invented targets. A user story may use “As [role], I want [capability], so that [benefit]”. An acceptance scenario may use Given [context], When [event], Then [observable result]. Include success, failure and boundary cases: for an unrelated booking service a boundary could be exactly the last permitted cancellation time.",
         "Create goal ID → requirement ID → planned model/test evidence. Mark future evidence “planned”; do not pretend it exists. An orphan has no justified upstream goal/source or expected evidence. Review for ambiguity, multiple obligations, contradictions, omissions and unverifiable wording. Preserve before/after wording and why it changed; peer review may confirm a requirement as well as find a fault."
@@ -482,109 +501,168 @@
         {
           "task": 1,
           "instruction": "Review M01 and identify information that should become requirements, assumptions or unresolved questions.",
-          "save_to": "M02 Report → Requirements Baseline. Use the website controls. In your downloaded ZIP: workspace/reports/M02.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M02 Report → Requirements Baseline). M02 Report → Requirements Baseline. Use the website controls. In your downloaded ZIP: workspace/reports/M02.md. Task answer in the ZIP: workspace/reports/M02_task01.md.",
           "minimum_requirements": [
             "Reference the M01 problem, objectives and scope.",
             "List at least 5 candidate requirement ideas, 2 assumptions and 2 unresolved questions.",
             "Do not turn every M01 statement into a system requirement automatically."
           ],
-          "complete_when": "The report shows a deliberate transition from M01 decisions to a requirements baseline.",
-          "deliverable": "M01→requirements transition notes"
+          "complete_when": "The report shows a deliberate transition from M01 decisions to a requirements baseline. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "M01→requirements transition notes",
+          "prerequisites": [
+            "M01.02",
+            "M01.03",
+            "M01.04",
+            "M01.05"
+          ],
+          "report_section": "Requirements Baseline",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M01.02, M01.03, M01.04, M01.05. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 2,
           "instruction": "Create a requirements register containing business, functional and non-functional requirements. Choose a reasonable decomposition and justify it.",
-          "save_to": "M02 Report → Requirements Baseline. Use the website controls. In your downloaded ZIP: workspace/reports/M02.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M02 Report → Requirements Baseline). M02 Report → Requirements Baseline. Use the website controls. In your downloaded ZIP: workspace/reports/M02.md. Task answer in the ZIP: workspace/reports/M02_task02.md.",
           "minimum_requirements": [
             "Include all three classes: business, functional and non-functional.",
             "Create at least 12 requirements in total.",
             "Use one main obligation per requirement.",
             "Explain briefly how you grouped/decomposed the set."
           ],
-          "complete_when": "The register has sufficient coverage to represent the project without becoming a feature dump.",
-          "deliverable": "Requirements register: at least 12 covering business/functional/NFR"
+          "complete_when": "The register has sufficient coverage to represent the project without becoming a feature dump. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Requirements register: at least 12 covering business/functional/NFR",
+          "prerequisites": [
+            "M02.01"
+          ],
+          "report_section": "Requirements Baseline",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M02.01. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 3,
           "instruction": "For every requirement record a stable ID, source, priority, rationale and acceptance criterion.",
-          "save_to": "M02 Report → Requirement Metadata & Acceptance Criteria. Use the website controls. In your downloaded ZIP: workspace/reports/M02.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M02 Report → Requirement Metadata & Acceptance Criteria). M02 Report → Requirement Metadata & Acceptance Criteria. Use the website controls. In your downloaded ZIP: workspace/reports/M02.md. Task answer in the ZIP: workspace/reports/M02_task03.md.",
           "minimum_requirements": [
             "Every requirement has a unique stable ID.",
             "Every requirement identifies source, priority and rationale.",
             "Every requirement has at least one observable acceptance criterion.",
             "Use the same IDs consistently in later tasks."
           ],
-          "complete_when": "No requirement is missing required metadata and acceptance criteria are testable in principle.",
-          "deliverable": "Metadata and acceptance criterion for every requirement"
+          "complete_when": "No requirement is missing required metadata and acceptance criteria are testable in principle. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Metadata and acceptance criterion for every requirement",
+          "prerequisites": [
+            "M02.02"
+          ],
+          "report_section": "Requirement Metadata & Acceptance Criteria",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M02.02. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 4,
           "instruction": "Check whether the set covers the end-to-end service across ordering, fulfilment, delivery and relevant external interactions without copying a predefined feature list.",
-          "save_to": "M02 Report → Requirements Baseline. Use the website controls. In your downloaded ZIP: workspace/reports/M02.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M02 Report → Requirements Baseline). M02 Report → Requirements Baseline. Use the website controls. In your downloaded ZIP: workspace/reports/M02.md. Task answer in the ZIP: workspace/reports/M02_task04.md.",
           "minimum_requirements": [
             "Perform a coverage review against the project vision and scope.",
             "Identify at least 2 gaps, overlaps or deliberate exclusions.",
             "Explain any boundary where responsibility belongs to an external service."
           ],
-          "complete_when": "Coverage conclusions are documented and tied to the team’s own scope decisions.",
-          "deliverable": "Scope/service coverage review"
+          "complete_when": "Coverage conclusions are documented and tied to the team’s own scope decisions. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Scope/service coverage review",
+          "prerequisites": [
+            "M02.02",
+            "M02.03"
+          ],
+          "report_section": "Requirements Baseline",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M02.02, M02.03. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 5,
           "instruction": "Define measurable quality constraints for the areas that matter to this project and explain why each metric is meaningful.",
-          "save_to": "M02 Report → Quality Requirements. Use the website controls. In your downloaded ZIP: workspace/reports/M02.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M02 Report → Quality Requirements). M02 Report → Quality Requirements. Use the website controls. In your downloaded ZIP: workspace/reports/M02.md. Task answer in the ZIP: workspace/reports/M02_task05.md.",
           "minimum_requirements": [
             "Write at least 4 measurable NFRs.",
             "Each NFR includes metric/condition and target.",
             "Explain why each selected quality area matters to a stakeholder or risk.",
             "Label teaching assumptions where the target is not based on observed data."
           ],
-          "complete_when": "The NFRs can be verified objectively and are justified by project context.",
-          "deliverable": "At least four measurable justified NFRs"
+          "complete_when": "The NFRs can be verified objectively and are justified by project context. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "At least four measurable justified NFRs",
+          "prerequisites": [
+            "M02.03",
+            "M02.04"
+          ],
+          "report_section": "Quality Requirements",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M02.03, M02.04. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 6,
           "instruction": "Write several user-oriented requirements and add normal plus failure/boundary acceptance scenarios.",
-          "save_to": "M02 Report → User-oriented Scenarios. Use the website controls. In your downloaded ZIP: workspace/reports/M02.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M02 Report → User-oriented Scenarios). M02 Report → User-oriented Scenarios. Use the website controls. In your downloaded ZIP: workspace/reports/M02.md. Task answer in the ZIP: workspace/reports/M02_task06.md.",
           "minimum_requirements": [
             "Create at least 4 user stories or equivalent user-oriented requirements.",
             "Create at least 8 acceptance scenarios total.",
             "Include normal, failure and boundary cases.",
             "Reference the relevant requirement IDs."
           ],
-          "complete_when": "The scenarios go beyond happy paths and can later inform tests/models.",
-          "deliverable": "Four user-oriented requirements and eight acceptance scenarios"
+          "complete_when": "The scenarios go beyond happy paths and can later inform tests/models. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Four user-oriented requirements and eight acceptance scenarios",
+          "prerequisites": [
+            "M02.03",
+            "M02.05"
+          ],
+          "report_section": "User-oriented Scenarios",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M02.03, M02.05. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 7,
           "instruction": "Create a traceability baseline from business goals to requirements and planned downstream evidence.",
-          "save_to": "M02 Report → Traceability. Use the website controls. In your downloaded ZIP: workspace/reports/M02.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M02 Report → Traceability). M02 Report → Traceability. Use the website controls. In your downloaded ZIP: workspace/reports/M02.md. Task answer in the ZIP: workspace/reports/M02_task07.md.",
           "minimum_requirements": [
             "Trace each M01 business objective to at least one requirement.",
             "Link important requirements to planned model/test evidence where known.",
             "Use “planned” for evidence that does not exist yet.",
             "Identify any orphan objective or requirement."
           ],
-          "complete_when": "A reviewer can follow why an important requirement exists and what evidence is expected later.",
-          "deliverable": "Goal→requirement→planned evidence traceability"
+          "complete_when": "A reviewer can follow why an important requirement exists and what evidence is expected later. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Goal→requirement→planned evidence traceability",
+          "prerequisites": [
+            "M02.03",
+            "M02.06",
+            "M01.05"
+          ],
+          "report_section": "Traceability",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M02.03, M02.06, M01.05. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 8,
           "instruction": "Peer-review ambiguous or compound requirements. Preserve at least three before/after revisions.",
-          "save_to": "M02 Report → Review & Revisions. Use the website controls. In your downloaded ZIP: workspace/reports/M02.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M02 Report → Review & Revisions). M02 Report → Review & Revisions. Use the website controls. In your downloaded ZIP: workspace/reports/M02.md. Task answer in the ZIP: workspace/reports/M02_task08.md.",
           "minimum_requirements": [
             "Review at least 5 requirements.",
             "Preserve at least 3 before/after examples.",
             "For each revision state the quality problem corrected (e.g. ambiguity, compound obligation, unverifiable wording)."
           ],
-          "complete_when": "The change record proves that review changed the baseline and explains why.",
-          "deliverable": "Review of five requirements with three before/after revisions"
+          "complete_when": "The change record proves that review changed the baseline and explains why. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Review of five requirements with three before/after revisions",
+          "prerequisites": [
+            "M02.04",
+            "M02.05",
+            "M02.06",
+            "M02.07"
+          ],
+          "report_section": "Review & Revisions",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M02.04, M02.05, M02.06, M02.07. Do not use a ready-made stakeholder list or scope from the course."
         }
       ],
       "theory_cards": [
         {
           "title": "From vision to requirements",
-          "body": "Elicit needs, analyse ambiguity/conflict, specify obligations, validate them and manage changes. Business requirements express outcomes; functional requirements specify services/behaviour; non-functional requirements constrain quality or operation. Use one main obligation per requirement and split compound statements. Choose your own coverage of the QuickBite scope rather than copy a ready-made solution."
+          "body": "Elicit needs, analyse ambiguity/conflict, specify obligations, validate them and manage changes. Business requirements express outcomes; functional requirements specify services/behaviour; non-functional requirements constrain quality or operation. Use one main obligation per requirement and split compound statements. Choose your own coverage of your saved QuickBite scope rather than copy a ready-made solution."
         },
         {
           "title": "Register and acceptance criteria",
@@ -705,89 +783,162 @@
         {
           "task": 1,
           "instruction": "Identify the external actors relevant to your requirements baseline and decide which goals deserve use cases.",
-          "save_to": "M03 Report → Actors & Use-case Rationale. Use the website controls. In your downloaded ZIP: workspace/reports/M03.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M03 Report → Actors & Use-case Rationale). M03 Report → Actors & Use-case Rationale. Use the website controls. In your downloaded ZIP: workspace/reports/M03.md. Task answer in the ZIP: workspace/reports/M03_task01.md.",
           "minimum_requirements": [
             "Identify external actors from M02 rather than copying a supplied list.",
             "For each actor record at least one goal relevant to system interaction.",
             "Distinguish people/organizations/external systems from internal components."
           ],
-          "complete_when": "Actor choices are justified by the system boundary and requirements.",
-          "deliverable": "Actor/goal rationale"
+          "complete_when": "Actor choices are justified by the system boundary and requirements. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Actor/goal rationale",
+          "prerequisites": [
+            "M02.08"
+          ],
+          "report_section": "Actors & Use-case Rationale",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M02.08. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 2,
           "instruction": "Create a use-case model with a clear system boundary and goal-level names. Justify any external system modeled as an actor.",
-          "save_to": "Models / CASE → Save name → M03_usecase; rationale in M03 Report → Actors & Use-case Rationale. Use the website controls. In your downloaded ZIP: workspace/reports/M03.md; workspace/models/ (JSON + SVG).",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M03 Report → Actors & Use-case Rationale). Models / CASE → Save name → M03_usecase; rationale in M03 Report → Actors & Use-case Rationale. Use the website controls. In your downloaded ZIP: workspace/reports/M03.md; workspace/models/ (JSON + SVG). Task answer in the ZIP: workspace/reports/M03_task02.md.",
           "minimum_requirements": [
             "Show a system boundary.",
             "Include the key actors and goal-level use cases needed by your baseline.",
             "Use verb-oriented goal names.",
             "Explain any external system represented as an actor."
           ],
-          "complete_when": "M03_usecase.json and .svg exist and the diagram is consistent with the written rationale.",
-          "deliverable": "M03_usecase JSON + SVG"
+          "complete_when": "M03_usecase.json and .svg exist and the diagram is consistent with the written rationale. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "M03_usecase JSON + SVG",
+          "prerequisites": [
+            "M03.01"
+          ],
+          "report_section": "Actors & Use-case Rationale",
+          "evidence": [
+            {
+              "prefix": "workspace/models/M03_usecase",
+              "count": 1,
+              "label": "use-case JSON",
+              "extension": ".json"
+            },
+            {
+              "prefix": "workspace/models/M03_usecase",
+              "count": 1,
+              "label": "use-case SVG",
+              "extension": ".svg"
+            }
+          ],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M03.01. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 3,
           "instruction": "Write one complete textual use case for an important interaction, including meaningful alternative and failure flows.",
-          "save_to": "M03 Report → UC01 Textual Specification. Use the website controls. In your downloaded ZIP: workspace/reports/M03.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M03 Report → UC01 Textual Specification). M03 Report → UC01 Textual Specification. Use the website controls. In your downloaded ZIP: workspace/reports/M03.md. Task answer in the ZIP: workspace/reports/M03_task03.md.",
           "minimum_requirements": [
             "Name it UC01 and reference related requirement IDs.",
             "Include primary actor, trigger, preconditions and postconditions.",
             "Write a main success flow.",
             "Include at least 2 alternative/failure flows."
           ],
-          "complete_when": "UC01 is detailed enough that another team could follow the behavior without asking you to explain it verbally.",
-          "deliverable": "UC01 complete textual specification"
+          "complete_when": "UC01 is detailed enough that another team could follow the behavior without asking you to explain it verbally. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "UC01 complete textual specification",
+          "prerequisites": [
+            "M03.02"
+          ],
+          "report_section": "UC01 Textual Specification",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M03.02. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 4,
           "instruction": "Create an activity model for a workflow where branching matters. Make guards explicit and avoid invented concurrency.",
-          "save_to": "Models / CASE → Save name → M03_activity; rationale in M03 Report → Activity-model Rationale. Use the website controls. In your downloaded ZIP: workspace/reports/M03.md; workspace/models/ (JSON + SVG).",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M03 Report → Activity-model Rationale). Models / CASE → Save name → M03_activity; rationale in M03 Report → Activity-model Rationale. Use the website controls. In your downloaded ZIP: workspace/reports/M03.md; workspace/models/ (JSON + SVG). Task answer in the ZIP: workspace/reports/M03_task04.md.",
           "minimum_requirements": [
             "Model one meaningful workflow.",
             "Include at least 2 decision points with explicit guards.",
             "Use start/end nodes and an understandable flow direction.",
             "Only model parallelism if the scenario actually requires it."
           ],
-          "complete_when": "M03_activity.json and .svg exist and the branching logic can be followed from start to finish.",
-          "deliverable": "M03_activity JSON + SVG"
+          "complete_when": "M03_activity.json and .svg exist and the branching logic can be followed from start to finish. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "M03_activity JSON + SVG",
+          "prerequisites": [
+            "M03.03"
+          ],
+          "report_section": "Activity-model Rationale",
+          "evidence": [
+            {
+              "prefix": "workspace/models/M03_activity",
+              "count": 1,
+              "label": "activity JSON",
+              "extension": ".json"
+            },
+            {
+              "prefix": "workspace/models/M03_activity",
+              "count": 1,
+              "label": "activity SVG",
+              "extension": ".svg"
+            }
+          ],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M03.03. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 5,
           "instruction": "Walk through success plus two non-success scenarios using only the model and specification.",
-          "save_to": "M03 Report → Walkthroughs. Use the website controls. In your downloaded ZIP: workspace/reports/M03.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M03 Report → Walkthroughs). M03 Report → Walkthroughs. Use the website controls. In your downloaded ZIP: workspace/reports/M03.md. Task answer in the ZIP: workspace/reports/M03_task05.md.",
           "minimum_requirements": [
             "Document 3 walkthroughs: 1 success and 2 non-success.",
             "For each, list the path through UC01/activity model.",
             "Record any ambiguity or missing step discovered."
           ],
-          "complete_when": "All 3 walkthroughs are documented and at least one conclusion is drawn from them.",
-          "deliverable": "Three documented walkthroughs"
+          "complete_when": "All 3 walkthroughs are documented and at least one conclusion is drawn from them. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Three documented walkthroughs",
+          "prerequisites": [
+            "M03.03",
+            "M03.04"
+          ],
+          "report_section": "Walkthroughs",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M03.03, M03.04. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 6,
           "instruction": "Trace modeled behavior back to M02 and note anything missing, duplicated or inconsistent.",
-          "save_to": "M03 Report → Traceability & Peer Review. Use the website controls. In your downloaded ZIP: workspace/reports/M03.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M03 Report → Traceability & Peer Review). M03 Report → Traceability & Peer Review. Use the website controls. In your downloaded ZIP: workspace/reports/M03.md. Task answer in the ZIP: workspace/reports/M03_task06.md.",
           "minimum_requirements": [
             "Reference requirement IDs represented by the models.",
             "Identify at least 1 missing, duplicated or inconsistent element—or explicitly state none found and how you checked.",
             "Record any requirement/model update made as a result."
           ],
-          "complete_when": "Traceability between M02 and M03 is explicit rather than implied.",
-          "deliverable": "M02→M03 traceability and consistency review"
+          "complete_when": "Traceability between M02 and M03 is explicit rather than implied. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "M02→M03 traceability and consistency review",
+          "prerequisites": [
+            "M03.02",
+            "M03.03",
+            "M03.04",
+            "M03.05"
+          ],
+          "report_section": "Traceability & Peer Review",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M03.02, M03.03, M03.04, M03.05. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 7,
           "instruction": "Ask another team to follow the specification without verbal help. Record their finding or explain what they checked if no ambiguity was found.",
-          "save_to": "M03 Report → Traceability & Peer Review. Use the website controls. In your downloaded ZIP: workspace/reports/M03.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M03 Report → Traceability & Peer Review). M03 Report → Traceability & Peer Review. Use the website controls. In your downloaded ZIP: workspace/reports/M03.md. Task answer in the ZIP: workspace/reports/M03_task07.md.",
           "minimum_requirements": [
             "Record reviewer/team identifier.",
             "Record the ambiguity precisely, or record no ambiguity found and the scenarios reviewed.",
             "State whether you changed the artifact and why."
           ],
-          "complete_when": "Peer-review evidence is recorded and the team responds to the finding.",
-          "deliverable": "Peer-review record and response"
+          "complete_when": "Peer-review evidence is recorded and the team responds to the finding. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Peer-review record and response",
+          "prerequisites": [
+            "M03.05",
+            "M03.06"
+          ],
+          "report_section": "Traceability & Peer Review",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M03.05, M03.06. Do not use a ready-made stakeholder list or scope from the course."
         }
       ],
       "theory_cards": [
@@ -916,90 +1067,153 @@
         {
           "task": 1,
           "instruction": "Derive external information exchanges from existing requirements and create a context-level model.",
-          "save_to": "Models / CASE → Save name → M04_context; M04 Report → Context & Decomposition Rationale. Use the website controls. In your downloaded ZIP: workspace/reports/M04.md; workspace/models/ (JSON + SVG).",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M04 Report → Context & Decomposition Rationale). Models / CASE → Save name: M04_context → Save JSON + SVG. Rationale in M04 Report → Context & Decomposition Rationale. In the ZIP: workspace/models/M04_context.json and .svg. Task answer in the ZIP: workspace/reports/M04_task01.md.",
           "minimum_requirements": [
             "Identify external entities from your own baseline.",
             "Show the system as one transformation/process.",
             "Name information flows with data/information nouns.",
             "Reference requirements that justify important flows."
           ],
-          "complete_when": "A saved context model exists and every major external flow has a rationale.",
-          "deliverable": "Context DFD and flow rationale"
+          "complete_when": "A saved context model exists and every major external flow has a rationale. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Context DFD and flow rationale",
+          "prerequisites": [
+            "M02.08",
+            "M03.03"
+          ],
+          "report_section": "Context & Decomposition Rationale",
+          "evidence": [
+            {
+              "prefix": "workspace/models/M04_context",
+              "count": 1,
+              "label": "context DFD",
+              "extension": ".json"
+            }
+          ],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M02.08, M03.03. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 2,
           "instruction": "Decompose the system into a small number of meaningful transformations and relevant data stores.",
-          "save_to": "Models / CASE → Save name → M04_level1; M04 Report → Context & Decomposition Rationale. Use the website controls. In your downloaded ZIP: workspace/reports/M04.md; workspace/models/ (JSON + SVG).",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M04 Report → Context & Decomposition Rationale). Models / CASE → Save name: M04_dfd → Save JSON + SVG. Rationale in M04 Report → Context & Decomposition Rationale. In the ZIP: workspace/models/M04_dfd.json and .svg. Task answer in the ZIP: workspace/reports/M04_task02.md.",
           "minimum_requirements": [
             "Use a small, understandable set of level-1 processes.",
             "Include relevant data stores only where persistent information is needed.",
             "Avoid turning screens/classes into DFD processes."
           ],
-          "complete_when": "The level-1 DFD explains how information is transformed, not merely where UI actions occur.",
-          "deliverable": "Level-1 DFD with processes/stores"
+          "complete_when": "The level-1 DFD explains how information is transformed, not merely where UI actions occur. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Level-1 DFD with processes/stores",
+          "prerequisites": [
+            "M04.01"
+          ],
+          "report_section": "Context & Decomposition Rationale",
+          "evidence": [
+            {
+              "prefix": "workspace/models/M04_dfd",
+              "count": 1,
+              "label": "level-1 DFD",
+              "extension": ".json"
+            }
+          ],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M04.01. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 3,
           "instruction": "Check balancing between context and level-1 views. Explain any renamed or aggregated flow.",
-          "save_to": "M04 Report → Balancing. Use the website controls. In your downloaded ZIP: workspace/reports/M04.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M04 Report → Balancing). M04 Report → Balancing. Use the website controls. In your downloaded ZIP: workspace/reports/M04.md. Task answer in the ZIP: workspace/reports/M04_task03.md.",
           "minimum_requirements": [
             "Create a balancing table for all context-level flows.",
             "Mark each as preserved, decomposed/aggregated or problematic.",
             "Explain every intentional rename/aggregation.",
             "Resolve or explicitly document unmatched flows."
           ],
-          "complete_when": "A reviewer can reconcile the context and level-1 diagrams using the table.",
-          "deliverable": "Complete external-flow balancing table"
+          "complete_when": "A reviewer can reconcile the context and level-1 diagrams using the table. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Complete external-flow balancing table",
+          "prerequisites": [
+            "M04.01",
+            "M04.02"
+          ],
+          "report_section": "Balancing",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M04.01, M04.02. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 4,
           "instruction": "Create a data dictionary for the core information structures your models rely on.",
-          "save_to": "M04 Report → Data Dictionary. Use the website controls. In your downloaded ZIP: workspace/reports/M04.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M04 Report → Data Dictionary). M04 Report → Data Dictionary. Use the website controls. In your downloaded ZIP: workspace/reports/M04.md. Task answer in the ZIP: workspace/reports/M04_task04.md.",
           "minimum_requirements": [
             "Define at least 6 core data structures/flows.",
             "For each give purpose and key fields/elements.",
             "Use terminology consistently with requirements and DFDs."
           ],
-          "complete_when": "The dictionary removes ambiguity from important flow/store names.",
-          "deliverable": "Dictionary of at least six structures/flows"
+          "complete_when": "The dictionary removes ambiguity from important flow/store names. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Dictionary of at least six structures/flows",
+          "prerequisites": [
+            "M04.02",
+            "M04.03"
+          ],
+          "report_section": "Data Dictionary",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M04.02, M04.03. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 5,
           "instruction": "Create an access matrix for relevant roles and information resources. Justify at least one denied operation.",
-          "save_to": "M04 Report → Access Matrix. Use the website controls. In your downloaded ZIP: workspace/reports/M04.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M04 Report → Access Matrix). M04 Report → Access Matrix. Use the website controls. In your downloaded ZIP: workspace/reports/M04.md. Task answer in the ZIP: workspace/reports/M04_task05.md.",
           "minimum_requirements": [
             "Include at least 4 roles and 4 information resources.",
             "Distinguish relevant operations such as read/create/update/delete where meaningful.",
             "Include at least 3 explicit denials.",
             "Justify at least one denied operation using a risk or responsibility argument."
           ],
-          "complete_when": "The matrix makes permissions reviewable and does not grant blanket access without justification.",
-          "deliverable": "Access matrix: at least four roles/resources and three denials"
+          "complete_when": "The matrix makes permissions reviewable and does not grant blanket access without justification. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Access matrix: at least four roles/resources and three denials",
+          "prerequisites": [
+            "M04.04",
+            "M01.03"
+          ],
+          "report_section": "Access Matrix",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M04.04, M01.03. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 6,
           "instruction": "Analyze one information-flow risk and propose a control plus a way to verify it.",
-          "save_to": "M04 Report → Information-flow Risk. Use the website controls. In your downloaded ZIP: workspace/reports/M04.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M04 Report → Information-flow Risk). M04 Report → Information-flow Risk. Use the website controls. In your downloaded ZIP: workspace/reports/M04.md. Task answer in the ZIP: workspace/reports/M04_task06.md.",
           "minimum_requirements": [
             "Describe one concrete information-flow risk.",
             "Identify affected asset/stakeholder.",
             "Propose one control.",
             "Define how you would verify that the control works."
           ],
-          "complete_when": "Risk, control and verification form one coherent chain.",
-          "deliverable": "One information-risk/control/verification analysis"
+          "complete_when": "Risk, control and verification form one coherent chain. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "One information-risk/control/verification analysis",
+          "prerequisites": [
+            "M04.04",
+            "M04.05"
+          ],
+          "report_section": "Information-flow Risk",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M04.04, M04.05. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 7,
           "instruction": "Compare the DFD with your activity model: what does each reveal and intentionally omit?",
-          "save_to": "M04 Report → DFD vs Activity Review. Use the website controls. In your downloaded ZIP: workspace/reports/M04.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M04 Report → DFD vs Activity Review). M04 Report → DFD vs Activity Review. Use the website controls. In your downloaded ZIP: workspace/reports/M04.md. Task answer in the ZIP: workspace/reports/M04_task07.md.",
           "minimum_requirements": [
             "Give at least 2 differences in what the models emphasize.",
             "Give at least 1 thing each model intentionally omits.",
             "Identify one consistency point between M03 and M04."
           ],
-          "complete_when": "The comparison demonstrates understanding of model purpose, not just notation.",
-          "deliverable": "Activity versus DFD comparison"
+          "complete_when": "The comparison demonstrates understanding of model purpose, not just notation. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Activity versus DFD comparison",
+          "prerequisites": [
+            "M04.03",
+            "M04.06",
+            "M03.04"
+          ],
+          "report_section": "DFD vs Activity Review",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M04.03, M04.06, M03.04. Do not use a ready-made stakeholder list or scope from the course."
         }
       ],
       "theory_cards": [
@@ -1128,89 +1342,144 @@
         {
           "task": 1,
           "instruction": "Identify service failures that would meaningfully affect stakeholders and distinguish reliability from availability concerns.",
-          "save_to": "M05 Report → Failure & Dependability Analysis. Use the website controls. In your downloaded ZIP: workspace/reports/M05.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M05 Report → Failure & Dependability Analysis). M05 Report → Failure & Dependability Analysis. Use the website controls. In your downloaded ZIP: workspace/reports/M05.md. Task answer in the ZIP: workspace/reports/M05_task01.md.",
           "minimum_requirements": [
             "Identify at least 5 meaningful service failures.",
             "For each state affected stakeholder/impact.",
             "Classify whether the concern is primarily reliability, availability or both, with a reason."
           ],
-          "complete_when": "The analysis distinguishes failure frequency/correctness from service accessibility rather than using the terms interchangeably.",
-          "deliverable": "Five service failures and reliability/availability rationale"
+          "complete_when": "The analysis distinguishes failure frequency/correctness from service accessibility rather than using the terms interchangeably. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Five service failures and reliability/availability rationale",
+          "prerequisites": [
+            "M02.05",
+            "M04.06"
+          ],
+          "report_section": "Failure & Dependability Analysis",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M02.05, M04.06. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 2,
           "instruction": "Define or refine measurable dependability requirements and state their assumptions.",
-          "save_to": "M05 Report → Failure & Dependability Analysis. Use the website controls. In your downloaded ZIP: workspace/reports/M05.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M05 Report → Failure & Dependability Analysis). M05 Report → Failure & Dependability Analysis. Use the website controls. In your downloaded ZIP: workspace/reports/M05.md. Task answer in the ZIP: workspace/reports/M05_task02.md.",
           "minimum_requirements": [
             "Create/refine at least 3 measurable dependability requirements.",
             "State measurement window/condition where relevant.",
             "Label assumed targets as teaching assumptions."
           ],
-          "complete_when": "Requirements are objectively checkable and connected to identified failures.",
-          "deliverable": "Three measurable dependability requirements"
+          "complete_when": "Requirements are objectively checkable and connected to identified failures. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Three measurable dependability requirements",
+          "prerequisites": [
+            "M05.01"
+          ],
+          "report_section": "Failure & Dependability Analysis",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M05.01. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 3,
           "instruction": "Use the availability simulator for a base scenario and at least two alternatives that answer a question you formulate.",
-          "save_to": "Simulators → Availability; save 3 runs. M05 Report → Availability Experiments. Use the website controls. In your downloaded ZIP: workspace/reports/M05.md; workspace/runs/ (saved inputs + results).",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M05 Report → Availability Experiments). Simulators → Availability; save 3 runs. M05 Report → Availability Experiments. Use the website controls. In your downloaded ZIP: workspace/reports/M05.md; workspace/runs/ (saved inputs + results). Task answer in the ZIP: workspace/reports/M05_task03.md.",
           "minimum_requirements": [
             "State one question before running the simulator.",
             "Save 1 base + at least 2 alternatives.",
             "Record changed inputs and results.",
             "Include a manual calculation/check for at least one scenario."
           ],
-          "complete_when": "Three runs exist and the report interprets them as estimates answering the stated question.",
-          "deliverable": "Three saved availability runs and one manual check"
+          "complete_when": "Three runs exist and the report interprets them as estimates answering the stated question. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Three saved availability runs and one manual check",
+          "prerequisites": [
+            "M05.02"
+          ],
+          "report_section": "Availability Experiments",
+          "evidence": [
+            {
+              "prefix": "workspace/runs/M05_availability_",
+              "count": 3,
+              "label": "three availability runs"
+            }
+          ],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M05.02. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 4,
           "instruction": "Describe one fault-tolerance or recovery strategy and explain which failure it addresses—and which it does not.",
-          "save_to": "M05 Report → Recovery / Fault Tolerance. Use the website controls. In your downloaded ZIP: workspace/reports/M05.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M05 Report → Recovery / Fault Tolerance). M05 Report → Recovery / Fault Tolerance. Use the website controls. In your downloaded ZIP: workspace/reports/M05.md. Task answer in the ZIP: workspace/reports/M05_task04.md.",
           "minimum_requirements": [
             "Describe trigger, recovery/fallback action and expected effect.",
             "Link it to at least one failure from Task 1.",
             "State at least one failure it does not solve.",
             "Include a small restore/recovery drill or thought experiment with evidence."
           ],
-          "complete_when": "The strategy has clear limits and is tied to a specific failure mode.",
-          "deliverable": "Recovery strategy plus documented drill or thought experiment"
+          "complete_when": "The strategy has clear limits and is tied to a specific failure mode. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Recovery strategy plus documented drill or thought experiment",
+          "prerequisites": [
+            "M05.01",
+            "M05.02",
+            "M05.03"
+          ],
+          "report_section": "Recovery / Fault Tolerance",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M05.01, M05.02, M05.03. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 5,
           "instruction": "Identify important assets and plausible threats. Prioritize a manageable subset rather than a generic threat list.",
-          "save_to": "M05 Report → Threat Analysis. Use the website controls. In your downloaded ZIP: workspace/reports/M05.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M05 Report → Threat Analysis). M05 Report → Threat Analysis. Use the website controls. In your downloaded ZIP: workspace/reports/M05.md. Task answer in the ZIP: workspace/reports/M05_task05.md.",
           "minimum_requirements": [
             "Identify at least 4 assets.",
             "List at least 6 plausible threats tied to those assets/trust boundaries.",
             "Prioritize at least 3 threats using a stated rationale.",
             "Include a simple trust-boundary sketch or equivalent description."
           ],
-          "complete_when": "Threats are project-specific and prioritized rather than copied as a generic security checklist.",
-          "deliverable": "Four assets, six threats, three priorities and trust-boundary description"
+          "complete_when": "Threats are project-specific and prioritized rather than copied as a generic security checklist. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Four assets, six threats, three priorities and trust-boundary description",
+          "prerequisites": [
+            "M05.01",
+            "M04.05"
+          ],
+          "report_section": "Threat Analysis",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M05.01, M04.05. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 6,
           "instruction": "For each selected threat, propose a control and a verification idea. Discuss one trade-off introduced by a control.",
-          "save_to": "M05 Report → Controls & Verification. Use the website controls. In your downloaded ZIP: workspace/reports/M05.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M05 Report → Controls & Verification). M05 Report → Controls & Verification. Use the website controls. In your downloaded ZIP: workspace/reports/M05.md. Task answer in the ZIP: workspace/reports/M05_task06.md.",
           "minimum_requirements": [
             "For at least 3 prioritized threats record control + verification method.",
             "Controls must address the stated threat.",
             "Discuss at least one cost/usability/performance/complexity trade-off."
           ],
-          "complete_when": "Each selected threat has a testable control idea and at least one engineering trade-off is acknowledged.",
-          "deliverable": "Controls/verification for three threats plus one trade-off"
+          "complete_when": "Each selected threat has a testable control idea and at least one engineering trade-off is acknowledged. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Controls/verification for three threats plus one trade-off",
+          "prerequisites": [
+            "M05.05"
+          ],
+          "report_section": "Controls & Verification",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M05.05. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 7,
           "instruction": "Update risks/requirements where the analysis reveals new constraints.",
-          "save_to": "M05 Report → Requirement / Risk Updates. Use the website controls. In your downloaded ZIP: workspace/reports/M05.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M05 Report → Requirement / Risk Updates). M05 Report → Requirement / Risk Updates. Use the website controls. In your downloaded ZIP: workspace/reports/M05.md. Task answer in the ZIP: workspace/reports/M05_task07.md.",
           "minimum_requirements": [
             "Record at least 2 updates or explicitly justify why none are needed.",
             "Reference affected requirement/risk IDs.",
             "Preserve the reason for each change."
           ],
-          "complete_when": "The earlier baseline reflects new dependability/security knowledge rather than remaining disconnected from M05.",
-          "deliverable": "Two baseline updates or explicit no-change justification"
+          "complete_when": "The earlier baseline reflects new dependability/security knowledge rather than remaining disconnected from M05. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Two baseline updates or explicit no-change justification",
+          "prerequisites": [
+            "M05.02",
+            "M05.03",
+            "M05.04",
+            "M05.06"
+          ],
+          "report_section": "Requirement / Risk Updates",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M05.02, M05.03, M05.04, M05.06. Do not use a ready-made stakeholder list or scope from the course."
         }
       ],
       "theory_cards": [
@@ -1339,90 +1608,164 @@
         {
           "task": 1,
           "instruction": "Identify architectural responsibilities implied by requirements and quality constraints.",
-          "save_to": "M06 Report → Architecture Responsibilities. Use the website controls. In your downloaded ZIP: workspace/reports/M06.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M06 Report → Architecture Responsibilities). M06 Report → Architecture Responsibilities. Use the website controls. In your downloaded ZIP: workspace/reports/M06.md. Task answer in the ZIP: workspace/reports/M06_task01.md.",
           "minimum_requirements": [
             "List at least 6 responsibilities derived from requirements/NFRs.",
             "Reference requirement IDs.",
             "Avoid naming technologies before the responsibility is clear."
           ],
-          "complete_when": "Responsibilities can be traced to needs rather than invented from a preferred stack.",
-          "deliverable": "Six traced architectural responsibilities"
+          "complete_when": "Responsibilities can be traced to needs rather than invented from a preferred stack. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Six traced architectural responsibilities",
+          "prerequisites": [
+            "M02.08",
+            "M05.07"
+          ],
+          "report_section": "Architecture Responsibilities",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M02.08, M05.07. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 2,
           "instruction": "Propose a logical architecture and justify how responsibilities are separated. Compare at least one alternative/trade-off.",
-          "save_to": "M06 Report → Architecture & Alternatives. Use the website controls. In your downloaded ZIP: workspace/reports/M06.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M06 Report → Architecture & Alternatives). M06 Report → Architecture & Alternatives. Use the website controls. In your downloaded ZIP: workspace/reports/M06.md. Task answer in the ZIP: workspace/reports/M06_task02.md.",
           "minimum_requirements": [
             "Describe the major logical parts and their responsibilities.",
             "Explain at least 3 responsibility boundaries.",
             "Compare at least 1 alternative architecture/decomposition.",
             "State at least 2 trade-offs."
           ],
-          "complete_when": "The chosen structure is justified against QuickBite quality/maintenance needs.",
-          "deliverable": "Logical architecture rationale and alternative/trade-offs"
+          "complete_when": "The chosen structure is justified against QuickBite quality/maintenance needs. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Logical architecture rationale and alternative/trade-offs",
+          "prerequisites": [
+            "M06.01"
+          ],
+          "report_section": "Architecture & Alternatives",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M06.01. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 3,
           "instruction": "Create a package/component-style view using the simplified notation or an external CASE tool.",
-          "save_to": "Models / CASE → Save name → M06_architecture (or attach equivalent); M06 Report → Architecture & Alternatives. Use the website controls. In your downloaded ZIP: workspace/reports/M06.md; workspace/models/ (JSON + SVG).",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M06 Report → Architecture & Alternatives). Models / CASE → Save name: M06_architecture → Save JSON + SVG. Rationale in M06 Report → Architecture & Alternatives. In the ZIP: workspace/models/M06_architecture.json and .svg. Task answer in the ZIP: workspace/reports/M06_task03.md.",
           "minimum_requirements": [
             "Show major logical elements and dependencies.",
             "Keep dependency direction understandable.",
             "Avoid cycles unless explicitly justified.",
             "Use names consistent with the written architecture."
           ],
-          "complete_when": "A saved architecture view exists and matches the responsibilities described in the report.",
-          "deliverable": "Saved package/component-style logical view"
+          "complete_when": "A saved architecture view exists and matches the responsibilities described in the report. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Saved package/component-style logical view",
+          "prerequisites": [
+            "M06.02"
+          ],
+          "report_section": "Architecture & Alternatives",
+          "evidence": [
+            {
+              "prefix": "workspace/models/M06_architecture",
+              "count": 1,
+              "label": "logical architecture",
+              "extension": ".json"
+            }
+          ],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M06.02. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 4,
           "instruction": "Design a deployment view showing the execution environment and external dependencies relevant to the project.",
-          "save_to": "Models / CASE → Save name → M06_deployment; M06 Report → Deployment. Use the website controls. In your downloaded ZIP: workspace/reports/M06.md; workspace/models/ (JSON + SVG).",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M06 Report → Deployment). Models / CASE → Save name → M06_deployment; M06 Report → Deployment. Use the website controls. In your downloaded ZIP: workspace/reports/M06.md; workspace/models/ (JSON + SVG). Task answer in the ZIP: workspace/reports/M06_task04.md.",
           "minimum_requirements": [
             "Show execution nodes/environments relevant to the design.",
             "Place major deployable/runtime elements.",
             "Show external dependencies/integrations.",
             "State at least 2 operational assumptions."
           ],
-          "complete_when": "M06_deployment exists and distinguishes logical responsibilities from physical/runtime placement.",
-          "deliverable": "M06_deployment JSON + SVG and two operational assumptions"
+          "complete_when": "M06_deployment exists and distinguishes logical responsibilities from physical/runtime placement. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "M06_deployment JSON + SVG and two operational assumptions",
+          "prerequisites": [
+            "M06.02",
+            "M06.03"
+          ],
+          "report_section": "Deployment",
+          "evidence": [
+            {
+              "prefix": "workspace/models/M06_deployment",
+              "count": 1,
+              "label": "deployment JSON",
+              "extension": ".json"
+            },
+            {
+              "prefix": "workspace/models/M06_deployment",
+              "count": 1,
+              "label": "deployment SVG",
+              "extension": ".svg"
+            }
+          ],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M06.02, M06.03. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 5,
           "instruction": "Use the capacity simulator to explore at least two demand/failure scenarios. Interpret results as estimates.",
-          "save_to": "Simulators → Capacity; save at least 3 runs. M06 Report → Capacity Experiments. Use the website controls. In your downloaded ZIP: workspace/reports/M06.md; workspace/runs/ (saved inputs + results).",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M06 Report → Capacity Experiments). Simulators → Capacity; save at least 3 runs. M06 Report → Capacity Experiments. Use the website controls. In your downloaded ZIP: workspace/reports/M06.md; workspace/runs/ (saved inputs + results). Task answer in the ZIP: workspace/reports/M06_task05.md.",
           "minimum_requirements": [
             "Save a base run plus at least 2 demand/failure scenarios.",
             "State the question each scenario explores.",
             "Interpret bottlenecks/limits rather than only copying numbers.",
             "Do not claim production capacity from the classroom simulator."
           ],
-          "complete_when": "Saved runs and written interpretations exist for at least 3 scenarios.",
-          "deliverable": "Three saved capacity runs and interpretations"
+          "complete_when": "Saved runs and written interpretations exist for at least 3 scenarios. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Three saved capacity runs and interpretations",
+          "prerequisites": [
+            "M06.04"
+          ],
+          "report_section": "Capacity Experiments",
+          "evidence": [
+            {
+              "prefix": "workspace/runs/M06_capacity_",
+              "count": 3,
+              "label": "three capacity runs"
+            }
+          ],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M06.04. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 6,
           "instruction": "Record one architecture decision in ADR-style form: context, decision, alternatives and consequences.",
-          "save_to": "M06 Report → ADR01. Use the website controls. In your downloaded ZIP: workspace/reports/M06.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M06 Report → ADR01). M06 Report → ADR01. Use the website controls. In your downloaded ZIP: workspace/reports/M06.md. Task answer in the ZIP: workspace/reports/M06_task06.md.",
           "minimum_requirements": [
             "Include Context, Decision, Alternatives considered and Consequences.",
             "Reference relevant requirements/NFRs.",
             "Include at least one negative consequence/trade-off."
           ],
-          "complete_when": "ADR01 explains why the decision was made and what it costs, not just what was chosen.",
-          "deliverable": "ADR01: context/decision/alternatives/consequences"
+          "complete_when": "ADR01 explains why the decision was made and what it costs, not just what was chosen. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "ADR01: context/decision/alternatives/consequences",
+          "prerequisites": [
+            "M06.02",
+            "M06.05"
+          ],
+          "report_section": "ADR01",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M06.02, M06.05. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 7,
           "instruction": "Review whether architecture/deployment address earlier NFRs.",
-          "save_to": "M06 Report → NFR Review. Use the website controls. In your downloaded ZIP: workspace/reports/M06.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M06 Report → NFR Review). M06 Report → NFR Review. Use the website controls. In your downloaded ZIP: workspace/reports/M06.md. Task answer in the ZIP: workspace/reports/M06_task07.md.",
           "minimum_requirements": [
             "Review at least 4 earlier NFRs.",
             "For each state architectural/deployment support and remaining gap/uncertainty.",
             "Add a release/monitoring consideration for unresolved operational risks."
           ],
-          "complete_when": "The review connects architecture to quality requirements and identifies residual gaps.",
-          "deliverable": "Review of four NFRs with gaps and monitoring/release considerations"
+          "complete_when": "The review connects architecture to quality requirements and identifies residual gaps. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Review of four NFRs with gaps and monitoring/release considerations",
+          "prerequisites": [
+            "M06.03",
+            "M06.04",
+            "M06.05",
+            "M06.06"
+          ],
+          "report_section": "NFR Review",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M06.03, M06.04, M06.05, M06.06. Do not use a ready-made stakeholder list or scope from the course."
         }
       ],
       "theory_cards": [
@@ -1545,75 +1888,145 @@
         {
           "task": 1,
           "instruction": "Identify candidate domain concepts from requirements, use cases and information models. Remove duplicates and UI-only concepts.",
-          "save_to": "M07 Report → Domain Concepts. Use the website controls. In your downloaded ZIP: workspace/reports/M07.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M07 Report → Domain Concepts). M07 Report → Domain Concepts. Use the website controls. In your downloaded ZIP: workspace/reports/M07.md. Task answer in the ZIP: workspace/reports/M07_task01.md.",
           "minimum_requirements": [
             "List at least 10 candidate concepts with source references.",
             "Remove/merge duplicates explicitly.",
             "Identify at least 2 UI/technical concepts excluded from the domain model and explain why."
           ],
-          "complete_when": "The final concept list is grounded in prior artifacts and separates domain from interface/implementation concerns.",
-          "deliverable": "Ten candidate concepts, sources and cleanup rationale"
+          "complete_when": "The final concept list is grounded in prior artifacts and separates domain from interface/implementation concerns. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Ten candidate concepts, sources and cleanup rationale",
+          "prerequisites": [
+            "M02.08",
+            "M03.03",
+            "M04.04"
+          ],
+          "report_section": "Domain Concepts",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M02.08, M03.03, M04.04. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 2,
           "instruction": "Create a class model with meaningful responsibilities and relationships. Add multiplicities where they matter.",
-          "save_to": "Models / CASE → Save name → M07_class; M07 Report → Class-model Rationale. Use the website controls. In your downloaded ZIP: workspace/reports/M07.md; workspace/models/ (JSON + SVG).",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M07 Report → Class-model Rationale). Models / CASE → Save name → M07_class; M07 Report → Class-model Rationale. Use the website controls. In your downloaded ZIP: workspace/reports/M07.md; workspace/models/ (JSON + SVG). Task answer in the ZIP: workspace/reports/M07_task02.md.",
           "minimum_requirements": [
             "Include the core domain classes needed by your concept analysis.",
             "Show meaningful associations/relationships.",
             "Add multiplicities where cardinality affects correctness.",
             "Avoid database-table or UI-screen modeling as a substitute for domain design."
           ],
-          "complete_when": "M07_class exists and relationships/multiplicities can be explained from project rules.",
-          "deliverable": "M07_class JSON + SVG with relevant multiplicities"
+          "complete_when": "M07_class exists and relationships/multiplicities can be explained from project rules. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "M07_class JSON + SVG with relevant multiplicities",
+          "prerequisites": [
+            "M07.01"
+          ],
+          "report_section": "Class-model Rationale",
+          "evidence": [
+            {
+              "prefix": "workspace/models/M07_class",
+              "count": 1,
+              "label": "M07_class JSON",
+              "extension": ".json"
+            },
+            {
+              "prefix": "workspace/models/M07_class",
+              "count": 1,
+              "label": "M07_class SVG",
+              "extension": ".svg"
+            }
+          ],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M07.01. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 3,
           "instruction": "Explain at least two non-obvious modeling choices.",
-          "save_to": "M07 Report → Class-model Rationale. Use the website controls. In your downloaded ZIP: workspace/reports/M07.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M07 Report → Class-model Rationale). M07 Report → Class-model Rationale. Use the website controls. In your downloaded ZIP: workspace/reports/M07.md. Task answer in the ZIP: workspace/reports/M07_task03.md.",
           "minimum_requirements": [
             "Explain at least 2 choices that another designer could reasonably make differently.",
             "For each state an alternative and why you rejected it."
           ],
-          "complete_when": "The rationale demonstrates design reasoning beyond naming classes.",
-          "deliverable": "Two non-obvious choices and alternatives"
+          "complete_when": "The rationale demonstrates design reasoning beyond naming classes. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Two non-obvious choices and alternatives",
+          "prerequisites": [
+            "M07.02"
+          ],
+          "report_section": "Class-model Rationale",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M07.02. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 4,
           "instruction": "Identify one design problem where a pattern could help. Compare at least two approaches before selecting a pattern.",
-          "save_to": "M07 Report → Pattern Decision. Use the website controls. In your downloaded ZIP: workspace/reports/M07.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M07 Report → Pattern Decision). M07 Report → Pattern Decision. Use the website controls. In your downloaded ZIP: workspace/reports/M07.md. Task answer in the ZIP: workspace/reports/M07_task04.md.",
           "minimum_requirements": [
             "Describe one concrete design problem.",
             "Compare at least 2 approaches (one may be “no formal pattern”).",
             "Select a pattern/approach only after the comparison.",
             "State consequences and where it would apply."
           ],
-          "complete_when": "The selected pattern solves a stated problem and is not added merely to satisfy the task.",
-          "deliverable": "One justified pattern/approach decision comparing two approaches"
+          "complete_when": "The selected pattern solves a stated problem and is not added merely to satisfy the task. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "One justified pattern/approach decision comparing two approaches",
+          "prerequisites": [
+            "M07.02",
+            "M07.03",
+            "M06.02"
+          ],
+          "report_section": "Pattern Decision",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M07.02, M07.03, M06.02. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 5,
           "instruction": "Model relevant packages/dependencies and check for unnecessary coupling.",
-          "save_to": "Models / CASE → Save name → M07_packages; M07 Report → Package / Dependency Review. Use the website controls. In your downloaded ZIP: workspace/reports/M07.md; workspace/models/ (JSON + SVG).",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M07 Report → Package / Dependency Review). Models / CASE → Save name → M07_packages; M07 Report → Package / Dependency Review. Use the website controls. In your downloaded ZIP: workspace/reports/M07.md; workspace/models/ (JSON + SVG). Task answer in the ZIP: workspace/reports/M07_task05.md.",
           "minimum_requirements": [
             "Group related responsibilities into packages/modules.",
             "Show major dependencies.",
             "Identify at least 1 coupling concern or explicitly justify why current dependencies are acceptable."
           ],
-          "complete_when": "M07_packages exists and dependency review is documented.",
-          "deliverable": "M07_packages JSON + SVG and coupling review"
+          "complete_when": "M07_packages exists and dependency review is documented. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "M07_packages JSON + SVG and coupling review",
+          "prerequisites": [
+            "M07.02",
+            "M07.04",
+            "M06.03"
+          ],
+          "report_section": "Package / Dependency Review",
+          "evidence": [
+            {
+              "prefix": "workspace/models/M07_packages",
+              "count": 1,
+              "label": "M07_packages JSON",
+              "extension": ".json"
+            },
+            {
+              "prefix": "workspace/models/M07_packages",
+              "count": 1,
+              "label": "M07_packages SVG",
+              "extension": ".svg"
+            }
+          ],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M07.02, M07.04, M06.03. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 6,
           "instruction": "Walk one change scenario and explain which model elements would need to change.",
-          "save_to": "M07 Report → Change Walkthrough. Use the website controls. In your downloaded ZIP: workspace/reports/M07.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M07 Report → Change Walkthrough). M07 Report → Change Walkthrough. Use the website controls. In your downloaded ZIP: workspace/reports/M07.md. Task answer in the ZIP: workspace/reports/M07_task06.md.",
           "minimum_requirements": [
             "Choose one plausible requirement/rule change.",
             "Identify affected classes/packages/operations.",
             "Explain at least one ripple effect or boundary that contains the change."
           ],
-          "complete_when": "The walkthrough demonstrates how the design responds to change, not just a list of files/classes.",
-          "deliverable": "One traced change-impact walkthrough"
+          "complete_when": "The walkthrough demonstrates how the design responds to change, not just a list of files/classes. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "One traced change-impact walkthrough",
+          "prerequisites": [
+            "M07.03",
+            "M07.04",
+            "M07.05"
+          ],
+          "report_section": "Change Walkthrough",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M07.03, M07.04, M07.05. Do not use a ready-made stakeholder list or scope from the course."
         }
       ],
       "theory_cards": [
@@ -1735,77 +2148,156 @@
         {
           "task": 1,
           "instruction": "Choose one behaviorally important scenario and identify participants needed to realize it.",
-          "save_to": "M08 Report → Sequence Scenarios. Use the website controls. In your downloaded ZIP: workspace/reports/M08.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M08 Report → Sequence Scenarios). M08 Report → Sequence Scenarios. Use the website controls. In your downloaded ZIP: workspace/reports/M08.md. Task answer in the ZIP: workspace/reports/M08_task01.md.",
           "minimum_requirements": [
             "Reference the relevant use case/requirement.",
             "List the participants and each responsibility.",
             "Exclude participants that do not contribute to the scenario."
           ],
-          "complete_when": "The chosen participants can be justified from prior architecture/class responsibilities.",
-          "deliverable": "Scenario/participant rationale"
+          "complete_when": "The chosen participants can be justified from prior architecture/class responsibilities. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Scenario/participant rationale",
+          "prerequisites": [
+            "M03.03",
+            "M06.03",
+            "M07.06"
+          ],
+          "report_section": "Sequence Scenarios",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M03.03, M06.03, M07.06. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 2,
           "instruction": "Create two sequence models for complementary important scenarios, showing credible message order; describe at least one alternative/error case in text.",
-          "save_to": "Models / CASE → Save name → M08_sequence01 and M08_sequence02; M08 Report → Sequence Scenarios. Use the website controls. In your downloaded ZIP: workspace/reports/M08.md; workspace/models/ (JSON + SVG).",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M08 Report → Sequence Scenarios). Models / CASE → Save name → M08_sequence01 and M08_sequence02; M08 Report → Sequence Scenarios. Use the website controls. In your downloaded ZIP: workspace/reports/M08.md; workspace/models/ (JSON + SVG). Task answer in the ZIP: workspace/reports/M08_task02.md.",
           "minimum_requirements": [
             "Show actor/system participants and ordered messages.",
             "Messages represent responsibilities rather than UI clicks.",
             "Describe at least 1 alternative/error path in text.",
             "Save M08_sequence01 and M08_sequence02 for two justified scenarios."
           ],
-          "complete_when": "Two saved sequence models with JSON + SVG exist, and the report explains normal and alternative behaviour.",
-          "deliverable": "M08_sequence01 and M08_sequence02 JSON + SVG, plus alternative/error text"
+          "complete_when": "Two saved sequence models with JSON + SVG exist, and the report explains normal and alternative behaviour. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "M08_sequence01 and M08_sequence02 JSON + SVG, plus alternative/error text",
+          "prerequisites": [
+            "M08.01"
+          ],
+          "report_section": "Sequence Scenarios",
+          "evidence": [
+            {
+              "prefix": "workspace/models/M08_sequence01",
+              "count": 1,
+              "label": "M08_sequence01 JSON",
+              "extension": ".json"
+            },
+            {
+              "prefix": "workspace/models/M08_sequence01",
+              "count": 1,
+              "label": "M08_sequence01 SVG",
+              "extension": ".svg"
+            },
+            {
+              "prefix": "workspace/models/M08_sequence02",
+              "count": 1,
+              "label": "M08_sequence02 JSON",
+              "extension": ".json"
+            },
+            {
+              "prefix": "workspace/models/M08_sequence02",
+              "count": 1,
+              "label": "M08_sequence02 SVG",
+              "extension": ".svg"
+            }
+          ],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M08.01. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 3,
           "instruction": "Identify a stateful concept whose legal lifecycle matters and define its states/transitions.",
-          "save_to": "M08 Report → State Lifecycle. Use the website controls. In your downloaded ZIP: workspace/reports/M08.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M08 Report → State Lifecycle). M08 Report → State Lifecycle. Use the website controls. In your downloaded ZIP: workspace/reports/M08.md. Task answer in the ZIP: workspace/reports/M08_task03.md.",
           "minimum_requirements": [
             "Choose a concept where state affects allowed behavior.",
             "List states with short meaning.",
             "List events/conditions that cause transitions."
           ],
-          "complete_when": "The lifecycle is relevant to correctness and consistent with requirements.",
-          "deliverable": "State meanings and events/conditions"
+          "complete_when": "The lifecycle is relevant to correctness and consistent with requirements. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "State meanings and events/conditions",
+          "prerequisites": [
+            "M08.01",
+            "M08.02"
+          ],
+          "report_section": "State Lifecycle",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M08.01, M08.02. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 4,
           "instruction": "Create a state machine and document invalid/forbidden transitions that matter to correctness.",
-          "save_to": "Models / CASE → Save name → M08_state; M08 Report → Forbidden Transitions. Use the website controls. In your downloaded ZIP: workspace/reports/M08.md; workspace/models/ (JSON + SVG).",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M08 Report → Forbidden Transitions). Models / CASE → Save name → M08_state; M08 Report → Forbidden Transitions. Use the website controls. In your downloaded ZIP: workspace/reports/M08.md; workspace/models/ (JSON + SVG). Task answer in the ZIP: workspace/reports/M08_task04.md.",
           "minimum_requirements": [
             "Model legal states and transitions.",
             "Show initial/final conditions where meaningful.",
             "Document at least 3 invalid/forbidden transitions.",
             "Explain why at least 2 forbidden transitions matter."
           ],
-          "complete_when": "M08_state exists and illegal behavior is explicit rather than left to interpretation.",
-          "deliverable": "M08_state JSON + SVG and three forbidden transitions"
+          "complete_when": "M08_state exists and illegal behavior is explicit rather than left to interpretation. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "M08_state JSON + SVG and three forbidden transitions",
+          "prerequisites": [
+            "M08.03"
+          ],
+          "report_section": "Forbidden Transitions",
+          "evidence": [
+            {
+              "prefix": "workspace/models/M08_state",
+              "count": 1,
+              "label": "M08_state JSON",
+              "extension": ".json"
+            },
+            {
+              "prefix": "workspace/models/M08_state",
+              "count": 1,
+              "label": "M08_state SVG",
+              "extension": ".svg"
+            }
+          ],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M08.03. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 5,
           "instruction": "Cross-check sequence messages against class/package responsibilities and requirements.",
-          "save_to": "M08 Report → Cross-model Consistency. Use the website controls. In your downloaded ZIP: workspace/reports/M08.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M08 Report → Cross-model Consistency). M08 Report → Cross-model Consistency. Use the website controls. In your downloaded ZIP: workspace/reports/M08.md. Task answer in the ZIP: workspace/reports/M08_task05.md.",
           "minimum_requirements": [
             "Check at least 5 messages/transitions against prior models/requirements.",
             "Record inconsistencies or confirm consistency with references.",
             "Update at least one artifact if a real inconsistency is found."
           ],
-          "complete_when": "The report contains traceable cross-model checks, not a generic “models are consistent” statement.",
-          "deliverable": "Five cross-model consistency checks"
+          "complete_when": "The report contains traceable cross-model checks, not a generic “models are consistent” statement. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Five cross-model consistency checks",
+          "prerequisites": [
+            "M08.02",
+            "M08.04",
+            "M07.02"
+          ],
+          "report_section": "Cross-model Consistency",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M08.02, M08.04, M07.02. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 6,
           "instruction": "Walk one requirement change through both dynamic models; document impacts, at least 8 planned tests and one relevant retry/idempotency rule.",
-          "save_to": "M08 Report → Change Walkthrough. Use the website controls. In your downloaded ZIP: workspace/reports/M08.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M08 Report → Change Walkthrough). M08 Report → Change Walkthrough. Use the website controls. In your downloaded ZIP: workspace/reports/M08.md. Task answer in the ZIP: workspace/reports/M08_task06.md.",
           "minimum_requirements": [
             "Choose one change affecting behavior/state.",
             "Describe impact on sequence and state models.",
             "Identify any requirement/class/package consequence.",
             "Add at least 8 planned tests and one idempotency/retry rule relevant to dynamic behavior."
           ],
-          "complete_when": "The change walkthrough and planned test ideas demonstrate that dynamic models can drive verification.",
-          "deliverable": "Change walkthrough, eight planned tests and one retry/idempotency rule"
+          "complete_when": "The change walkthrough and planned test ideas demonstrate that dynamic models can drive verification. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Change walkthrough, eight planned tests and one retry/idempotency rule",
+          "prerequisites": [
+            "M08.05"
+          ],
+          "report_section": "Change Walkthrough",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M08.05. Do not use a ready-made stakeholder list or scope from the course."
         }
       ],
       "theory_cards": [
@@ -1931,80 +2423,125 @@
         {
           "task": 1,
           "instruction": "Audit the project repository for missing, duplicated or inconsistent evidence and record issues.",
-          "save_to": "M09 Report → Repository Audit. Use the website controls. In your downloaded ZIP: workspace/reports/M09.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M09 Report → Repository Audit). M09 Report → Repository Audit. Use the website controls. In your downloaded ZIP: workspace/reports/M09.md. Task answer in the ZIP: workspace/reports/M09_task01.md.",
           "minimum_requirements": [
             "Review reports, models, runs, logs and traceability.",
             "Record at least 8 audit findings or verified checks.",
             "Classify findings by severity/importance.",
             "Identify owner/action for unresolved issues."
           ],
-          "complete_when": "The audit is evidence-based and produces an actionable cleanup list.",
-          "deliverable": "Eight audit findings or verified checks with owner/action"
+          "complete_when": "The audit is evidence-based and produces an actionable cleanup list. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Eight audit findings or verified checks with owner/action",
+          "prerequisites": [
+            "M01.08",
+            "M02.08",
+            "M03.07",
+            "M04.07",
+            "M05.07",
+            "M06.07",
+            "M07.06",
+            "M08.06"
+          ],
+          "report_section": "Repository Audit",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M01.08, M02.08, M03.07, M04.07, M05.07, M06.07, M07.06, M08.06. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 2,
           "instruction": "Create a short project plan for remaining work with milestones, dependencies and responsibilities.",
-          "save_to": "M09 Report → Remaining-work Plan. Use the website controls. In your downloaded ZIP: workspace/reports/M09.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M09 Report → Remaining-work Plan). M09 Report → Remaining-work Plan. Use the website controls. In your downloaded ZIP: workspace/reports/M09.md. Task answer in the ZIP: workspace/reports/M09_task02.md.",
           "minimum_requirements": [
             "Create at least 10 backlog items.",
             "Assign priority/owner and identify dependencies.",
             "Define at least 2 milestones or short iterations.",
             "Write a concise Definition of Done."
           ],
-          "complete_when": "The plan could be used by the 3-person team to coordinate remaining work.",
-          "deliverable": "Ten backlog items, two milestones/iterations and Definition of Done"
+          "complete_when": "The plan could be used by the 3-person team to coordinate remaining work. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Ten backlog items, two milestones/iterations and Definition of Done",
+          "prerequisites": [
+            "M09.01"
+          ],
+          "report_section": "Remaining-work Plan",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M09.01. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 3,
           "instruction": "Process a change request that affects an existing rule. Identify impacted requirements, models, code/tests and evidence before deciding.",
-          "save_to": "M09 Report → Change Request CR01. Use the website controls. In your downloaded ZIP: workspace/reports/M09.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M09 Report → Change Request CR01). M09 Report → Change Request CR01. Use the website controls. In your downloaded ZIP: workspace/reports/M09.md. Task answer in the ZIP: workspace/reports/M09_task03.md.",
           "minimum_requirements": [
             "Describe CR01 and its rationale/source.",
             "Perform impact analysis before changing artifacts.",
             "Identify affected requirements, models, tests/code and risks/evidence.",
             "Record accept/reject/defer decision with reason."
           ],
-          "complete_when": "CR01 contains a documented impact analysis and decision before implementation/update work.",
-          "deliverable": "CR01 impact analysis and accept/reject/defer decision"
+          "complete_when": "CR01 contains a documented impact analysis and decision before implementation/update work. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "CR01 impact analysis and accept/reject/defer decision",
+          "prerequisites": [
+            "M09.01",
+            "M09.02"
+          ],
+          "report_section": "Change Request CR01",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M09.01, M09.02. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 4,
           "instruction": "Update affected artifacts while preserving the reason for change and previous baseline where appropriate.",
-          "save_to": "M09 Report → Updated Artifacts & Traceability. Use the website controls. In your downloaded ZIP: workspace/reports/M09.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M09 Report → Updated Artifacts & Traceability). M09 Report → Updated Artifacts & Traceability. Use the website controls. In your downloaded ZIP: workspace/reports/M09.md. Task answer in the ZIP: workspace/reports/M09_task04.md.",
           "minimum_requirements": [
             "List every artifact changed because of CR01.",
             "Record old vs new rule/requirement where relevant.",
             "Update traceability links.",
             "Preserve the reason/source for the change."
           ],
-          "complete_when": "A reviewer can reconstruct what changed and why.",
-          "deliverable": "Changed artifacts, old/new rules and updated traceability"
+          "complete_when": "A reviewer can reconstruct what changed and why. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Changed artifacts, old/new rules and updated traceability",
+          "prerequisites": [
+            "M09.03"
+          ],
+          "report_section": "Updated Artifacts & Traceability",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M09.03. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 5,
           "instruction": "Analyze one professional/ethical issue raised by the system/change. Identify affected stakeholders and competing obligations.",
-          "save_to": "M09 Report → Professional / Ethical Analysis. Use the website controls. In your downloaded ZIP: workspace/reports/M09.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M09 Report → Professional / Ethical Analysis). M09 Report → Professional / Ethical Analysis. Use the website controls. In your downloaded ZIP: workspace/reports/M09.md. Task answer in the ZIP: workspace/reports/M09_task05.md.",
           "minimum_requirements": [
             "Describe one concrete issue tied to QuickBite/CR01.",
             "Identify at least 3 affected stakeholders.",
             "Describe at least 2 competing obligations/interests.",
             "Propose a defensible handling approach and acknowledge a limitation/trade-off."
           ],
-          "complete_when": "The analysis is specific to the project and does not reduce ethics to generic statements.",
-          "deliverable": "One project-specific ethical analysis"
+          "complete_when": "The analysis is specific to the project and does not reduce ethics to generic statements. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "One project-specific ethical analysis",
+          "prerequisites": [
+            "M09.03"
+          ],
+          "report_section": "Professional / Ethical Analysis",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M09.03. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 6,
           "instruction": "Perform a repository review with another team and record one improvement.",
-          "save_to": "M09 Report → Peer Review & Retrospective. Use the website controls. In your downloaded ZIP: workspace/reports/M09.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M09 Report → Peer Review & Retrospective). M09 Report → Peer Review & Retrospective. Use the website controls. In your downloaded ZIP: workspace/reports/M09.md. Task answer in the ZIP: workspace/reports/M09_task06.md.",
           "minimum_requirements": [
             "Record reviewer/team identifier.",
             "Record at least 2 findings.",
             "Implement or justify rejecting at least 1 suggested improvement.",
             "Write a short retrospective: what worked, what should change before M10."
           ],
-          "complete_when": "Peer review and retrospective result in at least one concrete repository improvement or justified decision.",
-          "deliverable": "Peer review, response to one improvement and retrospective"
+          "complete_when": "Peer review and retrospective result in at least one concrete repository improvement or justified decision. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Peer review, response to one improvement and retrospective",
+          "prerequisites": [
+            "M09.04",
+            "M09.05"
+          ],
+          "report_section": "Peer Review & Retrospective",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M09.04, M09.05. Do not use a ready-made stakeholder list or scope from the course."
         }
       ],
       "theory_cards": [
@@ -2140,103 +2677,185 @@
         {
           "task": 1,
           "instruction": "Create a small test strategy covering appropriate levels and the most important requirements/risk areas.",
-          "save_to": "M10 Report → Test Strategy. Use the website controls. In your downloaded ZIP: workspace/reports/M10.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M10 Report → Test Strategy). M10 Report → Test Strategy. Use the website controls. In your downloaded ZIP: workspace/reports/M10.md. Task answer in the ZIP: workspace/reports/M10_task01.md.",
           "minimum_requirements": [
             "Identify test levels/types relevant to this project.",
             "Prioritize at least 4 requirement/risk areas.",
             "State what will not be tested in this classroom project and why."
           ],
-          "complete_when": "The strategy is risk/requirement-driven rather than a generic list of test types.",
-          "deliverable": "Risk/requirement-based test strategy"
+          "complete_when": "The strategy is risk/requirement-driven rather than a generic list of test types. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Risk/requirement-based test strategy",
+          "prerequisites": [
+            "M09.06"
+          ],
+          "report_section": "Test Strategy",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M09.06. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 2,
           "instruction": "Design test cases using normal, boundary, invalid and state-transition reasoning. Link them to requirement IDs.",
-          "save_to": "M10 Report → Test Cases & Traceability. Use the website controls. In your downloaded ZIP: workspace/reports/M10.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M10 Report → Test Cases & Traceability). M10 Report → Test Cases & Traceability. Use the website controls. In your downloaded ZIP: workspace/reports/M10.md. Task answer in the ZIP: workspace/reports/M10_task02.md.",
           "minimum_requirements": [
             "Create at least 14 test cases.",
             "Include normal, boundary, invalid and state-transition cases.",
             "Link every case to requirement/rule IDs where applicable.",
             "State expected result for each case."
           ],
-          "complete_when": "At least 14 traceable test cases exist with varied test-design reasoning.",
-          "deliverable": "At least 14 planned cases with expected results and traceability"
+          "complete_when": "At least 14 traceable test cases exist with varied test-design reasoning. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "At least 14 planned cases with expected results and traceability",
+          "prerequisites": [
+            "M10.01",
+            "M08.06"
+          ],
+          "report_section": "Test Cases & Traceability",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M10.01, M08.06. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 3,
           "instruction": "Open the Python laboratory and inspect the published function contracts in the editable implementation file.",
-          "save_to": "Python testing → workspace/student_code/policies.py; notes in M10 Report → Student Tests First. Use the website controls. In your downloaded ZIP: workspace/reports/M10.md; workspace/student_code/policies.py, workspace/tests/test_student.py and workspace/logs/ (executed evidence).",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M10 Report → Student Tests First). Python testing → workspace/student_code/policies.py; notes in M10 Report → Student Tests First. Use the website controls. In your downloaded ZIP: workspace/reports/M10.md; workspace/student_code/policies.py, workspace/tests/test_student.py and workspace/logs/ (executed evidence). Task answer in the ZIP: workspace/reports/M10_task03.md.",
           "minimum_requirements": [
             "Read each published contract before editing implementation.",
             "List the behaviors/rules you believe require tests.",
             "Do not reveal supplied tests yet."
           ],
-          "complete_when": "The report shows a contract-derived test plan before supplied tests influence the team.",
-          "deliverable": "Contract-derived notes before supplied tests"
+          "complete_when": "The report shows a contract-derived test plan before supplied tests influence the team. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Contract-derived notes before supplied tests",
+          "prerequisites": [
+            "M10.01"
+          ],
+          "report_section": "Student Tests First",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M10.01. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 4,
           "instruction": "Before revealing supplied tests, add your own tests for at least three contract behaviors and run only your student test file.",
-          "save_to": "Python testing → workspace/tests/test_student.py; run “Run my tests only”; M10 Report → Student Tests First. Use the website controls. In your downloaded ZIP: workspace/reports/M10.md; workspace/student_code/policies.py, workspace/tests/test_student.py and workspace/logs/ (executed evidence).",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M10 Report → Student Tests First). Python testing → workspace/tests/test_student.py; run “Run my tests only”; M10 Report → Student Tests First. Use the website controls. In your downloaded ZIP: workspace/reports/M10.md; workspace/student_code/policies.py, workspace/tests/test_student.py and workspace/logs/ (executed evidence). Task answer in the ZIP: workspace/reports/M10_task04.md.",
           "minimum_requirements": [
             "Write at least 6 original tests total, covering at least 3 contract behaviors.",
             "Include at least one boundary and one invalid/state-related case.",
             "Run only student tests first.",
             "Save/record the result before revealing supplied tests."
           ],
-          "complete_when": "tests/test_student.py contains 6+ meaningful original tests and a student-only run result is recorded.",
-          "deliverable": "Six original executable tests across three behaviours and student-only log"
+          "complete_when": "tests/test_student.py contains 6+ meaningful original tests and a student-only run result is recorded. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Six original executable tests across three behaviours and student-only log",
+          "prerequisites": [
+            "M10.02",
+            "M10.03"
+          ],
+          "report_section": "Student Tests First",
+          "evidence": [
+            {
+              "prefix": "workspace/tests/test_student.py",
+              "count": 1,
+              "label": "saved original tests"
+            },
+            {
+              "prefix": "workspace/logs/",
+              "count": 1,
+              "label": "student-only log",
+              "contains": "tests_student"
+            }
+          ],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M10.02, M10.03. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 5,
           "instruction": "Then reveal and run the supplied regression tests. Treat failures as mismatches to investigate, not instructions to edit tests.",
-          "save_to": "Python testing → reveal supplied tests, then run supplied + student tests; M10 Report → Supplied Regression Results. Use the website controls. In your downloaded ZIP: workspace/reports/M10.md; workspace/student_code/policies.py, workspace/tests/test_student.py and workspace/logs/ (executed evidence).",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M10 Report → Supplied Regression Results). Python testing → reveal supplied tests, then run supplied + student tests; M10 Report → Supplied Regression Results. Use the website controls. In your downloaded ZIP: workspace/reports/M10.md; workspace/student_code/policies.py, workspace/tests/test_student.py and workspace/logs/ (executed evidence). Task answer in the ZIP: workspace/reports/M10_task05.md.",
           "minimum_requirements": [
             "Record the first supplied-suite result.",
             "For each failure identify the contract/rule involved.",
             "Do not modify supplied tests."
           ],
-          "complete_when": "The initial regression result is preserved and failures are interpreted against the contract.",
-          "deliverable": "Initial supplied-suite log and contract interpretation"
+          "complete_when": "The initial regression result is preserved and failures are interpreted against the contract. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Initial supplied-suite log and contract interpretation",
+          "prerequisites": [
+            "M10.04"
+          ],
+          "report_section": "Supplied Regression Results",
+          "evidence": [
+            {
+              "prefix": "workspace/logs/",
+              "count": 1,
+              "label": "initial regression log",
+              "contains": "tests_m10"
+            }
+          ],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M10.04. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 6,
           "instruction": "Repair defects in student_code/policies.py one at a time. Preserve evidence of at least one failing and corresponding passing run.",
-          "save_to": "Python testing → workspace/student_code/policies.py; M10 Report → Defect Reports. Use the website controls. In your downloaded ZIP: workspace/reports/M10.md; workspace/student_code/policies.py, workspace/tests/test_student.py and workspace/logs/ (executed evidence).",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M10 Report → Defect Reports). Python testing → workspace/student_code/policies.py; M10 Report → Defect Reports. Use the website controls. In your downloaded ZIP: workspace/reports/M10.md; workspace/student_code/policies.py, workspace/tests/test_student.py and workspace/logs/ (executed evidence). Task answer in the ZIP: workspace/reports/M10_task06.md.",
           "minimum_requirements": [
             "Repair implementation, not supplied tests.",
             "Create 3 defect records with symptom, cause, fix and verification.",
             "Preserve at least one before/after failing→passing evidence pair.",
             "Make one logical repair at a time where practical."
           ],
-          "complete_when": "Three defect records exist and at least one repair has explicit failing and passing evidence.",
-          "deliverable": "Repaired policies.py, three defect records and failing/passing evidence"
+          "complete_when": "Three defect records exist and at least one repair has explicit failing and passing evidence. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Repaired policies.py, three defect records and failing/passing evidence",
+          "prerequisites": [
+            "M10.05"
+          ],
+          "report_section": "Defect Reports",
+          "evidence": [
+            {
+              "prefix": "workspace/logs/",
+              "count": 2,
+              "label": "separate before/after logs"
+            }
+          ],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M10.05. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 7,
           "instruction": "Run the complete suite, update defect notes and summarize residual limitations.",
-          "save_to": "Python testing → Reveal supplied tests → Run all tests; M10 Report → Final Regression & Limitations. Use the website controls. In your downloaded ZIP: workspace/reports/M10.md; workspace/student_code/policies.py, workspace/tests/test_student.py and workspace/logs/ (executed evidence).",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M10 Report → Final Regression & Limitations). Python testing → Reveal supplied tests → Run all tests; M10 Report → Final Regression & Limitations. Use the website controls. In your downloaded ZIP: workspace/reports/M10.md; workspace/student_code/policies.py, workspace/tests/test_student.py and workspace/logs/ (executed evidence). Task answer in the ZIP: workspace/reports/M10_task07.md.",
           "minimum_requirements": [
             "Run the complete test suite after repairs.",
             "Save the final test log.",
             "State pass/fail totals.",
             "List residual limitations/untested areas even if all tests pass."
           ],
-          "complete_when": "A final saved regression log exists and the report distinguishes “tests pass” from “system fully proven”.",
-          "deliverable": "Final complete-suite log, totals and residual limitations"
+          "complete_when": "A final saved regression log exists and the report distinguishes “tests pass” from “system fully proven”. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Final complete-suite log, totals and residual limitations",
+          "prerequisites": [
+            "M10.06"
+          ],
+          "report_section": "Final Regression & Limitations",
+          "evidence": [
+            {
+              "prefix": "workspace/logs/",
+              "count": 1,
+              "label": "final complete-suite log",
+              "contains": "tests_all"
+            }
+          ],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M10.06. Do not use a ready-made stakeholder list or scope from the course."
         },
         {
           "task": 8,
           "instruction": "Prepare an integrated release review: what is verified, what remains assumed, and whether you would release.",
-          "save_to": "M10 Report → Release Review; Save & Export → Save identity & download project ZIP. Use the website controls. In your downloaded ZIP: workspace/reports/M10.md.",
+          "save_to": "Student task → this task’s answer → Save task answer (copied into M10 Report → Release Review). M10 Report → Release Review; Save & Export → Save identity & download project ZIP. Use the website controls. In your downloaded ZIP: workspace/reports/M10.md. Task answer in the ZIP: workspace/reports/M10_task08.md.",
           "minimum_requirements": [
             "Summarize verified evidence across M01–M10.",
             "List remaining assumptions, known limitations and unresolved risks.",
             "State RELEASE / CONDITIONAL RELEASE / DO NOT RELEASE with rationale.",
             "Export the final project/evidence ZIP for import on this website and submission on Moodle; no standalone server or production deployment is required."
           ],
-          "complete_when": "Release decision is supported by traceable evidence and the final export contains the project workspace and test evidence.",
-          "deliverable": "Integrated classroom release review and final project ZIP"
+          "complete_when": "Release decision is supported by traceable evidence and the final export contains the project workspace and test evidence. Save your work, check the minimum requirements, then record Review complete on this task card.",
+          "deliverable": "Integrated classroom release review and final project ZIP",
+          "prerequisites": [
+            "M10.07"
+          ],
+          "report_section": "Release Review",
+          "evidence": [],
+          "inputs": "Read the fixed company/problem narrative and classroom constraints; read your saved/imported project answers and evidence from: M10.07. Do not use a ready-made stakeholder list or scope from the course."
         }
       ],
       "theory_cards": [
