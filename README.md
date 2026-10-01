@@ -1,4 +1,10 @@
-# QuickBite Engineering Workbench — 4.4.0
+# QuickBite Engineering Workbench
+
+## Online browser preview
+
+The browser version uses Vercel as static hosting, without accounts or a database. Students keep work in their browser and export/import project ZIPs. See [the online workflow](docs/ONLINE.md) for student and teacher instructions. Run `npm run build` to produce the static `web/` directory. The original 4.4.0 local release remains available via its Git tag.
+
+## Local Python workbench — 4.4.0
 
 Run `python3 app.py` (Windows: `py -3 app.py`) from this folder, or use the START script. Python 3.10+ is required; no Python packages are needed. Node.js is required only for self-checks, course updates and release validation. The app listens on localhost, port 8765. Use `--port 8876` for a second copy.
 
@@ -38,7 +44,7 @@ M10 deliberately starts with three defective policy functions. `m10` or `all` st
 
 ## Git and releases
 
-This repository has a local baseline commit and tag `v4.4.0`. Student files, logs, caches and backups are excluded. No remote repository is configured.
+This repository has a local baseline commit and tag `v4.4.0`. Student files, logs, caches and backups are excluded. The private GitHub remote is https://github.com/alextthecreator/quickbite-workbench .
 
 For a future release, update `course_app/course_version.json` and `course_app/CHANGELOG.md`, run verification, commit the changes and create the matching tag, then:
 

@@ -1,0 +1,12 @@
+{
+  "name": "quickbite-workbench",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "node --test verification/test_browser_store.cjs && node tools/build_web.mjs",
+    "test:web": "node --test verification/test_browser_store.cjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

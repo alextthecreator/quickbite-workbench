@@ -1,0 +1,393 @@
+{
+  "simulator_defaults": {
+    "feasibility": {
+      "build_cost": 30000,
+      "monthly_benefit": 5200,
+      "monthly_cost": 1800,
+      "months": 12
+    },
+    "availability": {
+      "mtbf_hours": 240,
+      "mttr_hours": 2,
+      "database_availability": 0.999,
+      "app_replicas": 1
+    },
+    "capacity": {
+      "peak_rps": 150,
+      "rps_per_node": 90,
+      "target_utilization": 0.6,
+      "node_monthly_cost": 220,
+      "database_monthly_cost": 350,
+      "reserve_nodes": 1
+    },
+    "sprint": {
+      "capacity_points": 13,
+      "items": [
+        {
+          "id": "AUTH",
+          "points": 3,
+          "depends": []
+        },
+        {
+          "id": "ORDER",
+          "points": 5,
+          "depends": [
+            "AUTH"
+          ]
+        },
+        {
+          "id": "AUDIT",
+          "points": 3,
+          "depends": [
+            "AUTH"
+          ]
+        },
+        {
+          "id": "NOTIFY",
+          "points": 2,
+          "depends": [
+            "ORDER"
+          ]
+        },
+        {
+          "id": "COURIER",
+          "points": 5,
+          "depends": [
+            "ORDER"
+          ]
+        }
+      ]
+    },
+    "order_state": {
+      "initial": "PLACED",
+      "events": [
+        "confirm",
+        "start_preparing",
+        "mark_ready",
+        "pickup",
+        "deliver"
+      ]
+    }
+  },
+  "model_starters": {
+    "usecase": {
+      "kind": "usecase",
+      "nodes": [
+        {
+          "id": "sys",
+          "type": "system",
+          "label": "System boundary",
+          "x": 220,
+          "y": 40,
+          "width": 800,
+          "height": 520
+        },
+        {
+          "id": "a1",
+          "type": "actor",
+          "label": "Actor A",
+          "x": 20,
+          "y": 130
+        },
+        {
+          "id": "u1",
+          "type": "usecase",
+          "label": "Goal A",
+          "x": 430,
+          "y": 160
+        },
+        {
+          "id": "u2",
+          "type": "usecase",
+          "label": "Goal B",
+          "x": 430,
+          "y": 320
+        }
+      ],
+      "edges": [
+        {
+          "from": "a1",
+          "to": "u1",
+          "style": "association"
+        }
+      ]
+    },
+    "activity": {
+      "kind": "activity",
+      "nodes": [
+        {
+          "id": "s",
+          "type": "initial",
+          "label": "",
+          "x": 70,
+          "y": 90
+        },
+        {
+          "id": "a",
+          "type": "action",
+          "label": "Action A",
+          "x": 180,
+          "y": 70
+        },
+        {
+          "id": "d",
+          "type": "decision",
+          "label": "condition?",
+          "x": 500,
+          "y": 75
+        },
+        {
+          "id": "ok",
+          "type": "action",
+          "label": "Outcome A",
+          "x": 700,
+          "y": 30
+        },
+        {
+          "id": "bad",
+          "type": "action",
+          "label": "Outcome B",
+          "x": 700,
+          "y": 170
+        }
+      ],
+      "edges": [
+        {
+          "from": "s",
+          "to": "a"
+        },
+        {
+          "from": "a",
+          "to": "d"
+        },
+        {
+          "from": "d",
+          "to": "ok",
+          "label": "[condition true]"
+        },
+        {
+          "from": "d",
+          "to": "bad",
+          "label": "[otherwise]"
+        }
+      ]
+    },
+    "class": {
+      "kind": "class",
+      "nodes": [
+        {
+          "id": "a",
+          "type": "class",
+          "label": "ConceptA\n-id: str\n+operation()",
+          "x": 100,
+          "y": 100
+        },
+        {
+          "id": "b",
+          "type": "class",
+          "label": "ConceptB\n-value: str",
+          "x": 500,
+          "y": 100
+        }
+      ],
+      "edges": [
+        {
+          "from": "a",
+          "to": "b",
+          "style": "association",
+          "label": "1     0..*"
+        }
+      ]
+    },
+    "package": {
+      "kind": "package",
+      "nodes": [
+        {
+          "id": "p1",
+          "type": "package",
+          "label": "Package A",
+          "x": 80,
+          "y": 80
+        },
+        {
+          "id": "p2",
+          "type": "package",
+          "label": "Package B",
+          "x": 400,
+          "y": 80
+        },
+        {
+          "id": "p3",
+          "type": "package",
+          "label": "Package C",
+          "x": 720,
+          "y": 80
+        }
+      ],
+      "edges": [
+        {
+          "from": "p1",
+          "to": "p2",
+          "style": "dependency"
+        },
+        {
+          "from": "p2",
+          "to": "p3",
+          "style": "dependency"
+        }
+      ]
+    },
+    "sequence": {
+      "kind": "sequence",
+      "nodes": [
+        {
+          "id": "a",
+          "type": "lifeline",
+          "label": "Participant A",
+          "x": 40,
+          "y": 30
+        },
+        {
+          "id": "b",
+          "type": "lifeline",
+          "label": "Participant B",
+          "x": 320,
+          "y": 30
+        },
+        {
+          "id": "c",
+          "type": "lifeline",
+          "label": "Participant C",
+          "x": 600,
+          "y": 30
+        }
+      ],
+      "edges": [
+        {
+          "from": "a",
+          "to": "b",
+          "label": "messageA()"
+        },
+        {
+          "from": "b",
+          "to": "c",
+          "label": "messageB()"
+        }
+      ]
+    },
+    "state": {
+      "kind": "state",
+      "nodes": [
+        {
+          "id": "a",
+          "type": "state",
+          "label": "STATE_A",
+          "x": 80,
+          "y": 100
+        },
+        {
+          "id": "b",
+          "type": "state",
+          "label": "STATE_B",
+          "x": 420,
+          "y": 100
+        },
+        {
+          "id": "c",
+          "type": "state",
+          "label": "STATE_C",
+          "x": 760,
+          "y": 100
+        }
+      ],
+      "edges": [
+        {
+          "from": "a",
+          "to": "b",
+          "label": "eventA"
+        },
+        {
+          "from": "b",
+          "to": "c",
+          "label": "eventB"
+        }
+      ]
+    },
+    "dfd": {
+      "kind": "dfd",
+      "nodes": [
+        {
+          "id": "e",
+          "type": "external",
+          "label": "External entity",
+          "x": 50,
+          "y": 100
+        },
+        {
+          "id": "p",
+          "type": "process",
+          "label": "Process A",
+          "x": 400,
+          "y": 100
+        },
+        {
+          "id": "s",
+          "type": "store",
+          "label": "Data store",
+          "x": 760,
+          "y": 100
+        }
+      ],
+      "edges": [
+        {
+          "from": "e",
+          "to": "p",
+          "label": "input data"
+        },
+        {
+          "from": "p",
+          "to": "s",
+          "label": "stored data"
+        }
+      ]
+    },
+    "deployment": {
+      "kind": "deployment",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "deployment",
+          "label": "Client node",
+          "x": 70,
+          "y": 100
+        },
+        {
+          "id": "n2",
+          "type": "deployment",
+          "label": "Application node",
+          "x": 390,
+          "y": 100
+        },
+        {
+          "id": "n3",
+          "type": "deployment",
+          "label": "Data node",
+          "x": 710,
+          "y": 100
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "protocol"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "protocol"
+        }
+      ]
+    }
+  }
+}

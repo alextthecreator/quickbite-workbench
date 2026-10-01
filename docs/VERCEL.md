@@ -1,5 +1,7 @@
 # Vercel assessment — 1 October 2026
 
+**Updated scope:** the user chose a browser-only workbench with local browser storage and project-file handoff. This removes the need for accounts, a database and server-side Python execution. See ONLINE.md for the implemented static architecture. The requirements below apply to a separate multi-user hosted backend, not to this browser-only version.
+
 Vercel is suitable for a future browser-based course portal or the static course interface. The current local workbench is not ready for direct deployment. Keep 4.4.0 local while developing a separate hosted architecture.
 
 The current backend uses Python's ThreadingHTTPServer, writes files to workspace/, executes student Python tests in a local subprocess, exposes a per-process token, assumes one trusted local team, and applies updates by replacing its own source files. These are deliberate desktop assumptions.
