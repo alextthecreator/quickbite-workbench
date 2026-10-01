@@ -68,3 +68,14 @@ Exports preserve the guide used at export time, separately from student answers.
 The course contains company/problem context and classroom constraints, not a supplied stakeholder or scope solution. Your project fields start empty: M01.03 supplies stakeholders and M01.04 supplies scope. Save them in workspace/project-context.json. Task answers use independent workspace/reports/Mxx_taskNN.md files and are mirrored into the module report. The main report can retain legacy notes; task-card answers are the authoritative per-task source.
 
 Every task declares prerequisite IDs in curriculum.json. Student review records are stored in workspace/task-progress.json and fingerprint the saved evidence and upstream evidence. Missing/changed upstream work blocks dependent editing/reviews and relevant evidence saves. Concepts/instructions remain readable. This is a self-check workflow, not automatic academic grading. Export/import carries context, individual answers and reviews; old files retain their reports but do not fabricate structured data or review records.
+
+
+## Simplified course baseline — v4.7.0
+
+40 academic hours = 20 blocks of 90 minutes. There are 34 required task cards: 7 in M01 and 3 in each later module. Other cards are collapsed optional extensions. Task identifiers stay stable to preserve imported work. One concise module package is submitted within the project ZIP.
+
+M01 session 1: tasks 1–5 (two business objectives). Session 2: tasks 6 and 8 (lifecycle and qualitative feasibility, three risks). Task 7 simulations are optional.
+
+Guided mode allows draft saves in every module. Prerequisites remain preparation advice. Saved structure/evidence drives status without Review complete clicks; it does not grade correctness. Stakeholder and scope data remain empty until the student's own save/import. Legacy answers and review records are retained.
+
+Models / CASE is used throughout modelling modules, not only M09. M09 now covers planning, change and ethics. Python repair and all simulator experiments are optional. Required class/package, use-case/activity, sequence/state models, design-pattern categories and test planning remain in the core.

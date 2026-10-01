@@ -8,7 +8,7 @@ function guideMarkdown(guide){
  lines.push('## Roles','',...(s.role_context||[]).map(x=>'- '+x.role+': '+x.context),'');
  for(const m of c.modules){
   lines.push('# '+m.code+' — '+m.title,'','## Project guidance','',...(m.theory_cards||[]).flatMap(x=>['### '+x.title,'',x.body,'']),'## Module deliverables','',...m.deliverables.map(x=>'- '+x),'');
-  for(const t of m.task_specs)lines.push('### Task '+t.task,'',t.instruction,'','**Inputs & prerequisites:** '+t.inputs,'','**Required earlier tasks:** '+(t.prerequisites.join(', ')||'None'),'','**Deliverable:** '+t.deliverable,'','**Where to save:** '+t.save_to,'','**Minimum requirements:**','',...t.minimum_requirements.map(x=>'- '+x),'','**Complete when:** '+t.complete_when,'');
+  for(const t of m.task_specs)lines.push('### '+(t.optional?'Optional extension — ':'Required ' )+'Task '+t.task,'',t.instruction,'','**Inputs & prerequisites:** '+t.inputs,'','**Recommended earlier work:** '+(t.prerequisites.join(', ')||'None'),'','**Deliverable:** '+t.deliverable,'','**Where to save:** '+t.save_to,'','**Minimum requirements:**','',...t.minimum_requirements.map(x=>'- '+x),'','**Complete when:** '+t.complete_when,'');
  }
  return lines.join('\n');
 }

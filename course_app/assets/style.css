@@ -20,3 +20,5 @@
 .task-done p{margin:0;line-height:1.45}
 @media(max-width:760px){.task-spec-head{grid-template-columns:1fr}.task-number{width:max-content}}
 .task-spec textarea{display:block;width:100%;min-height:140px;margin:8px 0;padding:12px;border:1px solid var(--line);border-radius:10px;font:inherit;resize:vertical}#context textarea{display:block;width:100%;min-height:72px;margin:7px 0 14px;padding:10px;border:1px solid var(--line);border-radius:8px;font:inherit}#context select{margin:8px 0}#context article{margin-bottom:18px}textarea:disabled{background:#edf0f5;color:#667085}.task-spec .notice button{margin:4px}
+
+.optional-exercises{margin-top:24px;padding:16px;border:1px solid #cbd5e1;border-radius:12px}.optional-exercises summary{cursor:pointer;font-weight:700}
