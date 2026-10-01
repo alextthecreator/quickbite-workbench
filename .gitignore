@@ -1,0 +1,11 @@
+/workspace/
+/course_backups/
+/dist/
+__pycache__/
+*.py[cod]
+*.tmp
+.update_tmp
+.DS_Store
+.env
+.env.*
+.venv/

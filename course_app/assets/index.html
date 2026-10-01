@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>QuickBite Engineering Workbench</title>
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">QB</div>
+      <div><h1>QuickBite</h1><p>Engineering Workbench</p></div>
+    </div>
+    <button class="side-link active" data-page="overview" onclick="show('overview')"><span class="side-icon">⌂</span><span>Start / Resume</span></button>
+    <div class="side-section-title">Project modules</div>
+    <div id="moduleNav" class="module-nav"></div>
+    <div class="side-section-title">Engineering tools</div>
+    <button class="side-link" data-page="sim" onclick="show('sim')"><span class="side-icon">◫</span><span>Simulators</span></button>
+    <button class="side-link" data-page="models" onclick="show('models')"><span class="side-icon">◇</span><span>Models / CASE</span></button>
+    <button class="side-link" data-page="code" onclick="show('code')"><span class="side-icon">⌘</span><span>Python testing</span></button>
+    <button class="side-link" data-page="update" onclick="show('update')"><span class="side-icon">↻</span><span>Course Update</span></button>
+    <button class="side-link export-link" data-page="files" onclick="show('files')"><span class="side-icon">⇩</span><span>Save & Export</span></button>
+    <div class="sidebar-footer">
+      <div id="saveStatus">local project folder</div>
+      <small id="versionLabel">Course engine</small>
+      <small>This folder is your project. Export before leaving every class.</small>
+    </div>
+  </aside>
+
+  <div class="workspace">
+    <header class="topbar">
+      <div><div class="eyebrow">Software Engineering · 2026/2027</div><h2 id="pageTitle">Start / Resume</h2></div>
+      <div class="project-chip"><span id="teamChip">TEAM</span><span id="sessionChip">Session 1</span></div>
+    </header>
+    <main>
+      <section id="overview" class="page"></section>
+
+      <section id="task" class="page hidden">
+        <div class="module-header">
+          <div><div class="eyebrow" id="moduleEyebrow"></div><h2 id="moduleTitle"></h2><p id="moduleSummary" class="muted"></p></div>
+          <div class="module-jump"><label>Jump to module<select id="moduleSelect"></select></label></div>
+        </div>
+        <div id="sessionStrip" class="session-strip"></div>
+        <div class="module-tabs">
+          <button class="module-tab active" data-modtab="theory" onclick="showModuleTab('theory')">Concepts</button>
+          <button class="module-tab" data-modtab="taskwork" onclick="showModuleTab('taskwork')">Student task</button>
+          <button class="module-tab" data-modtab="report" onclick="showModuleTab('report')">Report & evidence</button>
+        </div>
+        <div id="moduleTheory" class="module-panel"></div>
+        <div id="moduleTask" class="module-panel hidden"></div>
+        <div id="moduleReport" class="module-panel hidden">
+          <div class="grid2">
+            <article>
+              <h3>Module report</h3>
+              <p class="muted">Use the existing headings. Structural checks verify format only—not correctness.</p>
+              <textarea id="reportEditor" class="editor tall"></textarea>
+              <div class="actions"><button onclick="saveReport()">Save report</button><button class="secondary" onclick="checkReport()">Check structure</button></div>
+            </article>
+            <article><h3>Structural feedback</h3><pre id="reportCheck" class="output"></pre></article>
+          </div>
+        </div>
+      </section>
+
+      <section id="sim" class="page hidden">
+        <div class="tool-intro"><div><div class="eyebrow">Evidence tool</div><h2>Deterministic simulators</h2><p>Use a simulator to answer a question, not to manufacture a result. Save both inputs and outputs, then interpret assumptions and limitations.</p></div></div>
+        <div class="toolbar"><label>Simulator<select id="engineSelect"></select></label><label>Assign evidence to<select id="simModule"></select></label></div>
+        <div class="grid2"><article><h3>Inputs (JSON)</h3><textarea id="simInput" class="editor"></textarea><div class="actions"><button onclick="runSim(false)">Run simulation</button><button onclick="runSim(true)">Run & save evidence</button></div></article><article><h3>Result</h3><pre id="simOutput" class="output"></pre></article></div>
+      </section>
+
+      <section id="models" class="page hidden">
+        <div class="tool-intro"><div><div class="eyebrow">CASE workspace</div><h2>Model editor</h2><p>Starters teach notation only. Replace generic labels with your own QuickBite analysis; the tool does not know the correct semantic answer.</p></div></div>
+        <div class="toolbar"><label>Starter<select id="modelKind"></select></label><button onclick="loadStarter()">Load neutral starter</button><label>Save name<input id="modelName" value="m03_model"></label></div>
+        <div class="grid2"><article><h3>Editable model source</h3><textarea id="modelEditor" class="editor tall"></textarea><div class="actions"><button onclick="previewModel()">Preview</button><button onclick="saveModel()">Save JSON + SVG</button></div><pre id="modelCheck" class="output small"></pre></article><article><h3>Preview</h3><div id="modelPreview" class="preview"></div></article></div>
+      </section>
+
+      <section id="code" class="page hidden">
+        <div class="tool-intro"><div><div class="eyebrow">Sessions 19–20</div><h2>Python testing & defect repair</h2><p>Expected behavior comes from the published contracts. First write your own tests. Only then reveal the supplied regression suite.</p></div></div>
+        <div class="test-flow"><div class="flow-card"><b>1. Read contract</b><span>What should happen?</span></div><div class="flow-arrow">→</div><div class="flow-card"><b>2. Write your tests</b><span>Choose cases independently</span></div><div class="flow-arrow">→</div><div class="flow-card"><b>3. Run & inspect</b><span>Evidence before repair</span></div><div class="flow-arrow">→</div><div class="flow-card"><b>4. Reveal regression suite</b><span>Then repair defects</span></div></div>
+        <div class="notice"><b>Important:</b> the supplied tests call functions from <code>workspace/student_code/policies.py</code>. They are not testing hidden code. Use the editable file selector below to inspect and repair those exact functions.</div>
+        <div class="toolbar"><label>Editable file<select id="codeKey"><option value="policies">workspace/student_code/policies.py</option><option value="student_tests">workspace/tests/test_student.py</option></select></label><button onclick="loadCode()">Load editable file</button></div>
+        <div class="code-layout">
+          <article><h3>Python editor</h3><p id="codeHelp" class="muted"></p><textarea id="codeEditor" class="editor code huge"></textarea><div class="actions"><button onclick="saveCode()">Save code</button><button onclick="runTests('student')">Run my tests only</button><button class="secondary" onclick="revealSuppliedTests()">Reveal supplied tests</button></div></article>
+          <div class="code-right"><article><h3>Supplied regression tests <span class="readonly-badge">read only</span></h3><div id="lockedTests" class="locked-panel">Write and run your own tests first. Reveal this suite when you are ready to compare your coverage.</div><pre id="suppliedTests" class="output code-output hidden"></pre><div id="regressionButtons" class="actions hidden"><button onclick="runTests('m10')">Run supplied + my tests</button><button class="secondary" onclick="runTests('all')">Run all tests</button></div></article><article><h3>Test output</h3><pre id="testOutput" class="output code-output"></pre></article></div>
+        </div>
+      </section>
+
+      <section id="update" class="page hidden">
+        <div class="tool-intro"><div><div class="eyebrow">Safe course maintenance</div><h2>Course Update</h2><p>Use this only when your instructor posts a <code>QuickBite_Course_Update_*.zip</code> on Moodle. Do not extract the update ZIP and do not replace your project with a new starter.</p></div></div>
+        <div class="update-layout">
+          <article><h3>Apply an instructor update</h3><div class="update-steps"><div><b>1</b><span>Start your latest exported QuickBite project.</span></div><div><b>2</b><span>Download the course update ZIP from Moodle.</span></div><div><b>3</b><span>Select it below and apply it.</span></div><div><b>4</b><span>After success, stop the server and restart this same project folder.</span></div></div><label class="file-label">Course update ZIP<input id="updateFile" type="file" accept=".zip,application/zip"></label><div class="actions"><button onclick="applyCourseUpdate()">Apply course update</button></div><pre id="updateOutput" class="output small">No update selected.</pre></article>
+          <article><h3>Your work is protected</h3><p>The updater can change course content and app files, but it cannot overwrite:</p><div class="protected-list"><span><b>workspace/</b> reports, models, runs, logs, attachments</span><span><b>student_code/</b> your implementation</span><span><b>workspace/tests/test_student.py</b> your tests</span></div><div class="notice" style="margin-top:16px"><b>Automatic safety:</b> files touched by the update are backed up before replacement. The updated app runs a self-check; if it fails, the course files are rolled back.</div><div class="danger-note" style="margin-top:16px"><b>Important:</b> a course update is not a progress backup. Keep exporting your complete project at the end of every class.</div></article>
+        </div>
+      </section>
+
+      <section id="files" class="page hidden"></section>
+    </main>
+  </div>
+</div>
+<script src="/assets/app.js"></script>
+</body>
+</html>
