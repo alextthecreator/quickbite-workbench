@@ -82,6 +82,7 @@ loadModule=async function(code){await flushEditors();const result=await oldLoadM
 loadCode=async function(){await flushEditors();const key=$('codeKey').value;const result=await oldLoadCode();loadedCodeKey=key;return result;};
 overviewHtml=onlineOverview;exportHtml=onlineFiles;exportProgress=onlineExport;
 runTests=async function(suite){
+ $('actionError')?.remove();
  $('testOutput').textContent='Loading browser Python and running tests…';
  try{await flushEditors();const result=await api('/api/tests',{method:'POST',body:JSON.stringify({suite})});$('testOutput').textContent=`exit_code=${result.exit_code}\n${result.log}\nSaved log: ${result.file}`;STATE=await api('/api/state');}
  catch(e){$('testOutput').textContent=e.message;showError(e);}

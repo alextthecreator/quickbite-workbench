@@ -13,7 +13,7 @@ class PythonWorker{
   $('saveStatus').textContent=operation==='tests'?'Running your Python tests…':'Python ready · computing…';
   const id=++this.sequence;
   try{return await new Promise((resolve,reject)=>{
-   const timer=setTimeout(()=>{this.stop();reject(Error('Python operation stopped after '+limit/1000+' seconds. Your saved project is unchanged.'));},limit);
+   const timer=setTimeout(()=>{this.pending.delete(id);reject(Error('Python operation stopped after '+limit/1000+' seconds. Your saved project is unchanged.'));this.stop();},limit);
    this.pending.set(id,{resolve:x=>{clearTimeout(timer);resolve(x);},reject:e=>{clearTimeout(timer);reject(e);}});
    this.worker.postMessage({id,operation,payload});
   });}finally{$('saveStatus').textContent='Saved in this browser · export before leaving';}
