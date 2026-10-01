@@ -1,4 +1,4 @@
-# Browser workbench preview — 4.5.0-web.1
+# Browser workbench — 4.5.1
 
 Live course: https://quickbite-workbench.vercel.app/ . Git pushes to main automatically update this production URL.
 
@@ -11,7 +11,7 @@ This is a static course app for Vercel. Students open one URL, work in their own
 3. At the end of every class use Save & Export → Download project ZIP. Keep the file outside the lab computer and upload it to Moodle at checkpoints.
 4. Next class open the same course URL and import that ZIP if needed. Review the import preview, then click Import this project. The previous browser project is downloaded as a JSON backup before replacement.
 
-The online ZIP contains student files and a project manifest; it is not a copy of the local Python server. Paths such as workspace/reports/M05.md refer to files inside that ZIP. Older local workbench ZIP exports can also be imported. Binary attachments are preserved. Importing never executes the imported Python code; tests run only when requested.
+The online ZIP contains student files, a project manifest and a read-only course-guide.md/course-guide.json copy of the full brief and all task instructions; it is not a copy of the local Python server. Paths such as workspace/reports/M05.md refer to files inside that ZIP. Older local workbench ZIP exports can also be imported. Binary attachments are preserved. Importing never executes the imported Python code; tests run only when requested.
 
 ## Teacher workflow
 
@@ -56,3 +56,9 @@ Browser storage is typically limited to a few MB, varying by browser. Files larg
 ## Git identity for automatic deployments
 
 This local repository uses the GitHub noreply identity of alextthecreator, so GitHub and Vercel can attribute pushes to the connected owner. GitHub Actions verifies the source before release, and Vercel builds the main branch automatically. Historical local-baseline commits retain their original metadata. When cloning on another computer, set the commit email to an address verified by your GitHub account (the GitHub noreply address is supported).
+
+## Course source of truth
+
+Project Brief contains the fictional company context, roles, scope/exclusions, open design decisions, data rules, team workflow and lecture-to-session mapping. Every task has an explicit deliverable; Module deliverables is generated from those same labels. Methods needed by the tasks are explained in titled guidance cards. M01/M02 lecture files cover Meetings 1/2 inside website module M01.
+
+Exports preserve the guide used at export time, separately from student answers. Import ignores this read-only guide and preserves student workspace data. Each test run uses a timestamp/UUID log filename; legacy logs are retained and can also be reopened from Python testing.

@@ -8,7 +8,7 @@ const toolData=JSON.parse(read(path.join(source,'tool-data.json')));
 const templates={'workspace/student_code/policies.py':read(path.join(app,'workspace_template/student_code/policies.py')),'workspace/tests/test_student.py':read(path.join(app,'workspace_template/tests/test_student.py')),'workspace/student_code/__init__.py':'','workspace/tests/__init__.py':''};
 const course=JSON.parse(read(path.join(app,'curriculum.json')));
 for(const m of course.modules)for(const s of m.session_plan){s.before_leave=s.before_leave.map(x=>x.replace(/Export the complete project ZIP.*$/,'Download your project ZIP; import it on this site next class.'));}
-fs.writeFileSync(path.join(out,'course.json'),JSON.stringify({course,...toolData,templates,supplied_tests:read(path.join(app,'tests/test_m10.py')),version:{app_id:'quickbite-web',version:'4.5.0-web.1',label:'Browser workbench preview'}},null,2));
+fs.writeFileSync(path.join(out,'course.json'),JSON.stringify({course,...toolData,templates,supplied_tests:read(path.join(app,'tests/test_m10.py')),version:{app_id:'quickbite-web',version:'4.5.1',label:'Complete project guide and submission baseline'}},null,2));
 let html=read(path.join(app,'assets/index.html'));
 html=html.replace(/    <button class="side-link" data-page="update".*\n/,'');
 const start=html.indexOf('      <section id="update"'),end=html.indexOf('      <section id="files"',start);html=html.slice(0,start)+html.slice(end);
@@ -16,12 +16,15 @@ html=html.replace('local project folder','browser project').replace('This folder
 html=html.replace('<div class="grid2"><article><h3>Editable model source</h3>', '<div class="toolbar"><label>Saved model<select id="savedModelSelect"></select></label><button class="secondary" onclick="loadSavedModel()">Open saved model</button></div><div class="grid2"><article><h3>Editable model source</h3>');
 html=html.replace('<div class="grid2"><article><h3>Inputs (JSON)</h3>', '<div class="toolbar"><label>Saved experiment<select id="savedRunSelect"></select></label><button class="secondary" onclick="loadSavedRun()">Open saved experiment</button></div><div class="grid2"><article><h3>Inputs (JSON)</h3>');
 html=html.replace('<script src="/assets/app.js"></script>','<script src="/assets/fflate.js"></script>\n<script src="/assets/project-store.js"></script>\n<script src="/assets/project-archive.js"></script>\n<script src="/assets/app.js"></script>');
+html=html.replace('<div class="side-section-title">Project modules</div>', '<button class="side-link" data-page="brief" onclick="show(\'brief\')"><span class="side-icon">▤</span><span>Project Brief</span></button><div class="side-section-title">Project modules</div>');
+html=html.replace('<section id="overview"', '<section id="brief" class="page hidden"></section><section id="overview"');
+html=html.replace('<article><h3>Test output</h3>', '<article><h3>Test output</h3><div class="toolbar"><label>Saved test log<select id="savedLogSelect"></select></label><button class="secondary" onclick="loadSavedLog()">Open saved test log</button></div>');
 fs.writeFileSync(path.join(out,'index.html'),html);
 let js=read(path.join(app,'assets/app.js'));
 const apiStart=js.indexOf('async function api('),apiEnd=js.indexOf('\nfunction esc',apiStart);js=js.slice(0,apiStart)+'async function api(url,opt={}){return browserApi(url,opt)}'+js.slice(apiEnd);
 js=js.replace("let r=await fetch('/api/course');let d=await r.json();","let d=await api('/api/course');");
 const bootIndex=js.lastIndexOf('boot().catch');js=js.slice(0,bootIndex);
-fs.writeFileSync(path.join(out,'assets/app.js'),read(path.join(source,'browser-api.js'))+'\n'+js+'\n'+read(path.join(source,'browser-ui.js')));
+fs.writeFileSync(path.join(out,'assets/app.js'),read(path.join(source,'browser-api.js'))+'\n'+js+'\n'+read(path.join(source,'course-guide.js'))+'\n'+read(path.join(source,'browser-ui.js')));
 fs.copyFileSync(path.join(app,'assets/style.css'),path.join(out,'assets/style.css'));
 for(const file of ['project-store.js','project-archive.js','python-worker.js'])fs.copyFileSync(path.join(source,file),path.join(out,'assets',file));
 fs.copyFileSync(path.join(source,'vendor/fflate.js'),path.join(out,'assets/fflate.js'));

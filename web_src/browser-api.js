@@ -75,7 +75,7 @@ async function browserApi(url,opt={}){
   const worker=new PythonWorker();let result;
   try{result=await worker.call('tests',{suite:d.suite,files:Object.fromEntries(Object.entries(browserStore.snapshot().files).filter(([path,text])=>typeof text==='string'&&/^(workspace\/student_code\/|workspace\/tests\/).*\.py$/.test(path)&&!path.endsWith('/test_m10.py'))),supplied_tests:browserCourse.supplied_tests});}
   finally{worker.stop();}
-  const file='workspace/logs/tests_'+d.suite+'.txt';browserStore.save(file,result.log);return {...result,file};
+  const file='workspace/logs/M10_tests_'+d.suite+'_'+new Date().toISOString().replace(/[:.]/g,'-')+'_'+crypto.randomUUID().slice(0,8)+'.txt';browserStore.save(file,result.log);return {...result,file};
  }
  throw Error('Unsupported browser action: '+url);
 }
