@@ -9,7 +9,17 @@ const templates={'workspace/student_code/policies.py':read(path.join(app,'worksp
 const course=JSON.parse(read(path.join(app,'curriculum.json')));
 for(const m of course.modules)for(const s of m.session_plan){s.before_leave=s.before_leave.map(x=>x.replace(/Export the complete project ZIP.*$/,'Download your project ZIP; import it on this site next class.'));}
 fs.writeFileSync(path.join(out,'course.json'),JSON.stringify({course,...toolData,templates,supplied_tests:read(path.join(app,'tests/test_m10.py')),version:{app_id:'quickbite-web',version:'4.7.1',label:'Complete project guide and submission baseline'}},null,2));
+const feedback=JSON.parse(read(path.join(source,'feedback-config.json')));
+if(feedback.url){
+ const url=new URL(feedback.url);
+ if(url.protocol!=='https:')throw new Error('Feedback form URL must use HTTPS.');
+}
 let html=read(path.join(app,'assets/index.html'));
+if(feedback.url){
+ const safeUrl=feedback.url.replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;').replaceAll('>','&gt;');
+ html=html.replace('<div class="sidebar-footer">', `<a class="side-link" href="${safeUrl}" target="_blank" rel="noopener noreferrer"><span class="side-icon">♡</span><span>Give feedback</span></a><div class="sidebar-footer">`);
+}
+
 html=html.replace(/    <button class="side-link" data-page="update".*\n/,'');
 const start=html.indexOf('      <section id="update"'),end=html.indexOf('      <section id="files"',start);html=html.slice(0,start)+html.slice(end);
 html=html.replace('local project folder','browser project').replace('This folder is your project. Export before leaving every class.','Your work stays in this browser. Download your project before leaving.');
