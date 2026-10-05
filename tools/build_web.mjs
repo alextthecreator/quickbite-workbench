@@ -17,7 +17,7 @@ if(feedback.url){
 let html=read(path.join(app,'assets/index.html'));
 if(feedback.url){
  const safeUrl=feedback.url.replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;').replaceAll('>','&gt;');
- html=html.replace('<div class="sidebar-footer">', `<a class="side-link" href="${safeUrl}" target="_blank" rel="noopener noreferrer"><span class="side-icon">♡</span><span>Give feedback</span></a><div class="sidebar-footer">`);
+ html=html.replace('</body>', `<aside class="feedback-widget" aria-label="Website feedback"><details><summary><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5H4l-3 3V11.5A8.5 8.5 0 0 1 9.5 3h3a8.5 8.5 0 0 1 8.5 8.5Z"/><path d="M6 10h10M6 14h7"/></svg><span>Give feedback</span></summary><div class="feedback-panel"><h2>How is the workbench working for you?</h2><p>This is the place to report problems, suggest improvements or tell us what works well.</p><a href="${safeUrl}" target="_blank" rel="noopener noreferrer">Open feedback form <span aria-hidden="true">↗</span></a><p class="feedback-note">Opens Google Forms in a new tab. Click the bubble again to close.</p></div></details></aside></body>`);
 }
 
 html=html.replace(/    <button class="side-link" data-page="update".*\n/,'');
@@ -43,3 +43,5 @@ fs.copyFileSync(path.join(source,'vendor/fflate-LICENSE.txt'),path.join(out,'ass
 for(const file of ['engines.py','models.py'])fs.copyFileSync(path.join(app,file),path.join(out,'python',file));
 fs.appendFileSync(path.join(out,'assets/style.css'),'\n.hero h2{font-size:30px}.stage{text-align:left}#actionError{margin-bottom:16px}\n');
 console.log('Built static browser workbench in web/. No student files or backend included.');
+
+fs.appendFileSync(path.join(out,'assets/style.css'),read(path.join(source,'feedback-widget.css')));
