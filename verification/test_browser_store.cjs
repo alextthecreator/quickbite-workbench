@@ -18,3 +18,27 @@ test('legacy local ZIP imports reports, code, tests and binary attachments',()=>
 test('unrelated and traversal ZIPs are rejected',()=>{assert.throws(()=>parseProjectFile(fflate.zipSync({'random.txt':fflate.strToU8('x')}),'wrong.zip'),/No QuickBite/);assert.throws(()=>parseProjectFile(fflate.zipSync({'workspace/../evil.py':fflate.strToU8('x')}),'bad.zip'),/Unsafe/);});
 test('ZIP decompression budget rejects oversized contents',()=>{const archive=fflate.zipSync({'workspace/reports/M01.md':fflate.strToU8('x'.repeat(20_000_001))});assert.throws(()=>parseProjectFile(archive,'large.zip'),/Expanded ZIP/);});
 test('export preserves complete assignment guide without importing it as student answers',()=>{const p=new ProjectStore(storage(),templates,'4.5.1');p.save('workspace/reports/M01.md','Original student analysis');const guide={version:'4.5.1',website:'https://quickbite-workbench.vercel.app/',course};const zip=projectZip(p.snapshot(),guide),entries=fflate.unzipSync(zip);const savedGuide=JSON.parse(fflate.strFromU8(entries['course-guide.json']));assert.equal(savedGuide.course.modules.flatMap(m=>m.task_specs).length,70);const md=fflate.strFromU8(entries['course-guide.md']);assert.equal((md.match(/\*\*Where to save:\*\*/g)||[]).length,70);assert.match(md,/Company|company profile/);assert.deepEqual(parseProjectFile(zip,'project.zip').files,p.snapshot().files);});
+
+test('stakeholders and scope populate M01 report and survive reload and import',()=>{
+ const s=storage(),p=new ProjectStore(s,templates,'web.1');
+ const c={schema_version:1,people:{rows:[{name:'Stakeholder QA',type:'person/role',need:'Need QA',concern:'Concern QA',question:'Question QA'}],conflict:'Conflict QA'},scope:{in_scope:['Capability QA'],out_of_scope:['Exclusion QA'],rationale:'Rationale QA'}};
+ p.save('workspace/reports/M01.md','# M01\n\n## Scope & Business Objectives\n<!-- TASK M01.05 -->\nMy objectives\n<!-- END TASK M01.05 -->\n\nTeacher notes retained');
+ p.save('workspace/project-context.json',JSON.stringify(c));
+ for(const term of ['Stakeholder QA','Need QA','Concern QA','Question QA','Conflict QA','Capability QA','Exclusion QA','Rationale QA','My objectives','Teacher notes retained'])assert.ok(p.get('workspace/reports/M01.md').includes(term),term);
+ const loaded=new ProjectStore(s,templates,'web.2'),copy=new ProjectStore(storage(),templates,'web.2');copy.import(loaded.snapshot());assert.deepEqual(copy.snapshot().files,loaded.snapshot().files);
+ c.people.conflict='Revised conflict';p.save('workspace/project-context.json',JSON.stringify(c));assert.ok(p.get('workspace/reports/M01.md').includes('Revised conflict'));assert.ok(!p.get('workspace/reports/M01.md').includes('Conflict QA'));assert.equal(p.get('workspace/reports/M01.md').split('<!-- TASK M01.03 -->').length,2);
+});
+test('existing saved context is mirrored on upgrade without overwriting legacy notes',()=>{
+ const s=storage(),p=new ProjectStore(s,templates,'web.1'),old=p.snapshot();old.files['workspace/project-context.json']=JSON.stringify({schema_version:1,people:{rows:[],conflict:'Previously saved conflict'},scope:{in_scope:['Previously saved scope'],out_of_scope:[],rationale:''}});old.files['workspace/reports/M01.md']='# M01\nLegacy analysis';s.setItem(KEY,JSON.stringify(old));const upgraded=new ProjectStore(s,templates,'web.2');assert.match(upgraded.get('workspace/reports/M01.md'),/Previously saved conflict/);assert.match(upgraded.get('workspace/reports/M01.md'),/Previously saved scope/);assert.match(upgraded.get('workspace/reports/M01.md'),/Legacy analysis/);
+});
+test('both context save buttons refresh report while keeping the other form draft',async()=>{
+ const vm=require('node:vm'),fs=require('node:fs'),learning=require('../web_src/learning-state.js');
+ const p=new ProjectStore(storage(),templates,'web.1'),fields={peopleConflict:{value:'Draft conflict'},scopeIn:{value:'Draft capability'},scopeOut:{value:'Draft exclusion'},scopeRationale:{value:'Draft rationale'},reportEditor:{value:''},saveStatus:{textContent:''}};
+ const person={name:'QA role',type:'person/role',need:'QA need',concern:'QA concern',question:'QA question'};
+ const source=fs.readFileSync(require.resolve('../web_src/course-guide.js'),'utf8');
+ const ctx=vm.createContext({QuickBiteLearning:learning,browserStore:p,COURSE:course,contextDraft:learning.empty(),contextDirty:true,STATE:null,loadedModuleCode:'M01',canWork:()=>true,flushEditors:async()=>{},api:async()=>p.state(course),$:id=>fields[id],reportWithCurrentSections:(code,text)=>text,showError:e=>{throw e},document:{querySelectorAll:()=>Object.entries(person).map(([field,value])=>({dataset:{person:'0',field},value}))}});
+ ctx.contextDraft.people.rows.push({...person});
+ vm.runInContext(source.slice(source.indexOf('function collectContextDraft'),source.indexOf('function updateLearningAccess')),ctx);
+ await vm.runInContext('savePeople()',ctx);assert.equal(ctx.contextDirty,true);assert.match(fields.reportEditor.value,/Draft conflict/);
+ await vm.runInContext('saveScope()',ctx);assert.equal(ctx.contextDirty,false);assert.match(fields.reportEditor.value,/Draft capability/);assert.match(fields.reportEditor.value,/Draft conflict/);
+});

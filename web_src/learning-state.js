@@ -16,11 +16,30 @@ function minimum(task,files){const e=evidence(task,files),issues=[];
  for(const req of task.evidence||[]){const count=e.files.filter(([path])=>path.toLowerCase().startsWith(req.prefix.toLowerCase())&&(!req.contains||path.includes(req.contains))&&(!req.extension||path.endsWith(req.extension))).length;if(count<req.count)issues.push('Save '+req.count+' required evidence file(s): '+req.label+'.');}
  return issues;
 }
+// Structured answers are authoritative; mirror them into managed report blocks.
+function syncContextReports(files){
+ if(!files[CONTEXT])return;
+ const c=context(files),people=c.people,scope=c.scope;
+ const answers=[['M01.03','Stakeholders & Conflicts',people.rows.length||people.conflict?people.rows.map((r,i)=>`#### Stakeholder ${i+1}: ${r.name}\nType: ${r.type}\nNeed: ${r.need}\nConcern: ${r.concern}\nOpen question: ${r.question}`).join('\n\n')+'\n\nConflict between stakeholder needs: '+people.conflict:''],['M01.04','Scope & Business Objectives',scope.in_scope.length||scope.out_of_scope.length||scope.rationale?'In scope:\n'+scope.in_scope.map(x=>'- '+x).join('\n')+'\n\nOut of scope:\n'+scope.out_of_scope.map(x=>'- '+x).join('\n')+'\n\nBoundary and rationale: '+scope.rationale:'']];
+ let report=files['workspace/reports/M01.md']||'# M01 QuickBite report\n';
+ for(const [id,heading,text] of answers){
+  const start='<!-- TASK '+id+' -->',end='<!-- END TASK '+id+' -->';
+  const a=report.indexOf(start),b=report.indexOf(end,a);
+  if(!text&&a<0)continue;
+  files['workspace/reports/'+id.replace('.','_task')+'.md']=text;
+  if(a>=0&&b>=a){report=report.slice(0,a)+(text?[start,'### Task '+id,text,end].join('\n'):'')+report.slice(b+end.length);continue;}
+  if(!text)continue;
+  const header='## '+heading;if(!report.split('\n').includes(header))report+='\n\n'+header+'\n';
+  const lines=report.split('\n'),at=lines.indexOf(header)+1;
+  lines.splice(at,0,start,'### Task '+id,text,end,'');report=lines.join('\n');
+ }
+ if(answers.some(x=>x[2])||files['workspace/reports/M01.md'])files['workspace/reports/M01.md']=report;
+}
 function state(course,files){const tasks=taskMap(course),records=files[PROGRESS]?JSON.parse(files[PROGRESS]):{},result={},visiting=new Set();
  function check(id){if(result[id])return result[id];if(!tasks[id]||visiting.has(id))throw Error('Invalid task dependency: '+id);visiting.add(id);const t=tasks[id],parents=(t.prerequisites||[]).map(p=>[p,check(p)]),missing=parents.filter(([p,s])=>s.status!=='complete').map(([p])=>p);const signature=fingerprint({evidence:evidence(t,files),parents:parents.map(([p,s])=>[p,s.signature])});const issues=minimum(t,files),r=records[id];const status=course.learning_mode==='guided'?(!issues.length?'complete':'ready'):missing.length?'blocked':r&&r.signature===signature&&!issues.length?'complete':r?'needs_review':'ready';visiting.delete(id);return result[id]={status,missing,issues,signature,reviewed_at:r?.reviewed_at||null};}
  for(const id of Object.keys(tasks))check(id);return result;
 }
 function review(course,files,id){const s=state(course,files)[id];if(!s)throw Error('Unknown task.');if(s.missing.length)throw Error('Complete prerequisites first: '+s.missing.join(', '));if(s.issues.length)throw Error(s.issues.join(' '));const records=files[PROGRESS]?JSON.parse(files[PROGRESS]):{};return {...records,[id]:{signature:s.signature,reviewed_at:new Date().toISOString()}};}
-root.QuickBiteLearning={CONTEXT,PROGRESS,empty,context,section,meaningful,taskMap,legacyAnswer,evidence,minimum,state,review};
+root.QuickBiteLearning={CONTEXT,PROGRESS,empty,context,syncContextReports,section,meaningful,taskMap,legacyAnswer,evidence,minimum,state,review};
 if(typeof module!=='undefined'&&module.exports)module.exports=root.QuickBiteLearning;
 })(typeof globalThis!=='undefined'?globalThis:this);

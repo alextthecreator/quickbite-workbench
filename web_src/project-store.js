@@ -36,9 +36,10 @@
    catch(e){throw Error('Saved browser project could not be read. It has not been overwritten. '+e.message);}
    // Seed only a first-time project. Never restore an old template over saved work.
    if(!raw){Object.assign(this.data.files,templates);this.persist(this.data);}
+   else {const next=clone(this.data);learning.syncContextReports(next.files);if(JSON.stringify(next.files)!==JSON.stringify(this.data.files))this.persist(next);}
   }
   persist(next){
-   const checked=validate(next);checked.course_version=this.version;
+   const prepared=clone(next);learning.syncContextReports(prepared.files);const checked=validate(prepared);checked.course_version=this.version;
    try{this.storage.setItem(KEY,JSON.stringify(checked));}
    catch(e){throw Error('Browser storage is full or unavailable. Export your project before closing this tab. '+e.message);}
    this.data=checked;return checked;
