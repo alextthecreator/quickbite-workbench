@@ -411,7 +411,7 @@
       ],
       "theory": [
         "Elicit needs, analyse ambiguity/conflict, specify obligations, validate them and manage changes. Business requirements express outcomes; functional requirements specify services/behaviour; non-functional requirements constrain quality or operation. Use one main obligation per requirement and split compound statements. Choose your own coverage of your saved QuickBite scope rather than copy a ready-made solution.",
-        "Use a table with ID, type, requirement, source, priority, rationale and acceptance criterion. IDs remain stable when wording changes. Sources may be brief facts, M01 decisions or explicitly labelled assumptions. State a simple priority scale, such as must/should/could, and use it consistently. Acceptance criteria describe observable evidence; avoid “fast”, “easy” or “secure” without measurable conditions.",
+        "Use a table with ID, type, requirement, source, priority, rationale, linked M01.5 business objective(s) and acceptance criterion. Each requirement must reference at least one relevant business objective from M01.5. IDs remain stable when wording changes. Sources may be brief facts, M01 decisions or explicitly labelled assumptions. State a simple priority scale, such as must/should/could, and use it consistently. Acceptance criteria describe observable evidence; avoid “fast”, “easy” or “secure” without measurable conditions.",
         "For an NFR specify metric, measurement condition/window and target; justify its stakeholder/risk relevance and label invented targets. A user story may use “As [role], I want [capability], so that [benefit]”. An acceptance scenario may use Given [context], When [event], Then [observable result]. Include success, failure and boundary cases: for an unrelated booking service a boundary could be exactly the last permitted cancellation time.",
         "Create goal ID → requirement ID → planned model/test evidence. Mark future evidence “planned”; do not pretend it exists. An orphan has no justified upstream goal/source or expected evidence. Review for ambiguity, multiple obligations, contradictions, omissions and unverifiable wording. Preserve before/after wording and why it changed; peer review may confirm a requirement as well as find a fault."
       ],
@@ -517,11 +517,11 @@
           "instruction": "Create a small requirements register for your chosen scope.",
           "save_to": "Write on this task card and click Save answer. It is copied into the module report and included in your project ZIP.",
           "minimum_requirements": [
-            "Write 6 functional and 3 non-functional requirements, plus your 2 business objectives.",
+            "Write 6 functional and 3 non-functional requirements. Link each requirement to at least one business objective from M01.5.",
             "Give each requirement an ID, source, priority and a testable acceptance criterion.",
             "Keep each requirement clear and focused on one expectation."
           ],
-          "complete_when": "Your saved work meets the checklist above. Check it yourself; the website does not grade correctness.",
+          "complete_when": "Your saved register contains 6 functional and 3 non-functional requirements, and each requirement references at least one relevant business objective from M01.5. Check the full checklist yourself; the website does not grade correctness.",
           "deliverable": "Create a small requirements register for your chosen scope",
           "prerequisites": [
             "M01.03",
@@ -530,7 +530,7 @@
           ],
           "report_section": "Requirements Baseline",
           "evidence": [],
-          "inputs": "Read Project Brief and this module’s Concepts. Use your own saved earlier decisions; draft or import them if missing. Recommended earlier work: M01.03, M01.04, M01.05.",
+          "inputs": "Read Project Brief and this module’s Concepts. Use your own saved earlier decisions; draft or import them if missing. Recommended earlier work: M01.03, M01.04, M01.05. For each requirement, record a reference to at least one relevant business objective from your M01.5 answer.",
           "optional": false
         },
         {
@@ -655,7 +655,7 @@
         },
         {
           "title": "Register and acceptance criteria",
-          "body": "Use a table with ID, type, requirement, source, priority, rationale and acceptance criterion. IDs remain stable when wording changes. Sources may be brief facts, M01 decisions or explicitly labelled assumptions. State a simple priority scale, such as must/should/could, and use it consistently. Acceptance criteria describe observable evidence; avoid “fast”, “easy” or “secure” without measurable conditions."
+          "body": "Use a table with ID, type, requirement, source, priority, rationale, linked M01.5 business objective(s) and acceptance criterion. Each requirement must reference at least one relevant business objective from M01.5. IDs remain stable when wording changes. Sources may be brief facts, M01 decisions or explicitly labelled assumptions. State a simple priority scale, such as must/should/could, and use it consistently. Acceptance criteria describe observable evidence; avoid “fast”, “easy” or “secure” without measurable conditions."
         },
         {
           "title": "Quality and user-oriented scenarios",
