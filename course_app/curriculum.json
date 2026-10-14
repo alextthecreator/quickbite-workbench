@@ -418,12 +418,12 @@
       "steps": [
         "Create a small requirements register for your chosen scope.",
         "Describe one important user interaction.",
-        "Connect your objectives to the requirements."
+        "Review objective coverage and requirement quality."
       ],
       "deliverables": [
         "Task 2: Create a small requirements register for your chosen scope",
         "Task 6: Describe one important user interaction",
-        "Task 7: Connect your objectives to the requirements"
+        "Task 7: Review objective coverage and requirement quality"
       ],
       "checks": [
         "Does the saved work meet the required task checklists?",
@@ -461,7 +461,7 @@
           "focus": "NFRs, traceability and baseline review",
           "work": [
             "Describe one important user interaction.",
-            "Connect your objectives to the requirements."
+            "Review objective coverage and requirement quality."
           ],
           "tools": [
             "Report & evidence",
@@ -610,21 +610,21 @@
         },
         {
           "task": 7,
-          "instruction": "Connect your objectives to the requirements.",
+          "instruction": "Review objective coverage and requirement quality.",
           "save_to": "Write on this task card and click Save answer. It is copied into the module report and included in your project ZIP.",
           "minimum_requirements": [
-            "Trace each of your 2 objectives to relevant requirement IDs.",
-            "Find and revise one unclear requirement; briefly explain the change."
+            "Review the links created in Task 2. Check that both business objectives from M01.5 are supported by relevant requirements; identify and address any gaps or unjustified links.",
+            "Review your requirements for clarity and testability. Revise any unclear requirement and briefly explain the change. If no revision is needed, state what you checked and why."
           ],
-          "complete_when": "Your saved work meets the checklist above. Check it yourself; the website does not grade correctness.",
-          "deliverable": "Connect your objectives to the requirements",
+          "complete_when": "Your saved review checks coverage of both M01.5 business objectives and the clarity and testability of your requirements. Record any gaps or unjustified links and how you addressed them. Explain any requirement revisions, or state what you checked and why no revision was needed. Check the full checklist yourself; the website does not grade correctness.",
+          "deliverable": "Review objective coverage and requirement quality",
           "prerequisites": [
             "M01.05",
             "M02.02"
           ],
           "report_section": "Traceability",
           "evidence": [],
-          "inputs": "Read Project Brief and this module’s Concepts. Use your own saved earlier decisions; draft or import them if missing. Recommended earlier work: M01.05, M02.02.",
+          "inputs": "Read Project Brief and this module’s Concepts. Use your own saved earlier decisions; draft or import them if missing. Recommended earlier work: M01.05, M02.02. Review the register and objective links you already created in Task 2; record your findings and any justified changes.",
           "optional": false
         },
         {
