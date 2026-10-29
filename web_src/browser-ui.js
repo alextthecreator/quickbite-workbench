@@ -38,7 +38,7 @@ async function applyImport(){
  try{
   await flushEditors();const previous=browserStore.snapshot();
   downloadBlob(new Blob([JSON.stringify(previous,null,2)],{type:'application/json'}),`QuickBite_${browserStore.project().team_id}_before_import.json`);
-  browserStore.import(pendingImport);pendingImport=null;STATE=browserStore.state(COURSE);PROJECT=STATE.project;updateChips();await loadModule(moduleForSession(PROJECT.current_session)?.code||'M01');await loadCode();renderOverview();show('files');$('importPreview').textContent='Imported successfully. Your previous browser project was downloaded as a JSON backup.';$('saveStatus').textContent='Project imported · '+PROJECT.team_id+' · Session '+PROJECT.current_session;
+  browserStore.import(pendingImport);pendingImport=null;STATE=browserStore.state(COURSE);PROJECT=STATE.project;updateChips();await loadModule(moduleForSession(PROJECT.current_session)?.code||'M01');await loadCode();renderOverview();await show('files');$('importPreview').textContent='Imported successfully. Your previous browser project was downloaded as a JSON backup.';$('saveStatus').textContent='Project imported · '+PROJECT.team_id+' · Session '+PROJECT.current_session;
  }catch(e){showError(e);}
 }
 function showError(error){$('saveStatus').textContent=error.message||String(error);let out=$('actionError');if(!out){out=document.createElement('div');out.id='actionError';out.className='danger-note';out.setAttribute('role','alert');document.querySelector('main').prepend(out);}out.textContent=error.message||String(error);}
@@ -94,4 +94,5 @@ runTests=async function(suite){
  try{await flushEditors();const result=await api('/api/tests',{method:'POST',body:JSON.stringify({suite})});$('testOutput').textContent=`exit_code=${result.exit_code}\n${result.log}\nSaved log: ${result.file}`;STATE=await api('/api/state');refreshSavedEvidence();}
  catch(e){$('testOutput').textContent=e.message;showError(e);}
 };
-boot().then(()=>{updateLearningAccess();installAutosave();refreshSavedEvidence();$('saveStatus').textContent='Saved in this browser · export before leaving';}).catch(showError);
+boot().then(async()=>{updateLearningAccess();installAutosave();refreshSavedEvidence();await installNavigation();$('saveStatus').textContent='Saved in this browser · export before leaving';}).catch(showError);
+
