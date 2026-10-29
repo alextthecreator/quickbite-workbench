@@ -1,0 +1,16 @@
+.drawio-panel{margin:18px 0;min-width:0}
+.drawio-heading{display:flex;justify-content:space-between;align-items:center;gap:16px}
+.drawio-heading h3{margin:6px 0}
+.drawio-panel>p{line-height:1.6;max-width:100ch}
+.drawio-status{font-size:13px;color:#475569;min-height:2em}
+.drawio-frame{display:block;width:100%;height:76vh;min-height:550px;border:1px solid #cad5e5;border-radius:8px;background:white;margin-top:16px}
+.drawio-empty{padding:65px 20px;text-align:center;background:#f6f8fc;border:1px dashed #cad5e5;border-radius:10px;color:#596b87;margin-top:18px}
+.drawio-preview{display:block;max-width:100%;height:auto;margin-top:15px;border:1px solid #dbe4f0;background:white}
+.drawio-panel:fullscreen{display:flex;flex-direction:column;height:100%;padding:16px;background:white;overflow:auto}
+.drawio-panel:fullscreen .drawio-frame{height:auto;min-height:250px;flex:1}
+.drawio-panel:fullscreen>p{margin:5px 0}
+.legacy-model-panel{margin-top:24px;background:white;border:1px solid #dbe4f0;border-radius:12px;padding:18px}
+.legacy-model-panel>summary{font-weight:700;cursor:pointer;color:#174eb6}
+.legacy-model-panel>p{font-size:14px;line-height:1.6}
+.drawio-panel .notice button{margin:6px}
+@media(max-width:650px){.drawio-heading{align-items:start}.drawio-frame{min-height:480px}.drawio-panel:fullscreen{padding:8px}}

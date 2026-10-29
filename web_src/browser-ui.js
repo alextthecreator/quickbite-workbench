@@ -17,6 +17,7 @@ function onlineFiles(){
 function downloadBlob(blob,name){const link=document.createElement('a'),url=URL.createObjectURL(blob);link.href=url;link.download=name;document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);}
 async function onlineExport(){
  try{
+  if(typeof drawioUnsaved==='function'&&drawioUnsaved())throw Error('Save your diagram to the project before exporting.');
   if(taskDrafts.size||contextDirty)throw Error('Save your task answers and project data before exporting.');
   await flushEditors();
   if($('exportTeam'))await browserApi('/api/project',{method:'POST',body:JSON.stringify({team_id:$('exportTeam').value.trim(),current_session:Number($('exportSession').value)})});
@@ -34,6 +35,7 @@ async function prepareImport(input){
 }
 async function applyImport(){
  if(!pendingImport)return;
+ if(typeof drawioSession!=='undefined'&&drawioSession){showError(Error('Close the visual diagram editor before importing another project.'));return;}
  if(taskDrafts.size||contextDirty){showError(Error('Save your task answers and project data before importing.'));return;}
  try{
   await flushEditors();const previous=browserStore.snapshot();

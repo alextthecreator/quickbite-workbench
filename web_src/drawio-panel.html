@@ -1,0 +1,16 @@
+<article id="drawioPanel" class="drawio-panel">
+  <div class="drawio-heading"><div><div class="eyebrow">Visual diagram editor</div><h3>Draw with draw.io</h3></div><button class="secondary" onclick="toggleDrawioFullscreen()">Full screen</button></div>
+  <p>Use the task card’s save name above. Open a saved diagram or choose a Starter and create a new one. Save to project includes the editable diagram and its SVG in your next project ZIP.</p>
+  <div class="actions"><button id="drawioSaveButton" onclick="requestDrawioSave()" disabled>Save to project</button><button id="drawioCloseButton" class="secondary" onclick="closeDrawio()" disabled>Close editor</button><button id="drawioRecoverButton" class="secondary hidden" onclick="recoverDrawioDraft()">Recover browser draft</button></div>
+  <p id="drawioStatus" class="drawio-status" role="status">Your existing JSON models remain available. Opening one in draw.io keeps the original JSON.</p>
+  <div id="drawioClosePrompt" class="notice hidden">This diagram has unsaved changes. <button class="secondary" onclick="$('drawioClosePrompt').classList.add('hidden')">Keep editing</button> <button class="secondary" onclick="closeDrawio(true)">Close without saving</button><p>Your browser draft is retained when available. Use Save to project before exporting your work.</p></div>
+  <div id="drawioEmpty" class="drawio-empty">Create a diagram or open saved work to start editing.</div>
+  <iframe id="drawioFrame" class="drawio-frame hidden" title="draw.io visual diagram editor" referrerpolicy="no-referrer" allowfullscreen></iframe>
+  <details id="drawioPreviewDetails" class="hidden"><summary>Saved SVG preview</summary><img id="drawioPreviewImage" class="drawio-preview" alt="Saved diagram preview"></details>
+</article>
+<details id="legacyModelPanel" class="legacy-model-panel">
+  <summary>Legacy JSON editor — existing projects</summary>
+  <p>Continue using your original JSON models here. A draw.io version is saved separately. To save a different JSON version when a draw.io version already exists, use a different name with the same task prefix.</p>
+  <div class="actions"><button class="secondary" onclick="openLegacySavedModel()">Open saved JSON</button><button class="secondary" onclick="loadStarter()">Load JSON starter</button><button class="secondary" onclick="openCurrentJsonInDrawio()">Open current JSON in draw.io</button></div>
+  <div class="grid2"><article><h3>Editable model source</h3><textarea id="modelEditor" class="editor tall"></textarea><div class="actions"><button onclick="previewModel()">Preview JSON</button><button onclick="saveModel()">Save JSON + SVG</button></div><pre id="modelCheck" class="output small"></pre></article><article><h3>Legacy preview</h3><div id="modelPreview" class="preview"></div></article></div>
+</details>

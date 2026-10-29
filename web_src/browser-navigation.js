@@ -20,6 +20,7 @@ async function installNavigation(){
  const router=QuickBiteRouter.create({
   window,
   beforeLeave:async(target)=>{
+   if(typeof guardDrawioNavigation==='function')guardDrawioNavigation(target);
    if(contextDirty&&target.page!=='context')throw Error('Save your stakeholder/scope changes before leaving Your project.');
    await flushEditors();
   },

@@ -54,7 +54,7 @@
    const files=this.data.files, reports={}, models=[],runs=[],logs=[];
    for(const [p,v] of Object.entries(files)){
     if(p.startsWith('workspace/reports/')&&p.endsWith('.md'))reports[p.split('/').at(-1).slice(0,-3)]=v;
-    if(p.startsWith('workspace/models/')&&p.endsWith('.json'))models.push(p.split('/').at(-1).slice(0,-5));
+    if(p.startsWith('workspace/models/')&&/\.(json|drawio)$/.test(p)){const name=p.split('/').at(-1).replace(/\.(json|drawio)$/,'');if(!models.includes(name))models.push(name);}
     if(p.startsWith('workspace/runs/'))runs.push(p.split('/').at(-1));
     if(p.startsWith('workspace/logs/'))logs.push(p.split('/').at(-1));
    }
