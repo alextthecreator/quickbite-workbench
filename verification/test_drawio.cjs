@@ -85,3 +85,16 @@ test('drafts and in-flight saves block navigation, while export failure preserve
  const svgRequest=b.messages.at(-1);await b.ctx.completeDrawioSave({event:'export',format:'svg',message:svgRequest,data:'invalid'});
  assert.deepEqual(b.store.snapshot(),before);assert.equal(b.ctx.drawioUnsaved(),true);assert.match(b.fields.drawioStatus.textContent,/Save failed/);
 });
+
+
+test('choosing a deployment starter suggests an unused name without renaming or replacing the open diagram',async()=>{
+ const b=bridge(),before=b.store.snapshot();b.store.save('workspace/models/M06_deployment.drawio',toXml(model));
+ b.fields.modelKind={value:'deployment'};b.ctx.suggestDrawioName();
+ assert.equal(b.fields.modelName.value,'M06_deployment_2');assert.equal(b.fields.modelName.disabled,false);
+ b.ctx.requestDrawioSave();const request=b.messages.at(-1),xml=toXml(model);
+ b.handlers.message({origin:ORIGIN,source:b.source,data:JSON.stringify({event:'export',format:'xml',message:request,xml})});
+ await b.ctx.completeDrawioSave({event:'export',format:'svg',message:b.messages.at(-1),data:'data:image/svg+xml,%3Csvg%2F%3E'});
+ assert.equal(b.store.get('workspace/models/M04_dfd.drawio'),xml);
+ assert.equal(b.store.get('workspace/models/M04_dfd.json'),before.files['workspace/models/M04_dfd.json']);
+ assert.ok(!b.store.get('workspace/models/M06_deployment_2.drawio'));
+});

@@ -1,6 +1,7 @@
 <article id="drawioPanel" class="drawio-panel">
   <div class="drawio-heading"><div><div class="eyebrow">Visual diagram editor</div><h3>Draw with draw.io</h3></div><button class="secondary" onclick="toggleDrawioFullscreen()">Full screen</button></div>
-  <p>Use the task card’s save name above. Open a saved diagram or choose a Starter and create a new one. Save to project includes the editable diagram and its SVG in your next project ZIP.</p>
+  <p>Choose a Starter and check the new diagram name above. You can edit the name before clicking New diagram. To continue existing work, use Open saved diagram. Save to project includes the editable diagram and its SVG in your next project ZIP.</p>
+  <p id="drawioActiveName" class="notice" aria-live="polite"></p>
   <div class="actions"><button id="drawioSaveButton" onclick="requestDrawioSave()" disabled>Save to project</button><button id="drawioCloseButton" class="secondary" onclick="closeDrawio()" disabled>Close editor</button><button id="drawioRecoverButton" class="secondary hidden" onclick="recoverDrawioDraft()">Recover browser draft</button></div>
   <p id="drawioStatus" class="drawio-status" role="status">Your existing JSON models remain available. Opening one in draw.io keeps the original JSON.</p>
   <div id="drawioClosePrompt" class="notice hidden">This diagram has unsaved changes. <button class="secondary" onclick="$('drawioClosePrompt').classList.add('hidden')">Keep editing</button> <button class="secondary" onclick="closeDrawio(true)">Close without saving</button><p>Your browser draft is retained when available. Use Save to project before exporting your work.</p></div>

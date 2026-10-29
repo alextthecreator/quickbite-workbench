@@ -30,7 +30,8 @@ function startDrawio(name,xml){
  if(drawioSession)closeDrawio(true);
  const frame=$('drawioFrame'),fresh=frame.cloneNode(false);frame.replaceWith(fresh);
  drawioSession={name,xml,base:drawioBase(name),dirty:false,ready:false,store:browserStore,source:fresh.contentWindow};
- $('modelName').value=name;$('modelName').disabled=true;
+ $('modelName').value=name;$('modelName').disabled=false;
+ $('drawioActiveName').textContent='Editing: '+name+' — Save to project updates this diagram. The name above is for a new diagram.';
  $('drawioEmpty').classList.add('hidden');fresh.classList.remove('hidden');
  $('drawioCloseButton').disabled=false;$('drawioSaveButton').disabled=true;
  $('drawioRecoverButton').classList.toggle('hidden',!availableDrawioDraft());
@@ -39,8 +40,15 @@ function startDrawio(name,xml){
  drawioSession.timer=setTimeout(()=>{if(drawioSession&&!drawioSession.ready)drawioStatus('draw.io is taking longer to load. Check your connection. Your saved work is unchanged; the legacy JSON editor is still available.');},30000);
 }
 function drawioLoad(xml){drawioPost({action:'load',xml,title:drawioSession.name,autosave:1,saveAndExit:1,libs:'general;uml;dfd',fit:1});}
+function suggestDrawioName(){
+ const prefixes={usecase:'M03_usecase',activity:'M03_activity',dfd:'M04_dfd',deployment:'M06_deployment',class:'M07_class',package:'M07_packages',sequence:'M08_sequence01',state:'M08_state'};
+ const prefix=prefixes[$('modelKind').value];if(!prefix)return;
+ let name=prefix,index=2;
+ while(browserStore.get('workspace/models/'+name+'.drawio')||browserStore.get('workspace/models/'+name+'.json')||drawioSession?.name===name)name=prefix+'_'+index++;
+ $('modelName').value=name;
+}
 function newDrawioDiagram(){
- try{const name=diagramName($('modelName').value.trim());if(browserStore.get('workspace/models/'+name+'.drawio')||browserStore.get('workspace/models/'+name+'.json'))throw Error('This name already has saved work. Choose Open saved diagram, or use a different save name.');startDrawio(name,QuickBiteDrawio.toXml(STARTERS[$('modelKind').value]));}
+ try{if(drawioUnsaved())throw Error('Save to project or close the current diagram before creating another.');const name=diagramName($('modelName').value.trim());if(browserStore.get('workspace/models/'+name+'.drawio')||browserStore.get('workspace/models/'+name+'.json'))throw Error('This name already has saved work. Choose Open saved diagram to continue it, or choose another Starter or a different name above to create a separate diagram.');startDrawio(name,QuickBiteDrawio.toXml(STARTERS[$('modelKind').value]));}
  catch(error){drawioStatus(error.message);}
 }
 function openCurrentJsonInDrawio(){
@@ -109,7 +117,7 @@ function closeDrawio(force=false,modified=false){
  if(drawioPending||drawioReading){drawioStatus('Wait for the diagram save to finish before closing.');return;}
  if(!force&&(drawioSession.dirty||modified)){$('drawioClosePrompt').classList.remove('hidden');return;}
  if(drawioSession.dirty)cacheDrawioDraft();
- clearTimeout(drawioSession.timer);drawioSession=null;$('drawioFrame').removeAttribute('src');$('drawioFrame').classList.add('hidden');$('drawioEmpty').classList.remove('hidden');$('drawioClosePrompt').classList.add('hidden');$('drawioRecoverButton').classList.add('hidden');$('drawioSaveButton').disabled=true;$('drawioCloseButton').disabled=true;$('modelName').disabled=false;drawioStatus('Editor closed. Saved project files are unchanged.');
+ clearTimeout(drawioSession.timer);drawioSession=null;$('drawioActiveName').textContent='';$('drawioFrame').removeAttribute('src');$('drawioFrame').classList.add('hidden');$('drawioEmpty').classList.remove('hidden');$('drawioClosePrompt').classList.add('hidden');$('drawioRecoverButton').classList.add('hidden');$('drawioSaveButton').disabled=true;$('drawioCloseButton').disabled=true;$('modelName').disabled=false;drawioStatus('Editor closed. Saved project files are unchanged.');
 }
 function toggleDrawioFullscreen(){
  if(document.fullscreenElement)document.exitFullscreen();else $('drawioPanel').requestFullscreen().catch(()=>drawioStatus('Full screen is unavailable in this browser. The editor remains usable here.'));

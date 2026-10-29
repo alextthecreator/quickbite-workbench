@@ -35,6 +35,7 @@ html=html.replace('local project folder','browser project').replace('This folder
 html=html.replace('<div class="grid2"><article><h3>Editable model source</h3>', '<div class="toolbar"><label>Saved model<select id="savedModelSelect"></select></label><button class="secondary" onclick="loadSavedModel()">Open saved model</button></div><div class="grid2"><article><h3>Editable model source</h3>');
 html=html.replace('onclick="loadStarter()">Load neutral starter','onclick="newDrawioDiagram()">New diagram');
 html=html.replace('Saved model<select id="savedModelSelect"','Saved diagram<select id="savedModelSelect"').replace('>Open saved model</button>','>Open saved diagram</button>');
+html=html.replace('<select id="modelKind">','<select id="modelKind" onchange="suggestDrawioName()">').replace('>Save name<input id="modelName"','>New / legacy diagram name<input id="modelName"');
 const diagramNames=[...new Set(course.modules.flatMap(module=>module.task_specs.flatMap(task=>task.evidence.filter(e=>e.prefix.startsWith('workspace/models/')).map(e=>e.prefix.split('/').at(-1)))))];
 html=html.replace('<input id="modelName" value="m03_model">','<input id="modelName" value="m03_model" list="diagramSaveNames"><datalist id="diagramSaveNames">'+diagramNames.map(name=>'<option value="'+name+'"></option>').join('')+'</datalist>');
 const modelStart=html.indexOf('<div class="grid2"><article><h3>Editable model source</h3>'),modelEnd=html.indexOf('</section>',modelStart);
