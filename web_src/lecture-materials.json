@@ -1,0 +1,59 @@
+[
+  {
+    "id": "M01_S01",
+    "module": "M01",
+    "sessions": [1],
+    "title": "Introduction to Software Engineering & Project Vision",
+    "description": "Problem statements, stakeholders, scope and measurable business objectives. Car Rental examples, then your QuickBite work.",
+    "file": "M01_S01_Introduction_Project_Vision.pdf",
+    "pages": 34,
+    "bytes": 2565995,
+    "reading": [{"label": "Problem, vision, stakeholders and scope", "first": 18, "last": 30}, {"label": "QuickBite work and saving", "first": 31, "last": 33}]
+  },
+  {
+    "id": "M01_S02",
+    "module": "M01",
+    "sessions": [2],
+    "title": "Software Life Cycles, Feasibility & Risk",
+    "description": "Compare lifecycle approaches, assess feasibility and identify risks. Apply the method to QuickBite Tasks 6 and 8; Task 7 remains optional.",
+    "file": "M01_S02_Life_Cycles_Feasibility_Risk.pdf",
+    "pages": 49,
+    "bytes": 8110929,
+    "reading": [{"label": "Processes and lifecycle choices", "first": 8, "last": 32}, {"label": "Feasibility and risk", "first": 33, "last": 43}, {"label": "QuickBite work and saving", "first": 46, "last": 48}]
+  },
+  {
+    "id": "M02_S03",
+    "module": "M02",
+    "sessions": [3],
+    "title": "Requirements Engineering",
+    "description": "Functional and quality requirements, elicitation, acceptance criteria and stable IDs. Build your QuickBite requirements register in Task 2.",
+    "file": "M02_S03_Requirements_Engineering.pdf",
+    "pages": 30,
+    "bytes": 1279191,
+    "reading": [{"label": "Requirement types and elicitation", "first": 4, "last": 19}, {"label": "Quality, acceptance criteria and register", "first": 20, "last": 27}, {"label": "QuickBite Task 2 and saving", "first": 28, "last": 29}]
+  },
+  {
+    "id": "M02_S04",
+    "module": "M02",
+    "sessions": [4],
+    "title": "User-oriented Scenarios & Requirements Review",
+    "description": "Normal and failure/boundary outcomes, objective coverage and requirements quality. Continue QuickBite with Tasks 6 and 7.",
+    "file": "M02_S04_User_Oriented_Scenarios.pdf",
+    "pages": 26,
+    "bytes": 1520036,
+    "reading": [{"label": "Scenario method and Car Rental examples", "first": 15, "last": 19}, {"label": "Traceability and quality review", "first": 20, "last": 22}, {"label": "QuickBite Tasks 6 and 7", "first": 13, "last": 14}],
+    "note": "The Moodle screenshot is a snapshot. Check Moodle for the current checkpoint deadline."
+  },
+  {
+    "id": "M03_S05_S06",
+    "module": "M03",
+    "sessions": [5, 6],
+    "title": "Use Cases & Activity Modelling",
+    "description": "Actors, system boundaries, textual use cases, decisions and guards. Connect one use-case diagram, one textual use case and one activity diagram.",
+    "file": "M03_S05_S06_Use_Cases_Activity_Modelling.pdf",
+    "pages": 31,
+    "bytes": 2425315,
+    "reading": [{"label": "Actors, use cases and system boundary", "first": 9, "last": 17}, {"label": "Textual specification and Car Rental example", "first": 18, "last": 21}, {"label": "Activities, guards and consistency", "first": 22, "last": 25}],
+    "note": "Task 2 creates the use-case diagram; Task 3 describes one selected use case. This is clarified on pages 17 and 21. For the workbench evidence, use Models / CASE to save M03_usecase and M03_activity as JSON + SVG. External tools shown in the slides do not automatically add their diagrams to your project ZIP."
+  }
+]
