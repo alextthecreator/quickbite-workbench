@@ -1,0 +1,28 @@
+.model-workspace{display:grid;grid-template-columns:minmax(0,1fr);gap:18px;min-width:0}
+#modelPreviewDock,.model-preview-panel{min-width:0;max-width:100%}
+.model-source{background:white;border:1px solid var(--line);border-radius:12px;padding:14px}
+.model-source>summary{cursor:pointer;font-weight:700;color:#174eb6}
+.model-source article{border:0;padding:16px 0 0;box-shadow:none}
+.model-source .editor.tall{min-height:300px}
+.model-preview-panel{scroll-margin-top:110px}
+.model-view-toolbar{display:flex;align-items:end;gap:10px;flex-wrap:wrap;margin:14px 0}
+.model-view-toolbar label{display:grid;gap:5px;font-size:12px;font-weight:600}
+.model-view-toolbar select{max-width:220px}
+.model-view-toolbar button{padding:9px 12px}
+.model-view-toolbar button[aria-pressed="true"]{background:#174eb6;color:white}
+.model-view-status{font-size:13px;line-height:1.5;color:#58677f;min-height:2em}
+.model-preview-panel .preview{height:650px;min-height:350px;border-style:solid;overscroll-behavior:contain}
+.model-preview-panel .preview svg{display:block;max-width:none;max-height:none}
+.model-flow-table{overflow:auto;max-height:650px}
+.model-flow-table table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;background:#fff}
+.model-flow-table caption{text-align:left;font-weight:700;padding:12px 0}
+.model-flow-table th,.model-flow-table td{border-bottom:1px solid #dbe4f0;padding:12px;text-align:left;vertical-align:top;white-space:normal;min-width:60px}
+.model-flow-table thead{position:sticky;top:0;background:#eef4ff}
+.model-flow-table td:nth-child(3){min-width:240px}
+.model-fullscreen{width:calc(100vw - 24px);max-width:none;height:calc(100dvh - 24px);max-height:none;border:0;border-radius:14px;padding:0;background:white}
+.model-fullscreen::backdrop{background:rgba(15,23,42,.65)}
+.model-fullscreen .model-preview-panel{height:100%;display:flex;flex-direction:column;padding:18px;border:0;overflow:hidden}
+.model-fullscreen .model-preview-panel h3{margin:0}
+.model-fullscreen .preview,.model-fullscreen .model-flow-table{height:auto;min-height:0;max-height:none;flex:1}
+.model-fullscreen .model-view-status{margin:6px 0}
+@media(max-width:600px){.model-view-toolbar{gap:8px}.model-view-toolbar button{padding:8px}.model-preview-panel .preview{height:500px}}

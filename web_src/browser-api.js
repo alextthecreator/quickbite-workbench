@@ -24,6 +24,7 @@ class PythonWorker{
 let engineWorker=null;
 function requireTasks(ids){if(browserCourse.course.learning_mode==='guided')return;const states=browserStore.state(browserCourse.course).learning;if(!ids.some(id=>states[id]&&states[id].status!=='blocked'))throw Error('This work is waiting for prerequisites. Open task '+ids.join(' / ')+' to see what to complete or import first.');}
 async function compute(operation,payload){
+ if(operation==='render'&&payload.model?.kind==='dfd'&&payload.layout!=='coordinates')return renderDfd(payload.model,payload.direction);
  if(!engineWorker)engineWorker=new PythonWorker();
  try{return await engineWorker.call(operation,payload);}catch(e){engineWorker.stop();engineWorker=null;throw e;}
 }

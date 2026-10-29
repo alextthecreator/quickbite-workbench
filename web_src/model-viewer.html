@@ -1,0 +1,32 @@
+<div class="model-workspace">
+  <details id="modelSourcePanel" class="model-source" open>
+    <summary>Edit model source (JSON)</summary>
+    <article><h3>Editable model source</h3><textarea id="modelEditor" class="editor tall"></textarea><div class="actions"><button onclick="previewModel()">Preview</button><button onclick="saveModel()">Save JSON + SVG</button></div><pre id="modelCheck" class="output small"></pre></article>
+  </details>
+  <div id="modelPreviewDock">
+    <article id="modelPreviewPanel" class="model-preview-panel">
+      <h3>Diagram preview</h3>
+      <div class="model-view-toolbar">
+        <label>DFD layout<select id="modelLayout" onchange="previewModel()"><option value="auto">Automatic layout</option><option value="coordinates">Saved positions</option></select></label>
+        <label>Direction<select id="dfdDirection" onchange="previewModel()"><option value="DOWN">Top to bottom</option><option value="RIGHT">Left to right</option></select></label>
+        <button class="secondary" onclick="previewModel()">Refresh preview</button>
+        <button id="modelExpandButton" class="secondary" onclick="toggleModelFullscreen()">Full screen</button>
+        <button id="modelDownloadButton" class="secondary" onclick="downloadModelSvg()" disabled>Download SVG</button>
+        <button onclick="saveModel()">Save JSON + SVG</button>
+      </div>
+      <div class="model-view-toolbar" role="group" aria-label="Diagram view">
+        <button id="modelDiagramButton" class="secondary" aria-pressed="true" onclick="setModelView('diagram')">Diagram</button>
+        <button id="modelTableButton" class="secondary" aria-pressed="false" onclick="setModelView('table')" disabled>Flow table</button>
+        <button class="secondary" aria-label="Zoom out" onclick="setModelZoom(0.8)">−</button>
+        <span id="modelZoomLabel" aria-live="polite">100%</span>
+        <button class="secondary" aria-label="Zoom in" onclick="setModelZoom(1.25)">+</button>
+        <button class="secondary" onclick="setModelZoom('fit')">Fit width</button>
+        <button class="secondary" onclick="setModelZoom('actual')">100%</button>
+      </div>
+      <p id="modelViewStatus" class="model-view-status" aria-live="polite">Open a saved model or preview your source. Previewing does not replace saved files. Save JSON + SVG updates the model and its exported diagram.</p>
+      <div id="modelPreview" class="preview"></div>
+      <div id="modelFlowTable" class="model-flow-table hidden"></div>
+    </article>
+  </div>
+</div>
+<dialog id="modelFullscreenDialog" class="model-fullscreen" aria-label="Diagram viewer"></dialog>
