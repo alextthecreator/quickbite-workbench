@@ -949,10 +949,11 @@
         8
       ],
       "theory": [
-        "A context model shows the entire system as one process plus external entities and named information flows. A level-1 DFD decomposes that transformation into processes and data stores. Process names describe transformations; flow/store names describe information, not clicks. Data must be transformed by a process: avoid entity→store or store→store links without a process.",
+        "A context model shows the entire system as one process plus external entities and named information flows. A level-1 DFD decomposes that transformation into processes and data stores. Process names describe transformations; flow/store names describe information, not clicks. Data must be transformed by a process: avoid entity→store or store→store links without a process. Both diagrams use Models / CASE → Starter: dfd. Task 1 keeps exactly one system process and no internal stores. Task 2 opens that process to show 3–5 internal processes and relevant stores. Reuse M01 scope, M02 requirements and M03 boundaries. DFD processes describe logical responsibilities, not a commitment to separate services or deployment nodes.",
         "All information crossing the context boundary must be accounted for at level 1. Internal stores/flows may be added, but do not silently add or remove external inputs/outputs. A balancing table records each context flow, matching level-1 flows and whether it is preserved, split/aggregated or unmatched. Explain renaming and aggregation. DFD models information transformation; M03 activity models order, decisions and control.",
         "For each core structure define name, purpose, key fields/elements and useful type/constraints; use the same names across requirements and flows. For permissions make a role × resource table with read/create/update/delete or other meaningful actions. Mark explicit denied actions and justify them from responsibilities or risk. Do not infer blanket access from a role name.",
-        "Describe an asset/information item, plausible event, cause and consequence, then a control and a verification idea. For example in an unrelated booking system, one branch seeing another branch’s private notes could be prevented by scoped access and checked with a forbidden-access test. This is analysis using synthetic examples, not a request to attack a real system."
+        "Describe an asset/information item, plausible event, cause and consequence, then a control and a verification idea. For example in an unrelated booking system, one branch seeing another branch’s private notes could be prevented by scoped access and checked with a forbidden-access test. This is analysis using synthetic examples, not a request to attack a real system.",
+        "M01 supplies stakeholders and agreed scope. M02 supplies requirements and stable IDs. M03 supplies actors, system boundary and behavioural flows. M04 adds information exchanges, transformations, stores and shared data definitions. M05 reuses these as assets, dependencies and trust-boundary inputs. M06 uses logical responsibilities to inform architecture without mapping each DFD process to a server. M07 uses dictionary concepts as candidates for classes, with identity, relationships and behaviour still to be analysed. M08 refines interactions and states. M09 traces change impact and M10 derives checks from flows, constraints and access rules. Optional access/risk tasks enrich this preparation but are not prerequisites for required later work."
       ],
       "steps": [
         "Create a context diagram of the system and its information exchanges.",
@@ -981,8 +982,7 @@
           "focus": "Context and level-1 information flow",
           "work": [
             "Create a context diagram of the system and its information exchanges.",
-            "Create a small level-1 data-flow diagram.",
-            "Describe the main data used in your diagrams."
+            "Create a small level-1 data-flow diagram."
           ],
           "tools": [
             "Models / CASE → DFD",
@@ -995,14 +995,16 @@
           ],
           "task_numbers": [
             1,
-            2,
-            4
+            2
           ]
         },
         {
           "session": 8,
           "focus": "Dictionary, access and information risk",
-          "work": [],
+          "work": [
+            "Describe the main data used in your diagrams.",
+            "Review context/level-1 balancing and consistency with M03. Save and export the complete project ZIP."
+          ],
           "tools": [
             "Models / CASE",
             "Report & evidence"
@@ -1012,7 +1014,9 @@
             "Check the module deliverables; optional extensions are not required.",
             "Download your project ZIP and keep it for next class."
           ],
-          "task_numbers": []
+          "task_numbers": [
+            4
+          ]
         }
       ],
       "report_sections": [
@@ -1030,15 +1034,19 @@
         {
           "task": 1,
           "instruction": "Create a context diagram of the system and its information exchanges.",
-          "save_to": "Write on this task card and click Save answer. It is copied into the module report and included in your project ZIP. Models / CASE → Save name: M04_context → Save JSON + SVG. Rationale in M04 Report → Context & Decomposition Rationale. In the ZIP: workspace/models/M04_context.json and .svg.",
+          "save_to": "Models / CASE → Starter: dfd → Load neutral starter. Keep \"kind\": \"dfd\". Use one process for the entire QuickBite system, external entities and named input/output flows. Remove the starter data store and any internal processes. Save name: M04_context → Save JSON + SVG. Write your scope rationale and explain one important exchange on this task card, then click Save answer. The answer is copied into M04 Report → Context & Decomposition Rationale. The project ZIP includes workspace/models/M04_context.json and .svg, and workspace/reports/M04.md.",
           "minimum_requirements": [
-            "Show the system, relevant external entities and named data flows.",
-            "Use your agreed scope; explain one important exchange."
+            "Represent the whole QuickBite system as exactly one process, with relevant external entities and named, directed data flows.",
+            "Keep internal processes and data stores out of this context view. Task 2 decomposes the same system into a level-1 DFD.",
+            "Use your agreed M01 scope and M02 requirements; explain one important exchange and reference the relevant requirement ID."
           ],
           "complete_when": "Your saved work meets the checklist above. Check it yourself; the website does not grade correctness.",
           "deliverable": "Create a context diagram of the system and its information exchanges",
           "prerequisites": [
-            "M02.02"
+            "M01.03",
+            "M01.04",
+            "M02.02",
+            "M03.02"
           ],
           "report_section": "Context & Decomposition Rationale",
           "evidence": [
@@ -1049,13 +1057,13 @@
               "extension": ".json"
             }
           ],
-          "inputs": "Read Project Brief and this module’s Concepts. Use your own saved earlier decisions; draft or import them if missing. Recommended earlier work: M02.02.",
+          "inputs": "Read Project Brief and this module’s Concepts. Reuse M01 stakeholders/scope, M02 requirements and M03 actors/system boundary. An external entity must send or receive information across the agreed system boundary. Draft or import earlier work if missing. Recommended earlier work: M01.03, M01.04, M02.02, M03.02.",
           "optional": false
         },
         {
           "task": 2,
           "instruction": "Create a small level-1 data-flow diagram.",
-          "save_to": "Write on this task card and click Save answer. It is copied into the module report and included in your project ZIP. Models / CASE → Save name: M04_dfd → Save JSON + SVG. Rationale in M04 Report → Context & Decomposition Rationale. In the ZIP: workspace/models/M04_dfd.json and .svg.",
+          "save_to": "Write on this task card and click Save answer. It is copied into the module report and included in your project ZIP. Models / CASE → Starter: dfd → Load neutral starter. Decompose the same system shown in Task 1 into 3–5 internal processes and relevant data stores. Save name: M04_dfd → Save JSON + SVG. Rationale in M04 Report → Context & Decomposition Rationale. In the ZIP: workspace/models/M04_dfd.json and .svg.",
           "minimum_requirements": [
             "Use 3–5 processes and relevant data stores.",
             "Keep external flows consistent with the context diagram; briefly explain your check."
@@ -1180,7 +1188,7 @@
       "theory_cards": [
         {
           "title": "Context and level-1 DFD",
-          "body": "A context model shows the entire system as one process plus external entities and named information flows. A level-1 DFD decomposes that transformation into processes and data stores. Process names describe transformations; flow/store names describe information, not clicks. Data must be transformed by a process: avoid entity→store or store→store links without a process."
+          "body": "A context model shows the entire system as one process plus external entities and named information flows. A level-1 DFD decomposes that transformation into processes and data stores. Process names describe transformations; flow/store names describe information, not clicks. Data must be transformed by a process: avoid entity→store or store→store links without a process. Both diagrams use Models / CASE → Starter: dfd. Task 1 keeps exactly one system process and no internal stores. Task 2 opens that process to show 3–5 internal processes and relevant stores. Reuse M01 scope, M02 requirements and M03 boundaries. DFD processes describe logical responsibilities, not a commitment to separate services or deployment nodes."
         },
         {
           "title": "Balancing",
@@ -1193,6 +1201,10 @@
         {
           "title": "Information-flow risk",
           "body": "Describe an asset/information item, plausible event, cause and consequence, then a control and a verification idea. For example in an unrelated booking system, one branch seeing another branch’s private notes could be prevented by scoped access and checked with a forbidden-access test. This is analysis using synthetic examples, not a request to attack a real system."
+        },
+        {
+          "title": "How M04 connects to the course",
+          "body": "M01 supplies stakeholders and agreed scope. M02 supplies requirements and stable IDs. M03 supplies actors, system boundary and behavioural flows. M04 adds information exchanges, transformations, stores and shared data definitions. M05 reuses these as assets, dependencies and trust-boundary inputs. M06 uses logical responsibilities to inform architecture without mapping each DFD process to a server. M07 uses dictionary concepts as candidates for classes, with identity, relationships and behaviour still to be analysed. M08 refines interactions and states. M09 traces change impact and M10 derives checks from flows, constraints and access rules. Optional access/risk tasks enrich this preparation but are not prerequisites for required later work."
         }
       ],
       "required_task_numbers": [
