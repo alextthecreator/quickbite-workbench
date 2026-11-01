@@ -1,6 +1,10 @@
 (function(root){
 const fflate=typeof module!=='undefined'&&module.exports?require('./vendor/fflate.js'):root.fflate;
 const QuickBiteStore=typeof module!=='undefined'&&module.exports?require('./project-store.js'):root.QuickBiteStore;
+const exporter=typeof module!=='undefined'&&module.exports?require('./project-export.js'):root.QuickBiteExport;
+// A text byte may occupy six JSON bytes, and workspace files are duplicated in
+// the manifest. Bound expansion using the same project budget plus guide overhead.
+const MAX_ARCHIVE_BYTES=QuickBiteStore.MAX_BYTES*8+2_000_000;
 function bytesFor(value){return typeof value==='string'?fflate.strToU8(value):Uint8Array.from(atob(value.data),x=>x.charCodeAt(0));}
 function guideMarkdown(guide){
  const c=guide.course,s=c.scenario,lines=['# QuickBite course guide','',`Course version: ${guide.version}`,`Website: ${guide.website}`,'','This is a read-only copy of the instructions at export time. Your answers are in workspace/. The website is the current source of truth.',''];
@@ -20,11 +24,11 @@ function projectZip(snapshot,guide=null){
  return fflate.zipSync(files,{level:6});
 }
 function binaryRecord(bytes){let s='';for(let i=0;i<bytes.length;i+=0x8000)s+=String.fromCharCode(...bytes.subarray(i,i+0x8000));return {encoding:'base64',data:btoa(s)};}
-function parseProjectFile(bytes,name,templates={}){
- if(bytes.length>12_000_000)throw Error('File is too large (12 MB maximum).');
- if(name.toLowerCase().endsWith('.json'))return QuickBiteStore.validate(JSON.parse(new TextDecoder().decode(bytes)));
+function parseProjectFile(bytes,name,templates={},course=null){
+ if(bytes.length>MAX_ARCHIVE_BYTES)throw Error('File is too large for the supported project format.');
+ if(name.toLowerCase().endsWith('.json')){const data=JSON.parse(new TextDecoder().decode(bytes));return data?.app_id===exporter.RECOVERY_ID?exporter.recover(data,course):QuickBiteStore.validate(data);}
  let unpacked=0;
- const entries=fflate.unzipSync(bytes,{filter:entry=>{unpacked+=entry.originalSize;if(unpacked>20_000_000)throw Error('Expanded ZIP is too large.');return !entry.name.endsWith('/');}});
+ const entries=fflate.unzipSync(bytes,{filter:entry=>{unpacked+=entry.originalSize;if(unpacked>MAX_ARCHIVE_BYTES)throw Error('Expanded ZIP is too large.');return !entry.name.endsWith('/');}});
  const manifest=Object.keys(entries).find(x=>x==='quickbite-project.json'||/^[^/]+\/quickbite-project.json$/.test(x));
  if(manifest)return QuickBiteStore.validate(JSON.parse(fflate.strFromU8(entries[manifest])));
  const files={};
@@ -42,6 +46,6 @@ function parseProjectFile(bytes,name,templates={}){
  return QuickBiteStore.validate({app_id:QuickBiteStore.APP_ID,schema_version:1,course_version:'legacy-import',files});
 }
 
-root.QuickBiteArchive={projectZip,parseProjectFile,guideMarkdown};
+root.QuickBiteArchive={projectZip,parseProjectFile,guideMarkdown,MAX_ARCHIVE_BYTES};
 if(typeof module!=='undefined'&&module.exports)module.exports=root.QuickBiteArchive;
 })(typeof globalThis!=='undefined'?globalThis:this);

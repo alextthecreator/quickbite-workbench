@@ -1,5 +1,15 @@
 let drawioSession=null,drawioPending=null,drawioReading=null,drawioCounter=0,drawioPreviewUrl=null;
+let drawioExportRead=null;
 const DRAWIO_DRAFT_KEY='quickbite.drawio.draft.v1';
+function readDrawioForExport(){
+ if(!drawioSession?.ready)return Promise.reject(Error('Diagram editor is not ready.'));
+ if(drawioExportRead)return Promise.reject(Error('A diagram backup is already being read.'));
+ return new Promise((resolve,reject)=>{
+  const token='quickbite-backup-'+(++drawioCounter),session=drawioSession;
+  const timer=setTimeout(()=>{drawioExportRead=null;reject(Error('Diagram backup read timed out.'));},5000);
+  drawioExportRead={token,session,resolve,reject,timer};drawioPost({action:'export',format:'xml',message:token});
+ });
+}
 function drawioStatus(text){$('drawioStatus').textContent=text;}
 function drawioUnsaved(){return !!drawioSession&&(drawioSession.dirty||!!drawioPending||!!drawioReading);}
 function drawioPost(message){if(drawioSession)$('drawioFrame').contentWindow.postMessage(JSON.stringify(message),QuickBiteDrawio.ORIGIN);}
@@ -104,6 +114,7 @@ async function completeDrawioSave(message){
 window.addEventListener('message',event=>{
  if(!drawioSession)return;
  const message=QuickBiteDrawio.acceptMessage(event,drawioSession.source);if(!message)return;
+ if(message.event==='export'&&drawioExportRead&&QuickBiteDrawio.replyToken(message)===drawioExportRead.token){const pending=drawioExportRead;drawioExportRead=null;clearTimeout(pending.timer);if(pending.session!==drawioSession||typeof message.xml!=='string')pending.reject(Error('Diagram changed while reading its backup.'));else pending.resolve(message.xml);return;}
  if(message.event==='init'){clearTimeout(drawioSession.timer);drawioSession.ready=true;$('drawioSaveButton').disabled=false;drawioLoad(drawioSession.xml);drawioStatus('Editor ready. Use Save to project to include your diagram in the ZIP.');}
  else if(message.event==='autosave'&&typeof message.xml==='string'&&message.xml.length<=3_000_000){drawioSession.xml=message.xml;drawioSession.dirty=true;drawioStatus('Diagram changed. Use Save to project before exporting.');cacheDrawioDraft();drawioPost({action:'status',message:'Changes not saved to QuickBite',modified:true});}
  else if(message.event==='save')beginDrawioSave(message.xml,!!message.exit);

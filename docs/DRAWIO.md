@@ -14,7 +14,7 @@ Models / CASE uses the official editor at `https://embed.diagrams.net` in JSON e
 
 Messages are accepted only from the exact editor origin and the current iframe window. Export replies are correlated with the originating request. A save first obtains XML, then its SVG; an incomplete or failed export does not replace the project files. The SVG preview is displayed as an image rather than inserted as active SVG markup.
 
-Editor autosave events retain one browser recovery draft separately from canonical project files. Save to project is required before ZIP export. Navigation, import, close and before-unload guards prevent accidental replacement of unsaved/in-flight work. Closing an unsaved editor requires an explicit choice; its browser draft is retained where storage is available. Recovery checks the team/name and original source fingerprint. Browser drafts are not a substitute for exporting a project ZIP.
+Editor autosave events retain one browser recovery draft separately from canonical project files. Save to project generates the normal editable source plus SVG. ZIP and Emergency backup can also capture an unsaved editable source without requiring a browser save; a changed draft must regenerate its SVG after reopening. Navigation, import, close and before-unload guards prevent accidental replacement of unsaved/in-flight work. Closing an unsaved editor requires an explicit choice; its browser draft is retained where storage is available. Recovery checks the team/name and original source fingerprint. Browser drafts are not a substitute for exporting a project ZIP.
 
 ## Verification
 
