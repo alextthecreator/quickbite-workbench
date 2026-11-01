@@ -1748,8 +1748,8 @@
       ],
       "theory": [
         "Find concepts and responsibilities in requirements/use cases/data definitions, merge duplicates, and separate domain concepts from UI widgets or technical plumbing. A class shows name, attributes and operations; relationships describe collaboration/structure. Multiplicity is the allowed number at an association end: 1, 0..1, 0..* or 1..*. In the simplified editor include multiplicities and relationship meaning in labels, with explanations in the report.",
-        "Patterns respond to recurring design pressures. Factory-like construction selects a creation variant; Adapter translates an external interface into your own interface; Strategy separates interchangeable behaviour behind one responsibility. These illustrate creational, structural and behavioural approaches. Compare at least two approaches, including no formal pattern if useful; choose one justified approach and explain consequences. Only one pattern decision is required, not three sketches or production implementations.",
-        "Packages group related responsibilities. Cohesion concerns how strongly a group belongs together; coupling concerns dependence between groups. Show major dependency arrows and inspect unnecessary cycles/ripple effects. Walk a proposed rule change through classes, operations and packages, noting boundaries that contain it. Explain at least two non-obvious design choices and alternatives."
+        "Patterns respond to recurring design pressures. Factory-like construction selects a creation variant; Adapter translates an external interface into your own interface; Strategy separates interchangeable behaviour behind one responsibility. These illustrate creational, structural and behavioural approaches. For each pattern, compare it with a simpler approach and explain the consequences. In M07, explain one creational and one structural pattern using your existing class model or a small sketch. In M08, explain one behavioural pattern. Keep each explanation brief; no additional full diagram or production implementation is required.",
+        "Packages group related responsibilities. Cohesion concerns how strongly a group belongs together; coupling concerns dependence between groups. Show major dependency arrows and inspect unnecessary cycles/ripple effects. Walk a proposed rule change through classes, operations and packages, noting boundaries that contain it. Task 2 requires one non-obvious modelling decision with a brief explanation. Optional Task 3 expands this to two choices and alternatives."
       ],
       "steps": [
         "Create one class diagram for the core domain.",
@@ -1973,11 +1973,11 @@
         },
         {
           "title": "Pattern choices",
-          "body": "Patterns respond to recurring design pressures. Factory-like construction selects a creation variant; Adapter translates an external interface into your own interface; Strategy separates interchangeable behaviour behind one responsibility. These illustrate creational, structural and behavioural approaches. Compare at least two approaches, including no formal pattern if useful; choose one justified approach and explain consequences. Only one pattern decision is required, not three sketches or production implementations."
+          "body": "Patterns respond to recurring design pressures. Factory-like construction selects a creation variant; Adapter translates an external interface into your own interface; Strategy separates interchangeable behaviour behind one responsibility. These illustrate creational, structural and behavioural approaches. For each pattern, compare it with a simpler approach and explain the consequences. In M07, explain one creational and one structural pattern using your existing class model or a small sketch. In M08, explain one behavioural pattern. Keep each explanation brief; no additional full diagram or production implementation is required."
         },
         {
           "title": "Packages, coupling and change",
-          "body": "Packages group related responsibilities. Cohesion concerns how strongly a group belongs together; coupling concerns dependence between groups. Show major dependency arrows and inspect unnecessary cycles/ripple effects. Walk a proposed rule change through classes, operations and packages, noting boundaries that contain it. Explain at least two non-obvious design choices and alternatives."
+          "body": "Packages group related responsibilities. Cohesion concerns how strongly a group belongs together; coupling concerns dependence between groups. Show major dependency arrows and inspect unnecessary cycles/ripple effects. Walk a proposed rule change through classes, operations and packages, noting boundaries that contain it. Task 2 requires one non-obvious modelling decision with a brief explanation. Optional Task 3 expands this to two choices and alternatives."
         },
         {
           "title": "Creational and structural patterns",
@@ -1999,9 +1999,9 @@
         16
       ],
       "theory": [
-        "Participants/lifelines collaborate in a scenario; ordered messages represent responsibilities/operations rather than UI clicks. Show sender, receiver, message and useful return labels. The editor is simplified: describe alternative/error paths in the report where it cannot express full UML fragments. Save two complementary sequence models covering behaviour you justify.",
+        "Participants/lifelines collaborate in a scenario; ordered messages represent responsibilities/operations rather than UI clicks. Show sender, receiver, message and useful return labels. The editor is simplified: describe alternative/error paths in the report where it cannot express full UML fragments. Save one sequence model for the selected use case, as required in Task 2. Describe one alternative or error case in text; a second sequence diagram is not required.",
         "A state describes a meaningful stage of a concept’s history; an event may trigger a transition; a guard permits it under a condition; an action is an effect. Show initial/final conditions where useful and label transitions with event [guard] / effect as needed. Forbidden transitions have no legal rule and should be rejected. Choose your own coherent lifecycle from requirements; do not infer hidden company rules.",
-        "Check messages against class/package responsibilities and IDs; check transitions against rules and permissions. Record at least five cross-model checks. For a proposed change describe effects on both sequence and state models and related requirements/classes. Plan eight cases with input/context and expected behaviour based on the model.",
+        "Check messages against class/package responsibilities and IDs; check transitions against rules and permissions. Briefly check that the sequence and state models agree with the selected use case and explain the two forbidden transitions required in Task 4; no separate checklist of five checks is required. Optional Task 6 extends this review to a proposed change affecting both sequence and state models and related requirements/classes, plus eight planned cases. These are optional extensions, not additional requirements of Tasks 2 and 4.",
         "A retry repeats a request after an uncertain result. An idempotent operation has the same intended effect when the same request is repeated as when it is applied once; for example a request ID may prevent duplicate effects. Specify which operation/request key your rule covers, the repeated response and what it does not guarantee. This is a proposed design rule, not a requirement to implement a distributed system."
       ],
       "steps": [
@@ -2222,7 +2222,7 @@
       "theory_cards": [
         {
           "title": "Sequence notation",
-          "body": "Participants/lifelines collaborate in a scenario; ordered messages represent responsibilities/operations rather than UI clicks. Show sender, receiver, message and useful return labels. The editor is simplified: describe alternative/error paths in the report where it cannot express full UML fragments. Save two complementary sequence models covering behaviour you justify."
+          "body": "Participants/lifelines collaborate in a scenario; ordered messages represent responsibilities/operations rather than UI clicks. Show sender, receiver, message and useful return labels. The editor is simplified: describe alternative/error paths in the report where it cannot express full UML fragments. Save one sequence model for the selected use case, as required in Task 2. Describe one alternative or error case in text; a second sequence diagram is not required."
         },
         {
           "title": "State lifecycle and forbidden transitions",
@@ -2230,7 +2230,7 @@
         },
         {
           "title": "Consistency and a change walkthrough",
-          "body": "Check messages against class/package responsibilities and IDs; check transitions against rules and permissions. Record at least five cross-model checks. For a proposed change describe effects on both sequence and state models and related requirements/classes. Plan eight cases with input/context and expected behaviour based on the model."
+          "body": "Check messages against class/package responsibilities and IDs; check transitions against rules and permissions. Briefly check that the sequence and state models agree with the selected use case and explain the two forbidden transitions required in Task 4; no separate checklist of five checks is required. Optional Task 6 extends this review to a proposed change affecting both sequence and state models and related requirements/classes, plus eight planned cases. These are optional extensions, not additional requirements of Tasks 2 and 4."
         },
         {
           "title": "Retry and idempotency",
@@ -2257,7 +2257,7 @@
       ],
       "theory": [
         "Your repository here means the project workspace in this browser/ZIP; students do not need Git. Audit reports, model files, run evidence, log history and traceability. Record item/reference, finding or verified check, severity/importance, owner and action. Include verified checks rather than inventing faults. CASE tools validate structure; they do not establish semantic correctness.",
-        "A backlog item describes an outcome; record priority, owner and dependencies. A milestone marks a reviewable result; an iteration groups work with feedback. Define Done with evidence conditions such as reviewed artifact, traceability and saved result. Plan ten remaining-work items and two milestones/iterations. Sprint simulator runs are optional exploration, not a hidden deliverable.",
+        "A backlog item describes an outcome; record priority, owner and dependencies. A milestone marks a reviewable result; an iteration groups work with feedback. Define Done with evidence conditions such as reviewed artifact, traceability and saved result. Plan 4–6 remaining-work items with owner, dependency and milestone, as required in Task 2. Explain the next priority. A second milestone or ten work items is not required. Sprint simulator runs are optional exploration, not a hidden deliverable.",
         "CR01 records proposed change, source/rationale, impacted requirements/models/code/tests/risks, then accept/reject/defer with reason. Export a baseline ZIP before editing affected artifacts. Record old/new rule and traceability. Models saved with the same name replace earlier copies; use a versioned name or the baseline ZIP to retain history. Decide before implementing.",
         "For one concrete QuickBite issue identify stakeholders, competing obligations, possible responses, justified choice and limitation. Use synthetic examples only. Peer review records scope and findings, then implement or explain rejecting an improvement. Retrospective: what worked, what to change and the next action/owner. If importing another team’s ZIP for review, export your own project first; import replaces rather than merges."
       ],
@@ -2460,7 +2460,7 @@
         },
         {
           "title": "Remaining-work plan and Definition of Done",
-          "body": "A backlog item describes an outcome; record priority, owner and dependencies. A milestone marks a reviewable result; an iteration groups work with feedback. Define Done with evidence conditions such as reviewed artifact, traceability and saved result. Plan ten remaining-work items and two milestones/iterations. Sprint simulator runs are optional exploration, not a hidden deliverable."
+          "body": "A backlog item describes an outcome; record priority, owner and dependencies. A milestone marks a reviewable result; an iteration groups work with feedback. Define Done with evidence conditions such as reviewed artifact, traceability and saved result. Plan 4–6 remaining-work items with owner, dependency and milestone, as required in Task 2. Explain the next priority. A second milestone or ten work items is not required. Sprint simulator runs are optional exploration, not a hidden deliverable."
         },
         {
           "title": "Change and baseline",

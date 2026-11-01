@@ -31,7 +31,7 @@ async function browserApi(url,opt={}){
  const d=opt.body?JSON.parse(opt.body):{},method=opt.method||'GET';
  if(url==='/api/course'){
   const r=await fetch('/course.json',{cache:'no-cache'});if(!r.ok)throw Error('Could not load course.');browserCourse=await r.json();
-  browserStore=new QuickBiteStore.ProjectStore(localStorage,browserCourse.templates,browserCourse.version.version);
+  browserStore=new QuickBiteStore.ProjectStore(localStorage,browserCourse.templates,browserCourse.version.version,browserCourse.course);
   return {...browserCourse,token:'browser-local',saved_state:browserStore.state(browserCourse.course)};
  }
  if(!browserStore)throw Error('Project is not ready.');

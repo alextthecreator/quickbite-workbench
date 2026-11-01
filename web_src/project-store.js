@@ -3,6 +3,7 @@
  'use strict';
  const KEY='quickbite.workspace.v1', MAX_BYTES=12_000_000, APP_ID='quickbite-browser-project';
  const learning=typeof module!=='undefined'&&module.exports?require('./learning-state.js'):root.QuickBiteLearning;
+ const reports=typeof module!=='undefined'&&module.exports?require('./report-sync.js'):root.QuickBiteReports;
  const clone=x=>JSON.parse(JSON.stringify(x));
  const validPath=p=>typeof p==='string'&&!p.includes('\\')&&!p.split('/').some(x=>x==='..'||x==='.'||!x)&&/^workspace\/(reports|models|runs|logs|attachments|student_code|tests)\/[A-Za-z0-9_. -]+$/.test(p)||p==='workspace/project.json'||p==='workspace/EXPORT_MANIFEST.json'||p==='workspace/project-context.json'||p==='workspace/task-progress.json';
  function meta(input={}){
@@ -17,7 +18,7 @@
   const data=clone(input);let total=0;
   if(Object.keys(data.files).length>1500)throw Error('Too many project files.');
   for(const [path,value] of Object.entries(data.files)){
-   if(!validPath(path))throw Error('Unsupported project path: '+path);
+   if(!validPath(path)||path.length>255)throw Error('Unsupported project path: '+path);
    if(typeof value!=='string'&&!(value&&value.encoding==='base64'&&typeof value.data==='string'&&/^[A-Za-z0-9+/]*={0,2}$/.test(value.data)))throw Error('Invalid project file: '+path);
    if(typeof value!=='string'&&!path.startsWith('workspace/attachments/'))throw Error('Only attachments may contain binary data.');
    total+=typeof value==='string'?new TextEncoder().encode(value).length:value.data.length;
@@ -30,26 +31,30 @@
   return {app_id:APP_ID,schema_version:1,course_version:typeof data.course_version==='string'?data.course_version:'unknown',exported_at:data.exported_at||null,files:data.files};
  }
  class ProjectStore{
-  constructor(storage,templates,version){
-   this.storage=storage;this.version=version;const raw=storage.getItem(KEY);
+  constructor(storage,templates,version,course=null){
+   this.storage=storage;this.version=version;this.course=course;const raw=storage.getItem(KEY);this.lastStored=raw;
    try{this.data=raw?validate(JSON.parse(raw)):{app_id:APP_ID,schema_version:1,course_version:version,files:{'workspace/project.json':JSON.stringify(meta(),null,2)}};}
    catch(e){throw Error('Saved browser project could not be read. It has not been overwritten. '+e.message);}
    // Seed only a first-time project. Never restore an old template over saved work.
    if(!raw){Object.assign(this.data.files,templates);this.persist(this.data);}
-   else {const next=clone(this.data);learning.syncContextReports(next.files);if(JSON.stringify(next.files)!==JSON.stringify(this.data.files))this.persist(next);}
+   else {const next=clone(this.data);if(course)reports.migrate(next.files,course);else learning.syncContextReports(next.files);if(JSON.stringify(next.files)!==JSON.stringify(this.data.files)){if(course)this.data=validate(next);else this.persist(next);}}
   }
   persist(next){
-   const prepared=clone(next);learning.syncContextReports(prepared.files);const checked=validate(prepared);checked.course_version=this.version;
-   try{this.storage.setItem(KEY,JSON.stringify(checked));}
-   catch(e){throw Error('Browser storage is full or unavailable. Export your project before closing this tab. '+e.message);}
+   const prepared=clone(next);reports.reconcile(prepared.files,this.course);const checked=validate(prepared);checked.course_version=this.version;
+   if(this.storage.getItem(KEY)!==this.lastStored)throw Error('This project changed in another tab. This tab has not overwritten it. Download an Emergency backup of this tab before reloading.');
+   const serialized=JSON.stringify(checked);
+   try{this.storage.setItem(KEY,serialized);}
+   catch(e){throw Error('Browser storage is full or unavailable. Export your project or download an Emergency backup before closing this tab. '+e.message);}
+   this.lastStored=serialized;
    this.data=checked;return checked;
   }
   get(path){return this.data.files[path];}
-  save(path,text){const next=clone(this.data);next.files[path]=text;this.persist(next);}
+  save(path,text){const next=clone(this.data),match=/^workspace\/reports\/(M\d{2})\.md$/.exec(path);if(match&&this.course)reports.saveReport(next.files,this.course,match[1],text);else next.files[path]=text;this.persist(next);}
+  saveTask(id,text,course=this.course){const next=clone(this.data);reports.saveTask(next.files,course,id,text);return this.persist(next);}
   project(){return meta(JSON.parse(this.get('workspace/project.json')));}
   saveProject(input){const next=meta({...this.project(),...input});this.save('workspace/project.json',JSON.stringify(next,null,2));return next;}
   snapshot(){return clone(this.data);}
-  import(input){return this.persist(validate(input));}
+  import(input){const next=validate(input);if(this.course)reports.migrate(next.files,this.course);return this.persist(next);}
   state(course){
    const files=this.data.files, reports={}, models=[],runs=[],logs=[];
    for(const [p,v] of Object.entries(files)){

@@ -41,6 +41,6 @@ function state(course,files){const tasks=taskMap(course),records=files[PROGRESS]
  for(const id of Object.keys(tasks))check(id);return result;
 }
 function review(course,files,id){const s=state(course,files)[id];if(!s)throw Error('Unknown task.');if(s.missing.length)throw Error('Complete prerequisites first: '+s.missing.join(', '));if(s.issues.length)throw Error(s.issues.join(' '));const records=files[PROGRESS]?JSON.parse(files[PROGRESS]):{};return {...records,[id]:{signature:s.signature,reviewed_at:new Date().toISOString()}};}
-root.QuickBiteLearning={CONTEXT,PROGRESS,empty,context,syncContextReports,section,meaningful,taskMap,legacyAnswer,evidence,minimum,state,review};
+root.QuickBiteLearning={CONTEXT,PROGRESS,empty,context,syncContextReports,section,meaningful,fingerprint,taskMap,legacyAnswer,evidence,minimum,state,review};
 if(typeof module!=='undefined'&&module.exports)module.exports=root.QuickBiteLearning;
 })(typeof globalThis!=='undefined'?globalThis:this);

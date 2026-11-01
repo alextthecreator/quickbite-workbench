@@ -46,7 +46,7 @@ test('M04 task answers, separately rendered models and guide survive reload and 
  for(const name of ['M04_context','M04_dfd'])for(const ext of ['json','svg'])assert.ok(entries['workspace/models/'+name+'.'+ext]);
  assert.match(fflate.strFromU8(entries['course-guide.md']),/Starter: dfd/);
  assert.equal(fflate.strFromU8(entries['workspace/reports/M04.md']),report);
- const restored=new store.ProjectStore({getItem:()=>null,setItem:()=>{}},{},'4.7.1');restored.import(parseProjectFile(zip,'QA.zip'));
+ const restoredValues=new Map(),restored=new store.ProjectStore({getItem:k=>restoredValues.get(k)||null,setItem:(k,v)=>restoredValues.set(k,v)},{},'4.7.1');restored.import(parseProjectFile(zip,'QA.zip'));
  assert.deepEqual(restored.snapshot().files,resumed.snapshot().files);
  assert.equal(restored.get('workspace/reports/M03.md'),'Earlier behavioural analysis retained');
 });
