@@ -50,3 +50,28 @@ test('M04 task answers, separately rendered models and guide survive reload and 
  assert.deepEqual(restored.snapshot().files,resumed.snapshot().files);
  assert.equal(restored.get('workspace/reports/M03.md'),'Earlier behavioural analysis retained');
 });
+
+test('the M04 protection-note addition preserves existing answers, models and completion across ZIP import',()=>{
+ const oldCourse=JSON.parse(JSON.stringify(course));
+ const oldTask=oldCourse.modules.find(m=>m.code==='M04').task_specs.find(t=>t.task===4);
+ oldTask.minimum_requirements=oldTask.minimum_requirements.filter(text=>!text.includes('one denied access'));
+ const memory=()=>{const entries=new Map();return {getItem:k=>entries.get(k)||null,setItem:(k,v)=>entries.set(k,v)};};
+ const before=new store.ProjectStore(memory(),{},'4.7.2',oldCourse);
+ const answer='Three core structures: Order with orderId and status; Menu item with itemId and price; Delivery with deliveryId and address. Field names and assumed status values match our model.';
+ before.saveTask('M04.04',answer,oldCourse);
+ before.save('workspace/models/M04_context.json',JSON.stringify({kind:'dfd',nodes:[],edges:[]}));
+ before.save('workspace/models/M04_context.svg','<svg xmlns="http://www.w3.org/2000/svg"><text>Existing context</text></svg>');
+ before.save('workspace/reports/M03.md','Earlier module content must survive.');
+ const baseline=before.snapshot().files;
+ const bytes=projectZip(before.snapshot(),{version:'4.7.2',website:'https://quickbite-workbench.vercel.app/',course:oldCourse});
+ const after=new store.ProjectStore(memory(),{},'4.7.3',course);
+ after.import(parseProjectFile(bytes,'existing-project.zip'));
+ for(const [path,value] of Object.entries(baseline))assert.equal(after.get(path),value,path+' changed');
+ assert.equal(after.state(course).learning['M04.04'].status,'complete');
+ const exported=fflate.unzipSync(projectZip(after.snapshot(),{version:'4.7.3',website:'https://quickbite-workbench.vercel.app/',course}));
+ const guide=JSON.parse(fflate.strFromU8(exported['course-guide.json']));
+ const protection=guide.course.modules.find(m=>m.code==='M04').task_specs.find(t=>t.task===4).minimum_requirements.find(text=>text.includes('one denied access'));
+ assert.ok(protection);assert.ok(fflate.strFromU8(exported['course-guide.md']).includes(protection));
+ assert.equal(fflate.strFromU8(exported['workspace/reports/M04_task04.md']),answer);
+ assert.ok(fflate.strFromU8(exported['workspace/reports/M04.md']).includes(answer));
+});
