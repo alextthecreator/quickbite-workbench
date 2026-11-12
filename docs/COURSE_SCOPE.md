@@ -20,7 +20,7 @@ The working delivery budget is 40 academic hours: 20 meetings of 90 minutes, inc
 | U6 test planning | M10 plan, six cases and two manual model walkthroughs |
 | K1 priorities and ethics | Team project; M09 priorities and ethical analysis |
 
-The core remains 34 required task cards. Optional work does not add grading points by default. Full SWEBOK coverage, production implementation, deployment and automated Python tests are not additional requirements of this short laboratory.
+The core has 35 required task cards, including M04 Task 5 (Access Matrix), required in S08. M04 checkpoint deliverables are Tasks 1, 2, 4 and 5. Optional work does not add grading points by default. Full SWEBOK coverage, production implementation, deployment and automated Python tests are not additional requirements of this short laboratory.
 
 ## Proportionate module choices
 
@@ -36,4 +36,4 @@ The core remains 34 required task cards. Optional work does not add grading poin
 
 The common 0/1/2 scale is adequate: 2 complete and correct against the stated checklist, 1 partial or partly incorrect, 0 absent or fundamentally incorrect. To make a ten-point module score reproducible, identify which five aspects receive those points. They can group the existing requirements; this adds no tasks.
 
-For example, M04's five aspects could be: system boundary, context exchanges, level-1 transformations/stores, consistency between views, and dictionary/justification. This is an illustrative proposal, not a newly imposed grading policy. No new rubrics or task obligations are introduced by these fixes.
+For example, M04's five aspects could be: system boundary, context exchanges, level-1 transformations/stores, consistency between views, and dictionary/access matrix with justification. This is an illustrative proposal, not a newly imposed grading policy. This example introduces no new rubric; M04 Task 5 is required as specified above.
