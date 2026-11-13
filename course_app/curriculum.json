@@ -1114,7 +1114,7 @@
         {
           "task": 4,
           "instruction": "Describe the main data used in your diagrams.",
-          "save_to": "Write on this task card and click Save answer. It is copied into the module report and included in your project ZIP.",
+          "save_to": "On the website use the editable data-dictionary table (Structure / Field / Meaning / Type / Constraints / Assumptions), add field rows, and include your protection note. Existing text answers remain editable as text. Click Save answer to copy your work into M04 Report → Data Dictionary and include it in the project ZIP. You can also edit the answer as text / Markdown.",
           "minimum_requirements": [
             "Write a data dictionary for 3 core structures with their important fields.",
             "Label assumptions and use consistent names across diagrams.",
@@ -1133,7 +1133,7 @@
         {
           "task": 5,
           "instruction": "Create an access matrix for relevant roles and information resources, specifying permitted actions and at least one explicitly denied operation justified by responsibility or risk.",
-          "save_to": "Write on this task card and click Save answer. It is copied into M04 Report → Access Matrix and included in your project ZIP as workspace/reports/M04_task05.md and workspace/reports/M04.md.",
+          "save_to": "On the website use the editable access matrix: name roles and information resources, select permitted actions, and state denied operations with their justification. Add roles/resources as needed. Existing text answers remain editable as text. Click Save answer to copy your work into M04 Report → Access Matrix. Your project ZIP includes workspace/reports/M04_task05.md and workspace/reports/M04.md. You can also edit the answer as text / Markdown.",
           "minimum_requirements": [
             "Include at least 4 roles and 4 information resources.",
             "Specify permitted actions such as Read / Create / Update / Delete where meaningful.",

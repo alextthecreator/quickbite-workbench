@@ -90,3 +90,9 @@ Models / CASE is used throughout modelling modules, not only M09. M09 now covers
 - A diagram export requests the current editable XML from draw.io. A changed draft has no reused stale SVG; reopen and save the diagram to regenerate its preview. If the editor does not respond, the latest received draft is kept and the message explicitly asks the student to retain the open editor and retry.
 - Export records identity and export time in the downloaded snapshot, without requiring the browser project to be rewritten. A download request does not assert that the user kept the file safely.
 - Regression covers every module's task/report synchronization, structured forms, old exports, conflict detection, simulated quota failure, emergency imports and large project round trips. A privately provided student export was tested locally; no student files are committed.
+
+### M04 table answers
+
+Task 4 provides an editable data dictionary; Task 5 provides a role × resource access matrix with permitted actions, explicit denied operations and justifications. Use Save answer after editing. You can add/remove field rows, roles and resources, and undo the last removal. Empty permission cells mean unspecified. Older text answers open as text; choosing the table keeps the entire original answer in its notes field. Edit as text / Markdown remains available.
+
+Tables are saved as readable Markdown in the existing M04 task files and report sections. The project schema, task IDs, archive paths and importer are unchanged. Tables reopen after reload or ZIP import. Unrecognised or hand-edited table layouts remain editable as text. Unsaved table edits are captured by both project ZIP export and Emergency backup.
