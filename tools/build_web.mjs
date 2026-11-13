@@ -54,7 +54,7 @@ let js=read(path.join(app,'assets/app.js'));
 const apiStart=js.indexOf('async function api('),apiEnd=js.indexOf('\nfunction esc',apiStart);js=js.slice(0,apiStart)+'async function api(url,opt={}){return browserApi(url,opt)}'+js.slice(apiEnd);
 js=js.replace("let r=await fetch('/api/course');let d=await r.json();","let d=await api('/api/course');");
 const bootIndex=js.lastIndexOf('boot().catch');js=js.slice(0,bootIndex);
-fs.writeFileSync(path.join(out,'assets/app.js'),read(path.join(source,'browser-api.js'))+'\n'+js+'\n'+read(path.join(source,'lecture-materials.js'))+'\n'+read(path.join(source,'course-guide.js'))+'\n'+read(path.join(source,'browser-navigation.js'))+'\n'+read(path.join(source,'browser-ui.js'))+'\n'+read(path.join(source,'drawio-ui.js')));
+fs.writeFileSync(path.join(out,'assets/app.js'),read(path.join(source,'browser-api.js'))+'\n'+js+'\n'+read(path.join(source,'lecture-materials.js'))+'\n'+read(path.join(source,'task-tables.js'))+'\n'+read(path.join(source,'task-table-ui.js'))+'\n'+read(path.join(source,'course-guide.js'))+'\n'+read(path.join(source,'browser-navigation.js'))+'\n'+read(path.join(source,'browser-ui.js'))+'\n'+read(path.join(source,'drawio-ui.js')));
 fs.copyFileSync(path.join(app,'assets/style.css'),path.join(out,'assets/style.css'));
 for(const file of ['learning-state.js','report-sync.js','project-store.js','project-export.js','project-archive.js','browser-router.js','python-worker.js','drawio-model.js'])fs.copyFileSync(path.join(source,file),path.join(out,'assets',file));
 fs.copyFileSync(path.join(source,'vendor/fflate.js'),path.join(out,'assets/fflate.js'));
@@ -67,3 +67,5 @@ fs.appendFileSync(path.join(out,'assets/style.css'),read(path.join(source,'feedb
 fs.appendFileSync(path.join(out,'assets/style.css'),read(path.join(source,'lecture-materials.css')));
 fs.appendFileSync(path.join(out,'assets/style.css'),read(path.join(source,'drawio.css')));
 
+
+fs.appendFileSync(path.join(out,'assets/style.css'),'\n'+read(path.join(source,'task-tables.css')));
