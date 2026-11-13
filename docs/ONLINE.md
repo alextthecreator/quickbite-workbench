@@ -72,7 +72,7 @@ Every task declares prerequisite IDs in curriculum.json. Student review records 
 
 ## Simplified course baseline — v4.7.0
 
-40 academic hours = 20 blocks of 90 minutes. There are 34 required task cards: 7 in M01 and 3 in each later module. Other cards are collapsed optional extensions. Task identifiers stay stable to preserve imported work. One concise module package is submitted within the project ZIP.
+40 academic hours = 20 blocks of 90 minutes. There are 35 required task cards: 7 in M01, 4 in M04 (Tasks 1, 2, 4 and 5), and 3 in each other module. M04 Task 5 is required in S08; save the access matrix and justified denied operation in Report → Access Matrix. Other cards are collapsed optional extensions. Task identifiers stay stable to preserve imported work. One concise module package is submitted within the project ZIP.
 
 M01 session 1: tasks 1–5 (two business objectives). Session 2: tasks 6 and 8 (lifecycle and qualitative feasibility, three risks). Task 7 simulations are optional.
 

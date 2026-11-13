@@ -91,8 +91,8 @@ test('the actual UI export functions do not call storage, flush or save and pres
  assert.equal(A.parseProjectFile(new Uint8Array(await downloads[0].blob.arrayBuffer()),downloads[0].name).files[R.pathFor('M02.02')],'Unsaved answer');
  await vm.runInContext('emergencyExport()',ctx);assert.equal(downloads.length,2);const json=JSON.parse(await downloads[1].blob.text());assert.equal(json.drafts.taskAnswers['M02.02'],'Unsaved answer');
 });
-test('course clarification keeps the required workload and all syllabus pattern categories',()=>{
- assert.equal(course.modules.flatMap(m=>m.task_specs.filter(t=>!t.optional)).length,34);
+test('course clarification includes the required S08 access matrix and all syllabus pattern categories',()=>{
+ assert.equal(course.modules.flatMap(m=>m.task_specs.filter(t=>!t.optional)).length,35);
  const m7=course.modules[6],m8=course.modules[7],m9=course.modules[8];
  assert.match(m7.task_specs[3].instruction,/creational and one structural/);
  assert.doesNotMatch(m7.theory_cards.map(c=>c.body).join(' '),/Only one pattern decision/);
