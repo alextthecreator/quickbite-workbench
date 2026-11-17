@@ -135,3 +135,14 @@ test('current ZIPs with an optional Task 5 import and re-export without changing
   assert.deepEqual(parseProjectFile(exported,'re-export.zip').files,original.files);
  }
 });
+
+test('M04 website and exported guides share the dictionary and matrix requirements',()=>{
+ const four=m04.task_specs.find(t=>t.task===4),five=m04.task_specs.find(t=>t.task===5);
+ assert.doesNotMatch(JSON.stringify(four),/assumptions/i);
+ assert.match(four.minimum_requirements.join(' '),/3 core structures.*field name, data type and meaning \/ constraint.*consistent names and types across diagrams and documentation/s);
+ assert.equal(five.optional,false);assert.ok(m04.session_plan.find(s=>s.session===8).task_numbers.includes(5));
+ const guide={course,version:'4.7.3'},md=require('../web_src/project-archive.js').guideMarkdown(guide);
+ for(const task of [four,five])for(const requirement of task.minimum_requirements)assert.ok(md.includes(requirement));
+ assert.match(five.minimum_requirements.join(' '),/Role \/ Resource.*roles in rows.*resources in columns/);
+ assert.deepEqual(m04.theory,m04.theory_cards.map(s=>s.body));
+});

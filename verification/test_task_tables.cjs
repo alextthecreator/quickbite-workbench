@@ -58,3 +58,32 @@ test('table input updates the standard draft used by ZIP and emergency export; a
  ctx.changeTaskTable(id,'undo');assert.equal(T.parse(id,drafts.get(id)).resources.length,5);
  ctx.clearTaskTableSession();assert.equal(vm.runInContext('tableUndo.size',ctx),0);
 });
+
+test('legacy dictionary and matrix tables reopen without losing fields, notes or ZIP contents',()=>{
+ for(const id of T.IDS){
+  const data=example(id),modern=T.serialize(id,data);
+  const legacy=id==='M04.04'?modern.replace('Notes (optional)','Assumptions').replace('#### Protection note\n','#### Protection note and assumptions\n'):modern.replace('Role / Resource','Role / resource');
+  assert.deepEqual(T.parse(id,legacy),data);
+  const before=new S.ProjectStore(memory(),{},'4.7.3',course);before.saveTask(id,legacy,course);
+  const after=new S.ProjectStore(memory(),{},'4.7.3',course);after.import(A.parseProjectFile(A.projectZip(before.snapshot()),'legacy-tables.zip'));
+  assert.deepEqual(after.snapshot().files,before.snapshot().files);
+  assert.deepEqual(T.parse(id,after.get(R.pathFor(id))),data);
+ }
+});
+
+test('matrix UI and exported Markdown have one role header and only resource columns',()=>{
+ const {ctx}=ui(),data=example('M04.05');data.roles[1]='Manager';data.resources[1]='Menu';
+ data.cells[1][1]={allowed:[],other:'',denied:'No access',reason:'Outside responsibility'};
+ const html=ctx.taskAnswerEditor('M04.05',T.serialize('M04.05',data));
+ const head=html.match(/<thead>(.*?)<\/thead>/s)[1];
+ assert.match(head,/<th scope="col">Role \/ Resource<\/th>/);
+ assert.equal((head.match(/<th /g)||[]).length,data.resources.length+1);
+ assert.doesNotMatch(head,/>Roles?<\/th>/);
+ const rows=[...html.matchAll(/<tr><th scope="row">(.*?)<\/tr>/gs)];assert.equal(rows.length,data.roles.length);
+ for(const [i,match] of rows.entries()){
+  assert.equal((match[1].match(/<td>/g)||[]).length,data.resources.length);
+  assert.match(match[1].split('</th>')[0],new RegExp('Remove role '+(i+1)));
+ }
+ const md=T.serialize('M04.05',data);assert.match(md,/\| Role \/ Resource \| Order &lt;details&gt; \| Menu \|/);
+ assert.match(md,/Denied: No access/);assert.deepEqual(T.parse('M04.05',md),data);
+});
