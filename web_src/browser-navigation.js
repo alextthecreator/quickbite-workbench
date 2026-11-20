@@ -2,6 +2,9 @@
 async function installNavigation(){
  const renderTab=showModuleTab,renderModule=loadModule;
  let painting=false,loadingModule=false,modelDraftActive=false,simDraftActive=false;
+ // Session recommendations are part of the cached module view.
+ let loadedSession=Number(PROJECT.current_session);
+ const sessionChanged=()=>loadedSession!==Number(PROJECT.current_session);
  const modelFields=['modelName','modelEditor','modelKind'],simFields=['simModule','simInput','engineSelect'];
  const values=ids=>Object.fromEntries(ids.map(id=>[id,$(id).value]));
  const restore=fields=>Object.entries(fields).forEach(([id,value])=>{$(id).value=value;});
@@ -13,8 +16,9 @@ async function installNavigation(){
  loadStarter=function(){modelDraftActive=true;return newStarter();};
  loadModule=async function(code){
   const model=modelDraftActive?values(modelFields):null,sim=simDraftActive?values(simFields):null;
+  const session=Number(PROJECT.current_session);
   loadingModule=true;
-  try{return await renderModule(code);}
+  try{const result=await renderModule(code);loadedSession=session;return result;}
   finally{loadingModule=false;if(model)restore(model);if(sim)restore(sim);}
  };
  const router=QuickBiteRouter.create({
@@ -27,7 +31,7 @@ async function installNavigation(){
   render:async(route)=>{
    painting=true;
    try{
-    if(route.page==='task'&&loadedModuleCode!==route.module)await loadModule(route.module);
+    if(route.page==='task'&&(loadedModuleCode!==route.module||sessionChanged()))await loadModule(route.module);
     if(route.page==='brief')$('brief').innerHTML=projectBriefHtml();
     if(route.page==='context')$('context').innerHTML=contextFormHtml();
     oldShow(route.page);
@@ -42,10 +46,10 @@ async function installNavigation(){
   },
   onError:error=>{if(loadedModuleCode)$('moduleSelect').value=loadedModuleCode;showError(error);}
  });
- show=function(page){return router.navigate(page==='task'?{page,module:loadedModuleCode||$('moduleSelect').value,tab:'theory'}:{page},{refresh:page==='files'||page==='overview'});};
- openModule=function(code){return router.navigate({page:'task',module:code,tab:'theory'});};
- showModuleTab=function(tab){if(painting||loadingModule)return renderTab(tab);return router.navigate({page:'task',module:loadedModuleCode||$('moduleSelect').value,tab});};
- goToTask=function(id){return router.navigate({page:'task',module:id.slice(0,3),tab:'taskwork',task:id.slice(4)});};
+ show=function(page){return router.navigate(page==='task'?{page,module:loadedModuleCode||$('moduleSelect').value,tab:'theory'}:{page},{refresh:page==='files'||page==='overview'||sessionChanged()});};
+ openModule=function(code){return router.navigate({page:'task',module:code,tab:'theory'},{refresh:sessionChanged()});};
+ showModuleTab=function(tab){if(painting||loadingModule)return renderTab(tab);return router.navigate({page:'task',module:loadedModuleCode||$('moduleSelect').value,tab},{refresh:sessionChanged()});};
+ goToTask=function(id){return router.navigate({page:'task',module:id.slice(0,3),tab:'taskwork',task:id.slice(4)},{refresh:sessionChanged()});};
  $('moduleSelect').onchange=()=>openModule($('moduleSelect').value);
  // Exposed for integration checks and to await a settled view after history events.
  window.quickbiteNavigation=router;
